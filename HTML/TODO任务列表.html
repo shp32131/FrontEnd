@@ -1,0 +1,87 @@
+<style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      padding: 200px;
+    }
+    ul {
+      list-style: none;
+      display: flex;
+      width: 200px;
+      flex-direction: column;
+    }
+    li {
+      height: 30px;
+      border: solid 2px #e67e22;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 10px;
+      color: #333;
+      transition: 1s;
+    }
+    a {
+      border-radius: 3px;
+      width: 20px;
+      height: 20px;
+      text-decoration: none;
+      text-align: center;
+      background: #16a085;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 5px;
+    }
+    .remove {
+      border: solid 2px #eee;
+      opacity: 0.8;
+      color: #eee;
+    }
+    .remove a {
+      background: #eee;
+    }
+  </style>
+  
+  <body>
+    <ul>
+      <li>aaaaaaaaaaaaa <a href="javascript:;">x</a></li>
+      <li>bbbbbbbbb <a href="javascript:;">x</a></li>
+      <li>cccccccccccccc <a href="javascript:;">x</a></li>
+    </ul>
+  </body>
+  
+  <script>
+    class Todos {
+      constructor() {}
+      run() {
+        this.items = document.querySelectorAll("ul>li");
+        this.lists = new WeakSet();
+        this.record();
+        this.addEvent();
+      }
+      addEvent() {
+        this.items.forEach(item => {
+          item.querySelector("a").addEventListener("click", event => {
+            //检测WakeSet中是否存在Li元素
+            const parentElement = event.target.parentElement;
+            if (!this.lists.has(parentElement)) {
+              alert("已经删除此TODO");
+            } else {
+              //删除后从记录的WakeSet中移除
+              parentElement.classList.add("remove");
+              this.lists.delete(parentElement);
+            }
+          });
+        });
+      }
+      record() {
+        this.items.forEach(item => this.lists.add(item));
+      }
+    }
+    new Todos().run();
+  </script>

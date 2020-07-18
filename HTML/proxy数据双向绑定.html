@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>proxy数据双向绑定</title>
+    </head>
+    <body>
+        <input type="text" v-model="title"/><br>
+        <input type="text" v-model="title"/><br>
+        <div v-bind="title"></div>
+    </body>
+    <script>
+        function View(){
+            //设置代理拦截 
+            let proxy = new Proxy({},{
+                get(obj,property){},
+                set(obj,property,value){
+                    let els = document.querySelectorAll(`[v-model="${property}"],[v-bind="${property}"]`);
+                    els.forEach(el=>{
+                        el.value = value;
+                        el.innerHTML = value;
+                    })
+                }
+            });
+            //初始化绑定元素事件
+            this.run = function(){
+                const els = document.querySelectorAll('[v-model]');
+                els.forEach(item=>{
+                    item.addEventListener('keyup',function(){
+                        proxy[this.getAttribute('v-model')] = this.value;
+                    })
+                })
+            }
+        }
+        new View().run();
+    </script>
+</html>
