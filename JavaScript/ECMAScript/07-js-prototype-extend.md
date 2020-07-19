@@ -6,7 +6,35 @@
   + 每个JavaScript对象都有它的原型:
     - 对象的原型是它的私有属性`__proto__`(非官方标准表示，但浏览器都实现了这个属性) 
     - 在ECMAScript标准中用符号`[[Prototype]]`(等同于`__proto__`)指向对象的原型 
-    - `[[Prototype]]`可以通过`Object.getPrototypeOf(),Object.setPrototypeOf()`来访问 
+    - `[[Prototype]]` 可以通过
+      + `Object.getPrototypeOf()` 
+      + `Object.setPrototypeOf()`来访问 
+```javascript
+function Fn(name,age){
+    this.name = name,
+    this.age = age,
+    this.say = function(){
+        console.log("hello");
+    }
+}
+Fn.prototype.sleep = function(){
+    console.log("sleep method");
+}
+Fn.prototype.gender = "man";
+let f1 = new Fn();
+let f2 = new Fn();
+
+console.log(f1.say == f2.say);//false
+console.log(f1.sleep == f2.sleep);// true
+console.log(f1.gender == f2.gender);// true
+
+Object.prototype.hide = function(){
+    console.log("hide method in object prototype");
+}
+
+f1.__proto__.hide();//hide method in object prototype
+console.log(Object.prototype == Function.__proto__);//false
+```
 ### 原型基础   
 - 原型：原型是系统为每个对象维护的一个属性 `__proto__` 
   + `__proto__`本身也是一个对象 

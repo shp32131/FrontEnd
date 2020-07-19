@@ -69,20 +69,27 @@ class Student extend User {
 - 类的原理分析
   + `JavaScript`中类的本质就是函数 
   + `constructor`用于定义函数代码 
-  + `constructor`外面的方法是在添加函数的原型方法  
+  + `constructor`外面的方法是在添加函数原型`prototype`上的方法  
 ```JavaScript
 // 类的本质就是函数 
 class User{
     constructor(name){
         this.name = name;
+        this.say = function(){
+          console.log('hello');
+        }
     }
     show(){
         console.log(this.name);
     }
 }
 // 上面的类与下面的函数是一样的功能 
-function User(name){
+function User(name = 'a'){
     this.name = name;
+    // let u1 = new User(),let u2 = new User() u1.say != u2.say
+    this.say = function(){
+      console.log('hello');
+    }
 }
 User.prototype.show = function(){
     console.log(this.name);
@@ -108,6 +115,7 @@ hd.show();
 - 类与函数的差异 
   + 类中定义的方法是不可枚举的 
   + 类默认使用严格模式执行  
+
 ### 静态访问 
 - `class`中通过`static`声明的属性或方法，叫静态属性或静态方法 
 - 静态属性 
@@ -289,7 +297,8 @@ console.log(hd);//Admin {name:'shp'}
   + 原生的继承主要是操作原型链,使用`class`要方便一些 
   + 必须在子类构造器中调用`super()`执行父类构造器函数 
   + `super.method()`可以在子类中调用父类方法 
-- `super`用来查询当前对象的原型,只能在类或对象中使用,不能在函数中使用  
+- `super`用来查询当前对象的原型 
+  + 只能在类或对象中使用,不能在函数中使用  
 - 静态继承,静态的方法和属性也是可以继承的,因为本质还是原型链查找方式  
 - 对象检测: `instanceof` - `isPrototypeOf`
 - 继承内置类
