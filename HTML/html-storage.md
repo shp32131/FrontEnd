@@ -17,6 +17,8 @@
 ### HTML5新增客户端存储数据 
 - `HTML5`新增加两个Web存储机制,`localStorage`和`sessionStorage`  
   + 本地存储,不同的网站存储在不同的区域,一个网站只能访问其自身的区域的数据  
+  + 如果存储对象,先`JSON.stringify()`,再存储  
+  + 取出对象后,先`JSON.parse()`，再用 
 
 - `localStorage` 没有时间限制的数据存储  
 ```JavaScript 
