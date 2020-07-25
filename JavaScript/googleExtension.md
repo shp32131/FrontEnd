@@ -91,3 +91,24 @@
 ```
 ## Manage Events 
 > google extensions manage events with the background.js scripts   
+
+
+## 页面缩小放大  
+```JavaScript
+    chrome.tabs.setZoomSettings(tab.id,{
+        mode: "manual",
+        scope: "per-tab",
+        defaultZoomFactor: 0
+
+    });
+
+    chrome.tabs.getZoomSettings(tab.id,zoom => {
+        console.log(zoom);
+    });
+// 页面放大为 300%
+    chrome.tabs.setZoom(tab.id,3,() => {
+        if(chrome.runtime.lastError){
+            console.log(chrome.runtime.lastError.message);
+        }
+    });
+```
