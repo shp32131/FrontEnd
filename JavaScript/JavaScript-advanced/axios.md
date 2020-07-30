@@ -41,7 +41,7 @@ axios.get('/user', {
 // 执行post请求 
 axios.post('/user', {
     firstName: 'Fred',
-    lastName: 'Flintstone'
+    lastName: 'FlintOne'
   })
   .then(function (response) {
     console.log(response);
@@ -69,7 +69,7 @@ axios({
   url: '/user/12345',
   data: {
     firstName: 'Fred',
-    lastName: 'Flintstone'
+    lastName: 'FlintOne'
   }
 });
 // 获取远端图片 
