@@ -86,7 +86,7 @@ p.then(
 
 ## WHY 为什么要用 Promise      
 - 1. 指定回调函数的方式更加灵活 :   
-  + `Promise`: 启动异步任务 --> 返回promise对象 --> 给promise对象绑定回调函数(甚至可以在异步之前)     
+  + `Promise`: 启动异步任务 --> 返回`promise`对象 --> 给`promise`对象绑定回调函数(甚至可以在异步之前)     
   + 嵌套回调：使用嵌套回调函数必须在启动异步任务之前指定回调函数     
 
 - 2. 支持链式调用,可以解决回调地狱问题    
@@ -95,7 +95,7 @@ p.then(
 
 - 3. `Promise`可以异常传透           
 
-- 4. `async\/await` 回调函数终极解决方案      
+- 4. `async/await` 回调函数终极解决方案      
 
 ## HOW 怎么使用 Promise    
 - 1. `Promise` 构造函数：`Promise(excutor){}`    
@@ -105,7 +105,7 @@ p.then(
   + 说明： `excutor`会在`Promise`内部立即同步回调，异步操作在执行器中执行     
 
 - 2.1 `Promise` 实例对象的方法 <sub> 备注：参数是onXXX开头的都是回调函数的意思 </sub>     
-  + `Promise.prototype.then` 方法：`(onResolved,onRejected) => {}`     
+  + `Promise.prototype.then` 方法体：`(onResolved,onRejected) => {}`     
   + `onResolved`函数：成功的回调函数  `(value) => {}`    
   + `onRejected`函数：失败的回调函数   `(reason) => {}`    
   + 说明：指定用于得到成功返回值value的成功回调和用于得到失败返回值reason回调，返回一个新的promise     
@@ -283,9 +283,9 @@ new Promise((resolve,reject) => {
 )
 ```
 
-- 4. `promise.then()`返回的新`promise`的结果状态是由什么决定的？      
-  + 简单表达: 由`then()`指定的的回调函数执行的结果决定     
-  + 详细表达：和`then()`所执行的是成功回调`(onResolved)`还是失败回调`(onRejected)`没有关系,和`then()`中回调函数执行的结果有关        
+- 4. `promise.then(onResolved,onRejected)`返回的新`promise`的结果状态是由什么决定的？      
+  + 简单表达: 由`then(onResolved,onRejected)`指定的的回调函数的执行结果决定   
+  + 详细表达：和`then()`所执行的是成功回调`(onResolved)`还是失败回调`(onRejected)`没有关系,只和`then()`中回调函数执行的结果有关        
     - 如果`then()`中是`return`一个非`promise`的任意值，那么`then()`返回的新`promise`状态由`pending => resolved`,结果 `value` 为返回的这个任意值      
     - 如果`then()`中有`throw `抛出异常，那么`then()`返回的新`promise`状态由`pending => rejected`,结果`reason`为抛出的异常值    
     - 如果`then()`中是`return`一个重新创建的`promise`，那么`then()`返回的新 `promise` 的状态和结果就是这个新创建的 `promise` 的状态和结果       
@@ -355,7 +355,40 @@ new Promise((resolve,reject) => {
     }
 )
 ```
-- 6. `Promise` 异常传透?      
+- 6.中断`promise`链？     
+  + 当使用`promise`的`then`链式调用时，在中间中断，不再调用后面的回调函数      
+  + 办法有一个：在回调函数中返回一个 `pending`状态的 `promise`对象       
+
+```javascript
+new Promise((resolve,reject) => {
+    resolve(1);
+}).then(
+    value => {
+        console.log('onResolved',value);
+        return 2;
+    },
+    reason => {
+        console.log('onRejected',reason);
+        return reason;
+    }
+).then(
+    value => {
+        console.log('onResolved',value);
+        return new Promise((resolve,reject) => { });//返回一个pending状态的promise，从此处中断调用链
+    },
+    reason => {
+        console.log('onRejected',reason)
+    }
+).then(
+    value => value;
+).catch(
+    reason => {
+        console.log('onCatched',reason);
+    }
+)
+```
+
+- 7. `Promise` 异常传透?      
   + 当使用`promise`的`then`链式调用时，可以在最后指定失败的回调       
   + 前面的任务操作出了异常，都会传到最后失败的回调中处理        
   + 一级一级往下传递异常(默认)       
@@ -396,39 +429,9 @@ new Promise((resolve,reject) => {
     }
 )
 ```
-- 7.中断`promise`链？     
-  + 当使用`promise`的`then`链式调用时，在中间中断，不再调用后面的回调函数      
-  + 办法有一个：在回调函数中返回一个 `pending`状态的 `promise`对象       
 
-```javascript
-new Promise((resolve,reject) => {
-    resolve(1);
-}).then(
-    value => {
-        console.log('onResolved',value);
-        return 2;
-    },
-    reason => {
-        console.log('onRejected',reason);
-        return reason;
-    }
-).then(
-    value => {
-        console.log('onResolved',value);
-        return new Promise((resolve,reject) => { });//返回一个pending状态的promise，从此处中断调用链
-    },
-    reason => {
-        console.log('onRejected',reason)
-    }
-).then(
-    value => value;
-).catch(
-    reason => {
-        console.log('onCatched',reason);
-    }
-)
-```
-
+=================================================================================================================
+=================================================================================================================
 ## 自定义一个Promise    
 ### 定义整体结构    
 ```JavaScript
@@ -480,7 +483,7 @@ Promise.reject = function(reason){}
 Promise.all = function(promises){}
 /*
 ** 方法名：race
-** 功能: 接收一个promise数组，返回一个promise
+** 功能: 接收一个promise数组，返回一个新promise
 ** 说明: 返回的promise的状态,由第一个完成的promise的结果决定
 */
 Promise.race = function(promises){}
@@ -549,7 +552,6 @@ function Promise(excutor){
 }
 
 window.Promise = Promise;
-
 })(window)
 
 ```
