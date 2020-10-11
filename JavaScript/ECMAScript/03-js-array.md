@@ -1,7 +1,7 @@
 ## Array  
 
 ## 数组类型
-> 数组是Array对象的实例，可以像对象一样调用方法     
+> 数组是`Array`对象的实例，可以像对象一样调用方法     
 ### 声明数组
 ```javascript
 let arr = new Array(1,'hello','world');
@@ -15,16 +15,15 @@ let  array = ['hello','world'];
 const array = [[1,2,3],[4,5,6]];
 ```
 
-> 数组是引用类型可以使用const声明并修改它的值  
+> 数组是引用类型可以使用`const`声明并修改它的值  
 ```javascript
 const arr = ['a','b'];
 arr.push('c');
 console.log(arr);
 ```
 
-> 使用原型的length属性可以获取数组的长度  
->
-> - Array.of 使用Array.of 与 new Array不同是设置一个参数时不会创建空元素数组  
+> 使用原型的`length`属性可以获取数组的长度    
+- `Array.of` 使用Array.of 与 new Array不同是设置一个参数时不会创建空元素数组  
 ```javascript
 let hd = Array.of(3);
 console.log(hd); //[3]
@@ -33,7 +32,7 @@ hd = Array.of(1, 2, 3);
 console.log(hd); //[1, 2, 3]
 ```
 
-> 类型检测，Array.isArray()检测变量是否为数组类型  
+> 类型检测，`Array.isArray()`检测变量是否为数组类型  
 ```javascript
 Array.isArray([1,2]);//true
 ```
@@ -91,7 +90,8 @@ console.log(Array.from(user));//['hello',20]
 </script>
 ```
 
-### Spread\/Rest 展开语法 <sup>es6</sup>
+### Spread/Rest 展开语法 <sup>es6</sup>
+
 - 使用展开语法将NodeList转换为数组操作  
 ```html
 <style>
@@ -883,7 +883,8 @@ console.log([1,[2,[3,4]]].flat(1));//[1,2,[3,4]]
 console.log([1,[2,[3,4]]].flat(2));//[1,2,3,4]
 ```
 >  flatMap(callback(currentValue,index,array,thisArg))
-> - 先用回调函数处理每个元素，再对数组执行 flat 函数       
+>
+>  - 先用回调函数处理每个元素，再对数组执行 flat 函数       
 ```javascript
 console.log([1,2,3].flatMap(n => [n*2]));//[2,4,6]
 ```
@@ -951,7 +952,7 @@ console.log(view4.byteLength); // 6
 console.log(view5.byteLength); // 6
 console.log(view6.byteLength); // 6
 ```
-> length属性不可写，可使用entries,keys,values迭代器遍历   
+> `length`属性不可写，可使用`entries,keys,values`迭代器遍历   
 ```javascript
 let view = new Int16Array([1,2]);
 for(let [k,v] of view.entries()){

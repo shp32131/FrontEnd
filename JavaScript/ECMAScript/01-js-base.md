@@ -257,8 +257,9 @@ console.log(bb);//hello
 
 ### null和undefined
 - `null`用于定义一个空对象，即如果一个变量要用来保存引用类型，则可以用`null`初始化这个变量  
-  + 转换数值时为 -1
+  + 转换数值时为 0 
   + JS先有的`null`后面才出现`undefined`  
+
 - `undefined`:对声明但未赋值的变量使用`typeof`运算符时，返回类型为`undefined`,表示值未定义   
   + 对未声明的变量使用会报错(`ReferenceError:not defined`)  
   + 使用typeof判断类型时显示`undefined`  

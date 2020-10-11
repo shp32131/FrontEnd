@@ -46,7 +46,8 @@ console.log(Number({}));	//NaN
 console.log(Number(undefined));	//NaN
 console.log(Number(null));	// 0
 ```
-- `parseInt()`提取字符串中的，去除开始空白后的数字,转为整数  
+
+- `parseInt()`提取字符串中去除开始空白后的数字,转为整数  
 - `parseFloat()`转换为浮点数，忽略开始的空白  
 ```javascript
 console.log(parseInt('  99hello'));	//99
