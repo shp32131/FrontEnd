@@ -616,16 +616,110 @@ Promise.prototype.catch = function(onRejected){
     return this.then(undefined,onRejected)
 }
 ```
-### Promise.resolve(),Promise.reject()
+### Promise.resolve(value),Promise.reject(reason)
 ```JavaScript
-
+/*
+** Promise.resolve
+** 返回一个成功或失败的promise
+*/
+Promise.resolve = function(value){
+    return new Promise((resolve,reject) => {
+        if(value instanceof Promise){
+            // value是promise对象时，value的结果就是返回的promise的结果
+            value.then(resolve,reject)
+        }else{
+            // value不是promise时,返回一个成功的promise，数据是value
+            resolve(value)
+        }
+    })
+}
+/*
+** Promise.reject
+** 返回一个失败的promise对象
+*/
+Promise.reject = function(reason){
+    //返回一个失败的promise
+    return new Promise((resolve,reject) => {
+        reject(reason)
+    })
+}
 ```
 ### Promise.all,Promise.race()
 ```JavaScript
+/*
+** Promise.all(promises)
+** 所有的promise都成功，返回的新的promise结果才为成功
+*/
+Promise.all = function(promises){
+    const values = new Array(promises.length)
+    let resolveCounts = 0
+    return new Promise((resolve,reject) => {
+        // 遍历promises数组
+        promises.forEach((p,index) => {
+            // p可能不是一个promise对象,所以用Promise.resolve(p)
+            Promise.resolve(p).then(
+                value => {
+                    resolveCounts++
+                    values[index] = value
+                    if(resolveCounts === promises.length){
+                        resolve(values)
+                    }
+                },
+                reason => {
+                    reject(reason)
+                }
+            )
+        })
+    })
+} 
+
+/*
+** Promise.race(promises)
+** 最先执行完的promise结果作为返回的promise的结果
+*/
+Promise.race = function(promises){
+    return new Promise((resolve,reject) => {
+        promises.forEach((p,index) => {
+            Promise.resolve(p).then(
+                value => {
+                    resolve(value)
+                },
+                reason => {
+                    reject(reason)
+                }
+            )
+        })
+    })
+}
 ```
 ### Promise.resolveDelay(),Promise.rejectDelay()
 ```JavaScript
-
+/*
+** Promise.resolveDelay
+** 返回一个新的成功或失败的promise对象
+*/
+Promise.resolveDelay = function(value,time){
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            if(value instanceof Promise){
+                value.then(resolve,reject)
+            }else{
+                resolve(value)
+            }
+        },time)
+    })
+}
+/*
+** Promise.rejectDelay
+**
+*/
+Promise.rejectDelay = function(reason,time){
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            reject(reason)
+        },time)
+    })
+}
 ```
 ### ES5 function 完整版 
 ```JavaScript
@@ -635,10 +729,104 @@ Promise.prototype.catch = function(onRejected){
 window.Promise = Promise;
 })(window)
 ```
+=========================================================================
 ### ES6 class 完整版
+```JavaScript
+class Promise{
+
+}
+```
 
 ## async与await   
+### async函数
+- `async`函数的返回值为一个`promise`对象 
+- `promise`对象的结果由`async`函数执行的返回值决定 
+  + 返回值是一个非`promise`对象
+  + 返回值是一个`promise`对象 
+  + 函数抛出异常 
+```JavaScript
+async function fn(){
+    return 1;// 有async时 相当于 return Promise.resolve(1)
+}
+let result = fn();
+console.log(result);// result是一个promise对象,状态是resolved,value是1
+```
+### await表达式
+- `await`右侧的表达式一般为`promise`对象,但也可以是其他的值  
+  + 如果表达式是`promise`对象,`await`返回是这个`promise`成功的结果值 
+  + 如果表达式的值不是`promise`，`await`返回的值就是这个值本身(立即产生这个值)
+- `await`必须写在`async`函数中,但`async`函数中可以没有`await` 
+- 如果`await`的`promise`失败了,就会抛出异常,需要通过`try...catch`来捕获处理异常 
+```JavaScript
+function fn1(){
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            resolve(1)
+        },1000)
+    })
+}
+//----------------------------------------------
+async function fn2(){
+    try{
+        let value = await fn1()
+        console.log('value',value);
+    }catch(error){
+        console.log(error);
+    }
+}
 
+```
 ## JS异步之宏队列与微队列   
+### Event Loop 是什么？
+- `Event Loop`是一个执行模型，在不同的地方有不同的实现
+  + `browser`和`Node.js`基于不同的技术实现了各自的`Event Loop`机制   
+  + `browser`的`Event Loop`是在`HTML5`的规范中明确定义    
+  + `Node.js`的`Event Loop`是基于`libuv`实现的，在`Node.js`官方文档和`libuv`的官方文档有说明    
+  + `libuv`直接实现`Event Loop`  
+  + `HTML5`规范中只是定义了`browser`中`Event Loop`的模型,具体由各个`browser`实现       
+
+### 宏队列和微队列  
+- 宏队列: 宏任务`MacroTasks`也叫`tasks`,这些异步任务的回调会依次进入`MacroTaskQueue`等待后续调用     
+  + `setTimeout`       
+  + `setInterval`     
+  + `I / O`流    
+  + `ajax回调`
+  + `requestAnimationFrame` (浏览器独有)    
+  + `UI rendering` (浏览器独有)
+  + `setImmediate` (node.js独有)
+
+- 微队列: 微任务`MicroTasks`也叫`jobs`这些异步任务的回调会依次进入`MicroTaskQueue`等待后续调用    
+  + `Promise.then()`     
+  + `Object.observe`      
+  + `MutationObserve(callback)`     
+  + `process.nexTick`(node.js独有) 
+
+- 运行时三个概念:
+  + 代码栈 `Stack`
+  + 宏任务队列 `MacroTaskQueue`   
+  + 微任务队列 `MicroTaskQueue`
+
+### Event Loop 
+- 浏览器的事件循环机制  `Event Loop`
+  + 1.从上往下依次解析执行代码栈`Stack`中的所有同步代码     
+    - 执行栈`Stack`中代码期间: 遇到异步任务时并不立即执行,将其添加到相应的任务队列中   
+      + 将微任务`jobs`添加到微任务队列`MicroTaskQueue`中    
+      + 将宏任务`tasks`添加到宏任务队列`MacroTaskQueue`中  
+
+  + 2.所有同步代码执行完后,将此时微任务队列`MicroTaskQueue`中所有微任务依次添加到代码栈`Stack`中执行  
+    - 这期间遇到异步任务时:
+      + 将微任务`jobs`添加到微任务队列`MicroTaskQueue`中    
+      + 将宏任务`tasks`添加到宏任务队列`MacroTaskQueue`中  
+    - 由于添加一个微任务的时间总会小于执行一个微任务的时间  
+    - 所以此阶段会清空当前微任务队列`MicroTaskQueue`中所有的微任务,包括在这个阶段新添加的微任务   
+
+  + 3.清空微任务队列后,开始将宏任务队列中的第一个宏任务添加到代码栈中执行  
+    - 这期间遇到异步任务时:
+      + 将微任务`jobs`添加到微任务队列`MicroTaskQueue`中    
+      + 将宏任务`tasks`添加到宏任务队列`MacroTaskQueue`中  
+    - 在这个宏任务执行完之后,先清空此时微任务队列中的微任务(如果有的话)  
+    - 然后开始添加宏任务队列中下一个宏任务到代码栈中以同样方式执行...  
+
+  + 4.重复2步骤和3步骤，直到清空宏任务队列和微任务队列中的所有异步任务  
 
 ## promise相关面试题   
