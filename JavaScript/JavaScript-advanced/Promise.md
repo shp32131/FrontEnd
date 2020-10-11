@@ -830,3 +830,6 @@ async function fn2(){
   + 4.重复2步骤和3步骤，直到清空宏任务队列和微任务队列中的所有异步任务  
 
 ## promise相关面试题   
+```JavaScript
+
+```
