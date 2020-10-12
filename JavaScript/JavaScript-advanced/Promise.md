@@ -430,8 +430,8 @@ new Promise((resolve,reject) => {
 )
 ```
 
-=================================================================================================================
-=================================================================================================================
+==================================分割线============================================
+
 ## 自定义一个Promise    
 ### 定义整体结构    
 ```JavaScript
@@ -513,7 +513,7 @@ function Promise(excutor){
         self.status = 'resolved';
         // 保存value数据
         self.data = value;
-        // 如果有待执行的callback函数，立即异步执行回调函数
+        // 如果有待执行的callback函数，则异步执行回调函数
         if(self.callbacks.length > 0){
             setTimeout(() => {
                 self.callbacks.forEach(callbacksObj => {
@@ -531,7 +531,7 @@ function Promise(excutor){
         self.status = 'rejected';
         // 保存reason数据
         self.data = reason;
-        // 如果有待执行的callback函数，立即异步执行回调函数
+        // 如果有待执行的callback函数，则异步执行回调函数
         if(self.callbacks.length > 0){
             setTimeout(() => {
                 self.callbacks.forEach(callbacksObj => {
@@ -545,7 +545,7 @@ function Promise(excutor){
     try{
         excutor(resolve,reject);
     }catch(error){
-        // 如果执行器抛出异常,状态变为rejected状态
+        // 如果执行器函数中抛出异常,状态变为rejected状态
         reject(error);
     }
 
@@ -648,7 +648,8 @@ Promise.reject = function(reason){
 ```JavaScript
 /*
 ** Promise.all(promises)
-** 所有的promise都成功，返回的新的promise结果才为成功
+** 返回一个新的promise,只有所有的promise都成功，返回的新的promise状态才为成功
+** 返回所有的promise的成功结果的值,值的顺序与promises中数组的顺序是一致的
 */
 Promise.all = function(promises){
     const values = new Array(promises.length)
@@ -675,7 +676,7 @@ Promise.all = function(promises){
 
 /*
 ** Promise.race(promises)
-** 最先执行完的promise结果作为返回的promise的结果
+** 最先执行完的那个promise的结果作为返回的promise的结果
 */
 Promise.race = function(promises){
     return new Promise((resolve,reject) => {
@@ -721,19 +722,206 @@ Promise.rejectDelay = function(reason,time){
     })
 }
 ```
+
+========================================================================
+
 ### ES5 function 完整版 
 ```JavaScript
 (function(window){
+    function Promise(excutor){
+        // 保存 this 后续使用
+        const self = this;
+        // promise初始状态为 pending
+        self.status = 'pending'; 
+        self.data = undefined;
+        self.callbacks = [];// {{onResolved(value){},onRejected(reason){}}}
+        // resolve(value)
+        function resolve(value){
+            if(self.status !== 'pending'){
+                return;
+            }
+            self.status = 'resolved';
+            self.data = value;
+            if(self.callbacks.length > 0){
+                // 此处是模拟p.then(onResolved,undefined)
+                // 误差: setTimeout()是宏任务,p.then()是微任务
+                setTimeout(() => {
+                    self.callbacks.forEach(callbackObj => {
+                        callbackObj.onResolved(value);
+                    })
+                })
+            }
+        }
+        // reject(reason)
+        function reject(reason){
+            if(self.status !== 'pending'){
+                return
+            }
+            self.status = 'rejected';
+            self.data = reason;
+            if(self.callbacks.length > 0){
+                // 此处是模拟p.then(undefined,onRejected)
+                // 误差: setTimeout()是宏任务,p.then()是微任务
+                setTimeout(() => {
+                    self.callbacks.forEach(callbackObj => {
+                        callbackObj.onRejected(reason);
+                    })
+                })
+            }
+        }
+        // 同步调用执行器函数 excutor(resolve,reject),如果抛出异常则调用
+        try{
+            excutor(resolve,reject);
+        }catch(error){
+            reject(error);
+        }
+    }
+    // 实现p.then()调用与调用链
+    Promise.prototype.then = function(onResolved,onRejected){
+        const onResolved = typeof onResolved === 'function' ? onResolved : value => value;
+        const onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason };
+        const self = this;
+        /*
+            p.then(onResolved,onRejected)的回调函数执行结果有三种情况
+            1.结果是一个promise对象
+            2.结果是一个非promise对象
+            3.抛出异常
+        */
+        return new Promise((resolve,reject) => {
+            function handle(callback){
+                try{
+                    const result = callback(self.data);
+                }catch(error){
+                    reject(error);
+                }
+                if(result instanceof Promise){
+                    result.then(resolve,reject);
+                }else{
+                    resolve(result);
+                }
+            }
+            if(self.status === 'pending'){
+                self.callbacks.push(
+                    {
+                        onResolved(value){
+                            handle(onResolved)
+                        },
+                        onRejected(reason){
+                            handle(onRejected)
+                        }
+                    }
+                )
+            }else if(self.status === 'resolved'){
+                setTimeout(() => {
+                    handle(onResolved);
+                })
+            }else {
+                setTimeout(() => {
+                    handle(onRejected);
+                })
+            }
+        })
+    }
+    // p.catch()
+    Promise.prototype.catch = function(onRejected){
+        return this.then(undefined,onRejected);
+    }
+    // Promise.resolve(value)
+    Promise.resolve = function(value){
+        return new Promise((resolve,reject) => {
+            if(value instanceof Promise){
+                value.then(resolve,reject)
+            }else{
+                resolve(value)
+            }
+        })
+    }
+    // Promise.reject(reason)
+    Promise.reject = function(reason){
+        return new Promise((resolve,reject)){
+            reject(reason);
+        }
+    }
+    // Promise.all(promises)
+    Promise.all = function(promises){
+        const values = new Array(promises.length);
+        let counts = 0;
+        return new Promise((resolve,reject) => {
+            promises.forEach((p,index) => {
+                Promise.resolve(p).then(
+                    value => {
+                        counts++;
+                        values[index] = value;
+                        if(counts === promises.length){
+                            resolve(values);
+                        }
+                    },
+                    reason => {
+                        reject(reason);
+                    }
+                )
+            })
+        })
+    }
+    // Promise.race(promises)
+    Promise.race = function(promises){
+        return new Promise((resolve,reject) => {
+            promises.forEach((p,index) => {
+                Promise.resolve(p).then(
+                    value => {
+                        resolve(value);
+                    },
+                    reason => {
+                        reject(reason);
+                    }
+                )
+            })
+        })
+    }
 
-// 向外部暴露 Promise
-window.Promise = Promise;
+    // 向外部暴露 Promise
+    window.Promise = Promise;
 })(window)
 ```
 =========================================================================
 ### ES6 class 完整版
 ```JavaScript
 class Promise{
+    constructor(excutor){
+        const self = this;
+        self.status = 'pending';
+        self.data = undefined;
+        self.callbacks = [];
+        function resolve(value){
+            if(self.status !== 'pending') return;
+        }
+        function reject(reason){
+            if(self.status !== 'pending') return;
+        }
+        try{
+            excutor(resolve,reject)
+        }catch(error){
+            reject(error);
+        }
+    }
+    then(onResolved,onRejected){
 
+    }
+    catch(onRejected){
+        return this.then(undefined,onRejected);
+    }
+    static resolve(value){
+
+    }
+    static reject(reason){
+
+    }
+    static all(promises){
+
+    }
+    static race(promises){
+
+    }
 }
 ```
 
