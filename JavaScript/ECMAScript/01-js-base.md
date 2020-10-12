@@ -18,7 +18,8 @@
 ```html
 <!-- 以下console.log('hello javascript')不会执行 -->
 <script src='test.js'>
-    console.log('hello javascript');//不会被执行 
+    //不会被执行 
+    console.log('hello javascript');
 </script>
 ```
 > 在`HTML`文档中，如果`head`标签中有JS代码，则要等到`head`标签中的JS代码加载并解析完成后,浏览器才会开始渲染解析`body`标签中的`HTML`内容，所以JS代码一般放在`body`标签中    
@@ -38,10 +39,12 @@
   + map 
 > `JavaScript`是弱类型脚本语言，变量的类型由其所引用的值类型决定   
 ```JavaScript
-let test = "hello";//String字面量声明方式
-console.log(typeof test);//string
+// String字面量声明方式
+let test = "hello";
+console.log(typeof test);// string
 
-test = new String('world');// String构造函数声明方式
+// String构造函数声明方式
+test = new String('world');
 console.log(typeof test);// object
 
 test = 123;
@@ -49,6 +52,12 @@ console.log(typeof test);//number
 
 test = {};
 console.log(typeof test);//object
+
+function fn(){}
+console.log(typeof fn);// 'function'
+
+let arr  = []
+console.log(arr);// 'object'
 ```
 
 ### 变量声明 var,let<sup>es6</sup>,const<sup>es6</sup>

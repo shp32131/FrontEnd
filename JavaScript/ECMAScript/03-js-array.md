@@ -8,6 +8,8 @@ let arr = new Array(1,'hello','world');
 console.log(arr);
 //推荐使用字面量方式声明一个数组 
 let  array = ['hello','world'];
+// 声明一个长度确定的数组
+let  arr = new Array(5);
 ```
 
 > 多维数组定义   

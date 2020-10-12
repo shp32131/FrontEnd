@@ -1,11 +1,11 @@
 ## Number
 ### 声明定义
 ```javascript
-let a = 10;//使用字面量形式声明一个 number 
-
-let n = new Number(2);// 使用number构造函数方式声明一个 number 
-
-//Number用于表示integer和float
+//使用字面量形式声明一个 number 
+let a = 10;
+// 使用number构造函数方式声明一个 number 
+let n = new Number(2);
+// Number用于表示integer和float
 let n1 = 11;
 ```
 ### 基本函数
