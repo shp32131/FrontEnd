@@ -251,7 +251,158 @@ let app = new Vue({
   + `<form v-on:submit.prevent="onSubmit">...</form>`中`.prevent`修饰符告诉`v-on`指令对于触发的事件调用`event.preventDefault()` 
 - 缩写 `v-bind` === `:`  `v-on` === `@`
 ## 计算属性与侦听器 
+### 模板语法vm.data与计算属性computed   
+```HTML
+<div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+<script>
+let vm = new Vue({
+    el: '#example',
+    data: {
+        message: 'Hello'
+    },
+    computed: {
+        // 计算属性的 getter
+        reversedMessage: function () {
+            // `this` 指向 vm 实例 ，是reveredMessage属性的getter函数 
+            return this.message.split('').reverse().join('')
+        }
+    }
+}
+</script>
+```
+- 当`vm.message`改变时,所有依赖`vm.reversedMessage`的绑定也会更新 
+- `computed`计算属性,因为模板语法中`{{name}}`中只能使用表达式，不能进行复杂的计算,所以有了`computed`计算属性 
+### computed 与 methods 区别
+```HTML
+<p>Reversed message: "{{ reversedMessage() }}"</p>
+<script>
+    let vm = new Vue({
+        el: '#app'
+        data: {
+            message: 'hello'
+        }
+        methods: {
+            reversedMessage: function(){
+                return this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+```
+- 虽然使用`methods`可以和`computed`达到同样的效果,但`computed`计算属性是基于它们的响应式依赖进行缓存的,而`methods`需要每次都要执行获取值 
+- 如果`message`需要每次渲染时，不管有没有修改`message`值，都执行一次`message`的`getter`函数，则用`methods`，尽量使用`computed`能提高性能  
+### computed计算属性与watch侦听属性
+```HTML
+<div id="demo">{{ fullName }}</div>
+<script>
+// 这里使用 watch 实例选项是命令式且重复的 
+var vm = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar',
+    fullName: 'Foo Bar'
+  },
+  watch: {
+    firstName: function (val) {
+      this.fullName = val + ' ' + this.lastName
+    },
+    lastName: function (val) {
+      this.fullName = this.firstName + ' ' + val
+    }
+  }
+})
+// 如果使用computer实例选项，将更合理
+var vm = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar'
+  },
+  computed: {
+    fullName: function () {
+      return this.firstName + ' ' + this.lastName
+    }
+  }
+})
+</script>
+```
+> 计算属性默认只有`getter`，需要时也可以提供一个`setter`   
+```JavaScript
+computed: {
+  fullName: {
+    // getter
+    get: function () {
+      return this.firstName + ' ' + this.lastName
+    },
+    // setter
+    set: function (newValue) {
+      var names = newValue.split(' ')
+      this.firstName = names[0]
+      this.lastName = names[names.length - 1]
+    }
+  }
+}
+vm.fullName = 'John  Doe'//setter会被调用，vm.firstName 和 vm.lastName会关联更新
+```
+- `watch`侦听器用法 
+```html
+<div id="watch-example">
+  <p>
+    Ask a yes/no question:
+    <input v-model="question">
+  </p>
+  <p>{{ answer }}</p>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script>
+var watchExampleVM = new Vue({
+  el: '#watch-example',
+  data: {
+    question: '',
+    answer: 'I cannot give you an answer until you ask a question!'
+  },
+  watch: {
+    // 如果 `question` 发生改变，这个函数就会运行
+    question: function (newQuestion, oldQuestion) {
+      this.answer = 'Waiting for you to stop typing...'
+      this.debouncedGetAnswer()
+    }
+  },
+  created: function () {
+    // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
+    // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+    // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
+    // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+    // 请参考：https://lodash.com/docs#debounce
+    this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+  },
+  methods: {
+    getAnswer: function () {
+      if (this.question.indexOf('?') === -1) {
+        this.answer = 'Questions usually contain a question mark. ;-)'
+        return
+      }
+      this.answer = 'Thinking...'
+      var vm = this
+      axios.get('https://yesno.wtf/api')
+        .then(function (response) {
+          vm.answer = _.capitalize(response.data.answer)
+        })
+        .catch(function (error) {
+          vm.answer = 'Error! Could not reach the API. ' + error
+        })
+    }
+  }
+})
+// 在这个示例中，使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的
+</script>
+```
 ## Class与Style绑定 
 ## 条件渲染 
 ## 事件处理 
