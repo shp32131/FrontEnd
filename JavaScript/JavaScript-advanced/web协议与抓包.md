@@ -6,12 +6,12 @@
 -------------------------------------------
 # 应用层
 ## HTTP/1
-- HTTP(Hypertext Transfer Protocol)超文本传输协议 
+- `HTTP(Hypertext Transfer Protocol)`超文本传输协议 
   + 一种应用层的,无状态的,以请求和应答方式运行的协议
   + 使用可扩展的语义和自描述消息格式
   + 与基于网络的超文本信息系统灵活的互动 
 ![http请求](./imgs/http请求.png)
-- HTTP协议的格式(基于ABNF主义的定义)
+- HTTP协议的格式(基于`ABNF`主义的定义)
 ![http请求](./imgs/http格式.png)
 ![http请求](./imgs/ABNF.png)
 ![http请求](./imgs/ABNF02.png)
