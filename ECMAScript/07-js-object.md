@@ -713,7 +713,7 @@ console.log(JSON.stringify(descs,null,4));
 |configurable|对象属性能否delete,能否修改访问器属性，能否修改属性特性|true|
 
 #### 设置特征
-> 使用Object.defineProperty()方法单个设置属性特性有三个参数   
+> 使用`Object.defineProperty(obj,property,descriptor)`方法单个设置属性特性有三个参数    
 ```javascript 
 "use strict";
 let user = {
@@ -744,6 +744,45 @@ Object.defineProperty(user,'name',{
     writable: true,
     configurable: true
 });//TypeError:cannot redefine property:name
+
+```
+> 使用`Object.defineProperty(obj,property,descriptor)`注意事项      
+```JavaScript
+var o = {}; // 创建一个新对象
+
+// 在对象中添加一个属性与数据描述符的示例
+Object.defineProperty(o, "a", {
+  value : 37,
+  writable : true,
+  enumerable : true,
+  configurable : true
+});
+
+// 对象 o 拥有了属性 a，值为 37
+
+// 在对象中添加一个设置了存取描述符属性的示例
+var bValue = 38;
+Object.defineProperty(o, "b", {
+  // 使用了方法名称缩写（ES2015 特性）
+  // 下面两个缩写等价于：
+  // get : function() { return bValue; },
+  // set : function(newValue) { bValue = newValue; },
+  get() { return bValue; },
+  set(newValue) { bValue = newValue; },
+  enumerable : true,
+  configurable : true
+});
+
+o.b; // 38
+// 对象 o 拥有了属性 b，值为 38
+// 现在，除非重新定义 o.b，o.b 的值总是与 bValue 相同
+
+// 数据描述符和存取描述符不能混合使用
+Object.defineProperty(o, "conflict", {
+  value: 0x9f91102,
+  get() { return 0xdeadbeef; } 
+});
+// 抛出错误 TypeError: value appears only in data descriptors, get appears only in accessor descriptors
 ```
 > 使用Object.defineProperties()方法设置多个属性特性有两个参数      
 ```javascript
