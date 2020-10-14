@@ -40,13 +40,12 @@ npm run serve
 ### vue是什么?
 - `vue`是一套用于构建用户界面的渐进式框架，自底向上逐层应用 
 - `vue`核心库只关注视图层，易于上手
-- `vue`的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进`DOM`的系统 
+- `vue`的核心是一个采用简洁的模板语法声明式地将数据渲染进`DOM`的系统 
 ```HTML
 <div id="app">
     {{message}}
     <span v-bind:title="value">鼠标悬停查看title属性</span>
 </div>
-
 <script>
 // 将Vue应用挂载到DOM元素上(#app)
 let app = new Vue({
@@ -59,9 +58,9 @@ let app = new Vue({
 </script>
 ```
 ### vue指令 
-- 在`vue`中，像`v-bind attribute`这样称为指令，带有`v-`前缀表示是`vue`提供的特殊`attribute` 
-- `v-bind` 数据绑定 `<span v-bind:title="value">`或`<span :title="value">` 绑定属性数据指令 
-- `v-if` 条件显示或隐藏 `v-if`指令 `<p v-if="seen"></p>` 当`seen=true`就会显示`<p>`标签内容 
+- 在`vue`中，带有`v-`前缀表示`vue`指令,是`vue`提供的特殊`attribute` 
+- `v-bind` 缩写为`:` 数据绑定 `<span v-bind:title="value">`或`<span :title="value">` 绑定属性数据指令 
+- `v-if` 条件显示或隐藏内容,`v-if`指令 `<p v-if="seen"></p>` 当`seen=true`就会显示`<p>`标签内容 
 - `v-for` 列表循环 `<li v-for="todo in todos">`
 ```HTML
 <div id="app">
@@ -84,7 +83,7 @@ let app = new Vue({
     })
 </script>
 ```
-- `v-on` 添加事件监听器 `<button v-on:click="reverseMessage">反转消息</button>` 
+- `v-on` 缩写为`@` 添加事件监听器 `<button v-on:click="reverseMessage">反转消息</button>` 
   + 简写`<button @click="reverseMessage">反转消息</button>`
 ```HTML
 <div id="app">
@@ -126,9 +125,10 @@ var app5 = new Vue({
 ### vue组件化应用构建
 - 在`vue`中，把一个页面抽象一个个小型的,独立的,可复用的组件,然后组成一个大型的应用界面 
 - 一个组件本质上就是一个拥有预定义选项的一个`vue`实例 
-- 使用`Vue.component('item',{template:'',props:[]})`注册组件 
+- 使用`Vue.component('item',{template:'',props:[]})`全局注册组件 
 
 ------------------------------Vue实例-------------------------------------
+
 ## vue 实例
 ### 创建一个 vue 实例
 ```javascript
@@ -249,7 +249,7 @@ let app = new Vue({
 ```
 - 修饰符 修饰符 (modifier) 是以半角句号`.`指明的特殊后缀，用于指出一个指令应该以特殊方式绑定 
   + `<form v-on:submit.prevent="onSubmit">...</form>`中`.prevent`修饰符告诉`v-on`指令对于触发的事件调用`event.preventDefault()` 
-- 缩写 `v-bind` === `:`  `v-on` === `@`
+- 缩写 `v-bind` == `:`,`v-on` == `@`,`v-slot` == `#` 
 ## 计算属性与侦听器 
 ### 模板语法vm.data与计算属性computed   
 ```HTML
@@ -404,9 +404,24 @@ var watchExampleVM = new Vue({
 </script>
 ```
 ## Class与Style绑定 
+- 操作元素的`class`列表和内联样式是数据绑定的一个常见需求 
+- `class`列表与内联样式都是`attribute`，所以用`v-bind`处理  
+- `Vue.js`在这方面做了一些增强
+### 绑定HTML Class
+### 绑定内联样式
+
 ## 条件渲染 
+### v-if 
+### v-show
+### v-if vs v-show
+### v-if与v-for一起使用
+
+## 列表渲染
+
 ## 事件处理 
+
 ## 表单输入绑定 
+
 ## 组件基础 
 ### 基本示例
 ```JavaScript
@@ -460,7 +475,7 @@ new Vue({
     ]
   }
 })
-// 注册组件
+// 全局注册组件
 Vue.component({'blog-post'
     Prop: ['key','title'],
     template: `<p>{{key}}---{{title}}</p>`
@@ -477,10 +492,21 @@ Vue.component({'blog-post'
 ------------------------------过渡与动画-------------------------------------
 ## 进入与离开和列表过渡
 ## 状态过渡 
-------------------------------可复用性与组合-------------------------------------
+------------------------------可复用性与组合--------------------------------
 ## 混入
+
 ## 自定义指令
+
 ## 渲染函数
+### 基础 
+### 节点，树及虚拟DOM
+### createElement参数
+### 深入数据对象
+### 使用jS代表模板
+### JSX
+### 函数式组件
+### 模板编译
+
 ## 插件
 ## 过滤器
 ------------------------------工具-------------------------------------
@@ -490,12 +516,72 @@ Vue.component({'blog-post'
 ## 生产环境部署
 ------------------------------规模化-------------------------------------
 ## 路由
-### vue-router
+### 自定义简单路由
+```JavaScript
+const NotFound = { template: '<p>Page not found</p>' }
+const Home = { template: '<p>home page</p>' }
+const About = { template: '<p>about page</p>' }
+
+const routes = {
+  '/': Home,
+  '/about': About
+}
+
+new Vue({
+  el: '#app',
+  data: {
+    currentRoute: window.location.pathname
+  },
+  computed: {
+    ViewComponent () {
+      return routes[this.currentRoute] || NotFound
+    }
+  },
+  render (h) { return h(this.ViewComponent) }
+})
+```
+### vue-router安装使用
+-	1.安装 `npm install vue-router  --save   / cnpm install vue-router  --save`
+- 2.`main.js`文件中引入`vue-router`
+  + `import VueRouter from 'vue-router'`
+  + `Vue.use(VueRouter)`
+- 3.配置路由
+  + 创建组件 引入组件
+  + 定义路由
+  ```JavaScript
+			const routes = [
+			  { path: '/foo', component: Foo },
+			  { path: '/bar', component: Bar },
+			  { path: '*', redirect: '/home' }   /*默认跳转路由*/
+      ]
+  ```
+  + 实例化`VueRouter`
+  ```JavaScript
+			const router = new VueRouter({
+			  routes // （缩写）相当于 routes: routes
+      })
+  ```
+- 4.挂载
+```JavaScript
+		new Vue({
+		  el: '#app',
+		  router，
+		  render: h => h(App)
+		})
+```
+- 5.根组件的模板里面放上这句话`<router-view></router-view>`
+- 6.路由跳转
+```HTML
+  <router-link to="/foo">Go to Foo</router-link>
+  <router-link to="/bar">Go to Bar</router-link>
+```
 
 ## 状态管理
+- `localStorage` `sessionStorage`
 ### vuex
 
 ## 服务端渲染
+
 ## 安全
 ------------------------------内在-------------------------------------
 ## 深入响应式原理  
