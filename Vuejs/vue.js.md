@@ -34,8 +34,8 @@ npm run build
 # 运行项目
 npm run serve
 ```
-> 使用新脚手架工具创建vue项目不会自动创建`vue.config.js`,其内部高度集成了`webpack`，要修改默认配置可创建`vue.config.js`配置文件  
-
+> `vue.config.js`是一个可选的配置文件，如果项目的(和 `package.json`同级的) 根目录中存在这个文件，那么它会被`@vue/cli-service` 自动加载    
+- 使用新脚手架工具创建vue项目不会自动创建`vue.config.js`,其内部高度集成了`webpack`，要修改默认配置可创建`vue.config.js`配置文件  
 ## vue介绍
 ### vue是什么?
 - `vue`是一套用于构建用户界面的渐进式框架，自底向上逐层应用 
@@ -376,7 +376,7 @@ var watchExampleVM = new Vue({
   },
   created: function () {
     // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
-    // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+    // 在这个例子中，我们希望限制访问 yes no.wtf/api 的频率
     // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
     // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
     // 请参考：https://lodash.com/docs#debounce
@@ -408,6 +408,65 @@ var watchExampleVM = new Vue({
 ## 事件处理 
 ## 表单输入绑定 
 ## 组件基础 
+### 基本示例
+```JavaScript
+// 定义 button-counter 的新组件 
+Vue.component('button-counter',{
+    // 非根实例的组件 data 对象必须是一个函数,不然会造成组件复用时数组共享的问题
+    data: function(){
+        return {
+            count: 0
+        }
+    },
+    template:`<button v-on:click="count++">You clicked me {{ count }} times.</button>`
+})
+```
+- 一个`vue`应用中，只有根实例有`vm.$el`,也就是说只有根实例才有`el`选项 
+- 非根实例组件中,`data`必须是一个函数，这样每个实例可以维护一份被返回对象的独立拷贝,这样组件复用时，各组件的数据才是独立的   
+### 全局注册与局部注册
+- `Vue.component()`是全局注册组件,可以在所有的组件中使用 
+- 全局注册的行为必须在根`Vue` 实例 (通过 new Vue) 创建之前发生
+### 通过Prop向子组件传递数据
+- `Prop`是你可以在组件上注册的一些自定义`attribute`，当一个值传递给一个`Prop attribute`时候，它就变成了那个组件实例的一个`property` 
+```JavaScript
+// 注册一个blog-post 子组件 
+Vue.component('blog-post', {
+  props: ['title'],
+  template: '<h3>{{ title }}</h3>'
+})
+// 在父组件中，向子组件传递一个值 
+<blog-post title="journey with Vue"></blog-post>
+// 这样template中的title变量的值就为'journey with vue' 
+```
+> 典型应用   
+```HTML
+<div id='app'>
+    <blog-post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:title="post.title"
+    ></blog-post>
+</div>
+
+<script>
+// 根实例
+new Vue({
+  el: '#app',
+  data: {
+    posts: [
+      { id: 1, title: 'My journey with Vue' },
+      { id: 2, title: 'Blogging with Vue' },
+      { id: 3, title: 'Why Vue is so fun' }
+    ]
+  }
+})
+// 注册组件
+Vue.component({'blog-post'
+    Prop: ['key','title'],
+    template: `<p>{{key}}---{{title}}</p>`
+})
+</script>
+```
 -------------------------------------- 深入了解组件 --------------------------------------------------------------------
 ## 组件注册
 ## Prop
