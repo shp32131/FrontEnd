@@ -408,8 +408,38 @@ var watchExampleVM = new Vue({
 - `class`列表与内联样式都是`attribute`，所以用`v-bind`处理  
 - `Vue.js`在这方面做了一些增强
 ### 绑定HTML Class
-### 绑定内联样式
+```HTML
+<div 
+  class = 'static'
+  v-bind:class="{active:isActive,'text-danger':hasError}"
+>
+</div>
+<script>
+let vm = new Vue({
+  data: {
+    isActive: true,
+    hasError: false
+  }
+})
+</script>
+<!-- ------------------------- -->
+<!--  以上渲染结果 -->
+<div class="static active"></div>
+```
+- 可以绑定一个返回对象的计算属性，实现强大的应用 
 
+### 绑定内联样式
+```HTML
+<div v-bind:style="styleObject"></div>
+<script>
+  data:{
+    styleObject: {
+      color: 'red',
+      fontSize: '13px'
+    }
+  }
+</script>
+```
 ## 条件渲染 
 ### v-if 
 ### v-show
@@ -419,8 +449,17 @@ var watchExampleVM = new Vue({
 ## 列表渲染
 
 ## 事件处理 
+### 监听事件
+### 事件处理方法
+### 内联处理器中的方法
+### 事件修饰符
+### 按键修饰符
+### 系统修饰符
 
 ## 表单输入绑定 
+### 基础用法
+### 值绑定
+### 修饰符
 
 ## 组件基础 
 ### 基本示例
@@ -581,7 +620,6 @@ new Vue({
 ### vuex
 
 ## 服务端渲染
-
 ## 安全
 ------------------------------内在-------------------------------------
 ## 深入响应式原理  
@@ -707,5 +745,6 @@ methods: {
   }
 }
 ```
+-------------------vue全家桶---------------------
 ## Vue 全家桶 
 > vue + vue-router + vuex + axios + ui框架
