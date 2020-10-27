@@ -1,6 +1,6 @@
 ## 概览
-Less --> leaner style sheets
-less 和 css 很像，less仅对css语言增加了一些扩展
+- Less --> leaner style sheets
+- less 和 css 很像，less仅对css语言增加了一些扩展
 ## 基本用法
 ### variable
 ```Less

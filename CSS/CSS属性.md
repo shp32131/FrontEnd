@@ -1,74 +1,12 @@
-## 动画
-@keyframes	                规定动画
-animation	                所有动画属性的简写属性，除了 animation-play-state 属性
-animation-name	            规定 @keyframes 动画的名称
-animation-duration	        规定动画完成一个周期所花费的秒或毫秒
-animation-timing-function	规定动画的速度曲线
-animation-delay	            规定动画何时开始
-animation-iteration-count	规定动画被播放的次数
-animation-direction	        规定动画是否在下一周期逆向地播放
-animation-play-state	    规定动画是否正在运行或暂停
-animation-fill-mode	        规定对象动画时间之外的状态
-
-## 过渡属性 transition
-transition	                简写属性，用于在一个属性中设置四个过渡属性
-transition-property	        规定应用过渡的 CSS 属性的名称
-transition-duration	        定义过渡效果花费的时间
-transition-timing-function	规定过渡效果的时间曲线
-transition-delay	        规定过渡效果何时开始
-
-## 2D/3D转换
-transform	                向元素应用 2D 或 3D 转换
-transform-origin	        允许你改变被转换元素的位置
-transform-style	            规定被嵌套元素如何在 3D 空间中显示
-perspective	                规定 3D 元素的透视效果
-perspective-origin	        规定 3D 元素的底部位置
-backface-visibility	        定义元素在不面对屏幕时是否可见
-
-## 文本
-- color	                设置文本的颜色
-- direction	            规定文本的方向 
-- letter-spacing	    设置字符间距
-- word-spacing	        设置单词间距
-- line-height	        设置行高
-- text-align	        规定文本的水平对齐方式
-- text-decoration	    规定添加到文本的装饰效果
-- text-indent	        规定文本块首行的缩进
-- text-overflow	        规定当文本溢出包含元素时发生的事情
-- text-shadow	        规定添加到文本的阴影效果
-- text-transform	    控制文本的大小写
-- unicode-bidi	        设置文本方向
-- white-space	        规定如何处理元素中的空白
-- hanging-punctuation	规定标点字符是否位于线框之外
-- punctuation-trim	    规定是否对标点字符进行修剪
-- text-align-last	    设置如何对齐最后一行或紧挨着强制换行符之前的行
-- text-emphasis	        向元素的文本应用重点标记以及重点标记的前景色
-- text-justify	        规定当 text-align 设置为 "justify" 时所使用的对齐方法
-- text-outline	        规定文本的轮廓
-- text-shadow	        向文本添加阴影
-- text-wrap	            规定文本的换行规则
-- word-break	        规定非中日韩文本的换行规则
-- word-wrap	            允许对长的不可分割的单词进行分割并换行到下一行
-
-## 字体
-- font	                在一个声明中设置所有字体属性
-- font-size	            规定文本的字体尺寸
-- font-weight	            规定字体的粗细
-- font-style	            规定文本的字体样式
-- font-family	            规定文本的字体系列
-- font-size-adjust	    为元素规定 aspect 值
-- font-stretch	        收缩或拉伸当前的字体系列
-- font-variant	        规定是否以小型大写字母的字体显示文本
-
 ## 背景
 background	            在一个声明中设置所有的背景属性。	1
-background-attachment	设置背景图像是否固定或者随着页面的其余部分滚动。	1
-background-color	    设置元素的背景颜色。	1
-background-image	    设置元素的背景图像。	1
+background-attachment	  设置背景图像是否固定或者随着页面的其余部分滚动。	1
+background-color	      设置元素的背景颜色。	1
+background-image	      设置元素的背景图像。	1
 background-position	    设置背景图像的开始位置。	1
-background-repeat	    设置是否及如何重复背景图像。	1
+background-repeat	      设置是否及如何重复背景图像。	1
 background-clip	        规定背景的绘制区域。	3
-background-origin	    规定背景图片的定位区域。	3
+background-origin	      规定背景图片的定位区域。	3
 background-size	        规定背景图片的尺寸。
 
 ## 定位
