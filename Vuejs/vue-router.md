@@ -135,3 +135,32 @@ export default {
 ### 滚动行为
 
 ### 路由懒加载
+
+## vue-router 问与答
+> `$router.go(-1)`后退时怎么带参数  
+- 如果不知道具体是哪一个上级页面时可以用下面这种方法,如果知道具体是哪个上级页面可以用`$router.push(name,params)`?
+- 1 声明一个空的`Vue`实例组件,eventBus
+```JavaScript
+// filename: eventBus.js
+import Vue from 'vue'
+let eventBus = new Vue({})
+export default eventBus
+```
+- 2 下级页面通过`eventBus.$emit`传参给上一个页面
+```JavaScript
+import eventBus from './public/eventBus.js'
+methods: {
+  // 点击事件
+  goback() {
+    eventBus.$emit('clueId',this.clueId)
+    this.$router.go(-1);
+  }
+}
+```
+- 3 上级页面接收参数
+```JavaScript
+import eventBus from `../public/eventBus.js`
+eventBus.$on('clueId',function (data) {
+ this.clueId = data 
+}).bind(this)
+```
