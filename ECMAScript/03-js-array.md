@@ -698,7 +698,9 @@ if(state) console.log('你说脏话了');
 ```
 
 #### filter
-> 使用filter可以过虑数据中元素  
+> 使用`filter`可以过虑数组中元素   
+- 返回过滤条件通过的数组项 
+- 不改变原数组   
 ```javascript
 //获取在css栏中的课程  
 let lessons = [

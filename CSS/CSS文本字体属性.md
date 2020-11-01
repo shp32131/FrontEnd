@@ -1,12 +1,12 @@
 ## 字体
-- font	                在一个声明中设置所有字体属性
-- font-size	            规定文本的字体尺寸
-- font-weight	            规定字体的粗细
-- font-style	            规定文本的字体样式
-- font-family	            规定文本的字体系列
-- font-size-adjust	    为元素规定 aspect 值
-- font-stretch	        收缩或拉伸当前的字体系列
-- font-variant	        规定是否以小型大写字母的字体显示文本
+- `font`	 设置字体所有属性
+- `font-size`	  字体尺寸
+- `font-weight`	 字体的粗细
+- `font-style`	 字体样式
+- `font-family`	 文本的字体系列
+- `font-size-adjust`	    为元素规定 aspect 值
+- `font-stretch`	        收缩或拉伸当前的字体系列
+- `font-variant`	        规定是否以小型大写字母的字体显示文本
 ## 文本
 - color	                设置文本的颜色
 - direction	            规定文本的方向 
