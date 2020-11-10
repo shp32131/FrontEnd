@@ -1,15 +1,14 @@
 ## Symbol And Set And Map
 
 ## Symbol <sup>es6</sup>
-> Symbol(符号，代号的意思)是一种新的基本数据类型，用于防止属性名冲突面产生的，比如向第三方添加属性时  
-
-- symbol值通过Symbol函数生成,生成的symbol是一个类似于字符串的原始类型的值 
-- symbol的值是唯一的，独一无二的不会重复的   
-- 使用new命令会报错，因为Symbol是原始类型的值而不是对象 
-- 如果传入的参数为对象，会用toString()转为字符串 
-- Symbol值不能与其他的值进行运算,可转换为字符串，布尔值，不能转为数值 
-- Symbol参数只表示对当前Symbol值的描述，所以相同参数的symbol值也不相同   
-
+- `Symbol`(符号,代号的意思)是一种新的基本数据类型，用于防止属性名冲突面产生的，比如向第三方添加属性时  
+- `symbol`值通过`Symbol()`函数生成,生成的`symbol`是一个类似于字符串的原始类型的值 
+- `symbol`的值是唯一的，独一无二的不会重复的   
+- `new Symbol()`命令会报错，因为`Symbol`是原始类型的值而不是对象 
+- `Symbol`值不能与其他的值进行运算,可转换为字符串，布尔值，不能转为数值 
+- `Symbol()`参数问题:
+  + 如果传入的参数为对象，会用`toString()`转为字符串 
+  + `Symbol`参数只表示对当前`Symbol`值的描述，相同参数的`symbol`值也不相同   
 ### 基础知识
 #### Symbol  
 ```javascript  
@@ -27,26 +26,25 @@ console.log(symbol1.name);//undefined
 //let  sy1 = Symbol('name');
 console.log(sy1.description);//name
 ```
-
 #### Symbol.for  
-> Symbol.for()根据描述参数获取一个Symbol值，如果不存在就新建一个Symbol值 
-- 使用Symbol.for会在系统中进行Symbol值登记而Symbol不会 
+- `Symbol.for()`根据描述参数获取一个`Symbol`值，如果不存在就新建一个`Symbol`值 
+- 区别:使用`Symbol.for()`会在系统中进行`Symbol`值登记而`Symbol()`不会 
 ```javascript
 let sy1 = Symbol.for('john');
 let sy2 = Symbol.for('john');
 console.log(sy1 == sy2);//true
 ```
 #### Symbol.keyFor  
-- Symbol.keyFor根据使用`Symbol.for`登记的`Symbol`值返回描述参数  
-- 如果没有就返回`undefined`
+- `Symbol.keyFor`根据使用`Symbol.for`登记的`Symbol`值返回描述参数  
+  + 如果没有就返回`undefined`
 ```javascript
 let sy1 = Symbol.for('alex');
 console.log(Symbol.keyFor(sy1),Symbol.keyFor('mark'));//alex,undefined
 ```
 #### 对象属性  
-> Symbol声明和访问使用[] 
-- 访问对象的Symbol属性不能使用`.`运算符，`.`是操作字符串的 
-- 访问对象的Symbol属性用 `[symbol]` 
+> `Symbol`声明和访问使用`[]` 
+- 访问对象的`Symbol`属性不能使用`.`运算符，`.`是操作字符串的 
+- 访问对象的`Symbol`属性用 `[symbol]` 
 ```javascript
 let sy1 = Symbol('name');
 let obj = {
