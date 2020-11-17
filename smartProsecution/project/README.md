@@ -1,8 +1,19 @@
-## 项目介绍
+# project
+## Project setup
+``` npm install ```
+### Compiles and hot-reloads for development
+``` npm run serve ```
+### Compiles and minifies for production
+``` npm run build ```
+### Lints and fixes files
+``` npm run lint ```
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+## my tasks 
+### 项目介绍
 - 平安政府项目 智慧法律检务项目
 - 12个后台 7个前端
 - 共八个子系统
-## 任务
 ### 公益诉讼,知识产权,打击金融犯罪三个系统的线索管理模块的线索拆分
 - 功能: 通过要拆分的线索id,调用接口展示原线索信息,拆分原线索，提交新线索数据
 > 页面展示：
@@ -37,3 +48,4 @@
 - 基于上年职工月均工资计算,总金额不超过上年职工月均工资x36个月
 - 根据prd确定计算规则,和参数修改与微调
 - ...
+### 外部卷宗管理-卷宗列表查询页面开发
