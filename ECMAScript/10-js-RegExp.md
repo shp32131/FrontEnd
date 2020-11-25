@@ -12,7 +12,6 @@ console.log(nums.join(''));//'21999349'
 
 // 使用正则
 console.log(str.match(/\d/g/).join(''));
-
 ```
 ### 创建正则 
 - 创建正则的两种方式:
@@ -303,8 +302,6 @@ console.log(str.split(/[-/]/));
 </script>
 
 ```
-
-
 
 ### 断言匹配
 - 可以将断言理解为正则中的条件 
