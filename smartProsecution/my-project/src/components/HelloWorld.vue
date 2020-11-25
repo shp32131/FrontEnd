@@ -4,13 +4,15 @@
     <div class="part-login" :style="dialogPosition" v-show="dialogVisible">
       <div class="dialog">
         <div class="header">
-          <div class="public left" style="border-right:1px solid #d9d9d9;">
-            <div class="text" :style="leftStyle" @click="selectLeft">账户密码登录
+          <div class="public left" style="border-right: 1px solid #d9d9d9">
+            <div class="text" :style="leftStyle" @click="selectLeft">
+              账户密码登录
               <div class="flag-border" v-show="leftLogin"></div>
             </div>
           </div>
           <div class="public right">
-            <div class="text" :style="rightStyle" @click="selectRight">手机快捷登录
+            <div class="text" :style="rightStyle" @click="selectRight">
+              手机快捷登录
               <div class="flag-border" v-show="rightLogin"></div>
             </div>
           </div>
@@ -27,20 +29,20 @@
             <el-input v-model="phoneNumber" prefix-icon="el-icon-mobile-phone" placeholder="请输入手机号码"></el-input>
           </div>
         </div>
-        <div class="item" style="margin-bottom:32px" v-if="accountLogin">
+        <div class="item" style="margin-bottom: 32px" v-if="accountLogin">
           <div class="value">
             <div class="label">密码</div>
             <el-input v-model="name" prefix-icon="el-icon-lock" placeholder="请输入密码"></el-input>
           </div>
         </div>
-        <div class="item" style="margin-bottom:32px" v-if="phoneLogin">
-          <div class="value" style="width:220px;">
+        <div class="item" style="margin-bottom: 32px" v-if="phoneLogin">
+          <div class="value" style="width: 220px">
             <div class="label">验证码</div>
             <el-input v-model="name" prefix-icon="el-icon-lock" placeholder="请输入验证码"></el-input>
-            <div class="verify-code" :style="countStyle" @click="getVerificationCode">{{codeText}}</div>
+            <div class="verify-code" :style="countStyle" @click="getVerificationCode">{{ codeText }}</div>
           </div>
         </div>
-        <div class="item" style="margin-bottom:16px;">
+        <div class="item" style="margin-bottom: 16px">
           <div class="value">
             <el-button type="primary">登录</el-button>
           </div>
@@ -57,76 +59,81 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   data() {
     return {
       dialogPosition: {},
       dialogVisible: false,
       leftLogin: true,
       rightLogin: false,
-      leftStyle: {color:"#4b8ffa",'font-weight':"bold"},
+      leftStyle: { color: "#4b8ffa", "font-weight": "600" },
       rightStyle: null,
       accountLogin: true,
       phoneLogin: false,
-      codeText: '获取验证码',
+      codeText: "获取验证码",
       countDown: 60,
       countStyle: null,
 
       name: "",
-    }
+    };
   },
   watch: {
     countDown(val) {
-      this.codeText = val + 's'
-    }
+      if ("获取验证码" == val) {
+        this.codeText = val;
+      } else {
+        this.codeText = val + "s";
+      }
+    },
   },
   created() {
-    let left = window.innerWidth/2-305
-    let top = window.innerHeight/2-212
-    this.dialogPosition = {position:"absolute",left:left+'px',top:top+'px'}
+    let left = window.innerWidth / 2 - 305;
+    let top = window.innerHeight / 2 - 212;
+    this.dialogPosition = { position: "absolute", left: left + "px", top: top + "px" };
   },
   methods: {
     login() {
-      this.dialogVisible = !this.dialogVisible 
+      this.dialogVisible = !this.dialogVisible;
     },
     selectLeft() {
-      this.accountLogin = true
-      this.phoneLogin = false
-      this.leftLogin = true
-      this.rightLogin = false
-      this.leftStyle = {color:"#4b8ffa",'font-weight':"bold"}
-      this.rightStyle = {color:"#666",'font-weight':"normal"}
+      this.accountLogin = true;
+      this.phoneLogin = false;
+      this.leftLogin = true;
+      this.rightLogin = false;
+      this.leftStyle = { color: "#4b8ffa", "font-weight": "600" };
+      this.rightStyle = { color: "#666", "font-weight": "normal" };
     },
     selectRight() {
-      this.accountLogin = false
-      this.phoneLogin = true 
-      this.rightLogin = true
-      this.leftLogin = false
-      this.rightStyle = {color:"#4b8ffa",'font-weight':"bold"}
-      this.leftStyle = {color:"#666",'font-weight':"normal"}
+      this.accountLogin = false;
+      this.phoneLogin = true;
+      this.rightLogin = true;
+      this.leftLogin = false;
+      this.rightStyle = { color: "#4b8ffa", "font-weight": "600" };
+      this.leftStyle = { color: "#666", "font-weight": "normal" };
     },
     getVerificationCode() {
-      let that = this
+      let that = this;
+      this.countDown = 60;
       // let oldTime = new Date().valueOf()
-      this.countStyle = {color:"#4b8ffa",border:"1px solid #4b8ffa"}
+      this.countStyle = { color: "#4b8ffa", border: "1px solid #4b8ffa", cursor: "none" };
       let timer = setInterval(() => {
-        if(that.countDown > 0) {
-          that.countDown = that.countDown - 1
-        }else {
-          clearInterval(timer)
-          that.countStyle = null 
-          that.codeText = "获取验证码"
-          that.countDown = 60
-          return
+        if (that.countDown > 0) {
+          that.countDown = that.countDown - 1;
+        } else {
+          clearInterval(timer);
+          that.countStyle = null;
+          // that.codeText = "获取验证码"
+          that.countDown = "获取验证码";
+          return;
         }
-      },1000)
-    }
-  }
-}
+      }, 1000);
+    },
+  },
+};
 </script>
 <style lang="less" scoped>
 .page {
-  background-color: #FFF;
+  background-color: #fff;
   .part-login {
     width: 610px;
     height: 424px;
@@ -199,8 +206,8 @@ export default {
           }
           .verify-code {
             width: 112px;
-            height: 43px;
-            line-height: 43px;
+            height: 40px;
+            line-height: 40px;
             font-size: 16px;
             text-align: center;
             border: 1px solid #d9d9d9;
@@ -214,7 +221,7 @@ export default {
             color: #4b8ffa;
             border: 1px solid #4b8ffa;
           }
-        } 
+        }
       }
     }
   }
@@ -225,6 +232,6 @@ export default {
   color: #666;
 }
 /deep/.el-button--primary {
-  color: #FFF;
+  color: #fff;
 }
 </style>
