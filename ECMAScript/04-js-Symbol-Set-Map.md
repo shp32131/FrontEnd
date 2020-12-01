@@ -1,5 +1,4 @@
-## Symbol And Set And Map
-
+# Symbol And Set And Map
 ## Symbol <sup>es6</sup>
 - `Symbol`(符号,代号的意思)是一种新的基本数据类型，用于防止属性名冲突面产生的，比如向第三方添加属性时  
 - `symbol`值通过`Symbol()`函数生成,生成的`symbol`是一个类似于字符串的原始类型的值 

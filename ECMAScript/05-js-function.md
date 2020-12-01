@@ -1,7 +1,6 @@
 ## Function 
-
-> 每个JS函数都是一个Function对象   
-> - (function(){}).constructor === Function;//true   
+- 每个JS函数都是一个Function对象   
+- `(function(){}).constructor === Function;//true`   
 ```javascript
 function fn(){
     return "hello";
@@ -13,13 +12,12 @@ console.log(f.constructor === fn);//true
 console.log((function(){}).constructor === Function);//true
 
 ```
-> Function 构造函数可以动态创建函数对象  
-> - 会有和 eval 类似的安全问题(将字符串解析成JS语句)  
-> - Function创建的函数只能在全局作用域中执行(无法形成闭包)  
->
-> Function创建的函数比函数声明和函数表达式创建的函数更为低效  
-> - Function构造器生成的函数是在函数创建时解析的  
-> - 函数声明和函数表达式是其他代码一起解析的  
+- `Function` 构造函数可以动态创建函数对象  
+ + 会有和 `eval` 类似的安全问题(将字符串解析成JS语句)  
+- `Function`创建的函数只能在全局作用域中执行(无法形成闭包)  
+- `Function`创建的函数比函数声明和函数表达式创建的函数更为低效  
+- `Function`构造器生成的函数是在函数创建时解析的  
+- 函数声明和函数表达式是和其他代码一起解析的  
 
 ```javascript
 
@@ -29,7 +27,7 @@ let sum = new Function("a","b","return a+b;");
 console.log(sum(1,2));//3
 ```
 
-> Function构造器创建的函数不会创建当前环境的闭包，因此只能访问全局变量和本身的局部变量   
+- `Function`构造器创建的函数不会创建当前环境的闭包，因此只能访问全局变量和本身的局部变量   
 
 ```javascript
 var a = 10 ;

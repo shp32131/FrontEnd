@@ -1,23 +1,19 @@
-## Number
-### 声明定义
+# Number
+## 声明定义
 ```javascript
-//使用字面量形式声明一个 number 
-let a = 10;
-// 使用number构造函数方式声明一个 number 
-let n = new Number(2);
-// Number用于表示integer和float
-let n1 = 11;
+let a = 10;//使用字面量形式声明一个 number 
+let n = new Number(2);// 使用number构造函数方式声明一个 number 
+let n1 = 11;// Number用于表示integer和float
 ```
-### 基本函数
+## 基本函数
 - `Number.isInteger()`判断变量是否为`integer`  
-- `to.Fixed()`指定返回的小数位数,结果会四舍五入  
+- `number.toFixed()`指定返回的小数位数,结果会四舍五入  
 ```javascript
 console.log(Number.isInteger(3.14));
-
 console.log((3.1415926).toFixed(2));//3.14
 ```
-### NaN
--  `NaN`: Not a Number 表示无效的数值  
+## NaN,Number.isNaN()
+- `NaN`: 'Not a Number' 表示无效的数字值  
 - `NaN`不能使用 `==`进行比较，可以使用`Number.isNaN()`和`Object.is(num,NaN)`进行判断  
 - `typeof NaN == 'number'`
 ```javascript
