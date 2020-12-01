@@ -66,7 +66,7 @@ export default {
       dialogVisible: false,
       leftLogin: true,
       rightLogin: false,
-      leftStyle: { color: "#4b8ffa", "font-weight": "600" },
+      leftStyle: { color: "#4b8ffa", "font-weight": "550" },
       rightStyle: null,
       accountLogin: true,
       phoneLogin: false,
@@ -100,7 +100,7 @@ export default {
       this.phoneLogin = false;
       this.leftLogin = true;
       this.rightLogin = false;
-      this.leftStyle = { color: "#4b8ffa", "font-weight": "600" };
+      this.leftStyle = { color: "#4b8ffa", "font-weight": "550" };
       this.rightStyle = { color: "#666", "font-weight": "normal" };
     },
     selectRight() {
@@ -108,7 +108,7 @@ export default {
       this.phoneLogin = true;
       this.rightLogin = true;
       this.leftLogin = false;
-      this.rightStyle = { color: "#4b8ffa", "font-weight": "600" };
+      this.rightStyle = { color: "#4b8ffa", "font-weight": "550" };
       this.leftStyle = { color: "#666", "font-weight": "normal" };
     },
     getVerificationCode() {

@@ -1,68 +1,42 @@
 ## Array  
-
 ## 数组类型
-> 数组是`Array`对象的实例，可以像对象一样调用方法     
-### 声明数组
-```javascript
-let arr = new Array(1,'hello','world');
-console.log(arr);
-//推荐使用字面量方式声明一个数组 
-let  array = ['hello','world'];
-// 声明一个长度确定的数组
-let  arr = new Array(5);
-```
+***数组是`Array`对象的实例，可以像对象一样调用方法***
+## 数组声明 
+- `Array`对象实例创建数组：`let arr = new Array(1,'hello','world')`
+ + 声明一个长度确定的数组：`let  arr = new Array(5)`
 
-> 多维数组定义   
-```javascript
-const array = [[1,2,3],[4,5,6]];
-```
+- (推荐)使用字面量方式声明一个数组：`let  array = ['hello','world']`
 
-> 数组是引用类型可以使用`const`声明并修改它的值  
-```javascript
-const arr = ['a','b'];
-arr.push('c');
-console.log(arr);
-```
+- 多维数组定义：`const array = [[1,2,3],[4,5,6]]`
+ + 数组是引用类型可以使用`const`声明并修改它的值  
 
-> 使用原型的`length`属性可以获取数组的长度    
-- `Array.of` 使用Array.of 与 new Array不同是设置一个参数时不会创建空元素数组  
-```javascript
-let hd = Array.of(3);
-console.log(hd); //[3]
+- 使用原型的`length`属性可以获取数组的长度    
 
-hd = Array.of(1, 2, 3);
-console.log(hd); //[1, 2, 3]
-```
+- 使用`Array.of()` 与 `new Array()`不同是传一个参数时不会创建空元素数组  
+ + `const hd = Array.of(1, 2, 3) console.log(hd); //[1, 2, 3] `
 
-> 类型检测，`Array.isArray()`检测变量是否为数组类型  
-```javascript
-Array.isArray([1,2]);//true
-```
+- 数组类型检测，`Array.isArray()`检测变量是否为数组类型  
+ + `Array.isArray([1,2]);//true`
 
-### 类型转换
+## 数组类型转换
 - 可以将数组转换为字符串也可以将其他类型转换为数组  
-- 大部分数据类型都可以使用.toString()函数转换为字符串 
+- 大部分数据类型都可以使用`.toString()`函数转换为字符串 
 ```javascript
-console.log([1,2,3].toString());//1,2,3
-//也可以使用String()转换为字符串  
-let str = String([1,2,3]);
-//也可以使用join()方法连接成字符串 
-let str2 = [1,2,3].join('-');
-console.log(str2);//1-2-3
+console.log([1,2,3].toString());// 1,2,3
+let str = String([1,2,3]);// 也可以使用String()转换为字符串 1,2,3
+let str2 = [1,2,3].join('-');// 也可以使用join()方法连接成字符串 1-2-3
 ```
-#### Array.isArray(),Array.of()
+### Array.isArray(),Array.of()
 ```javascript
-//Array.isArray()检测一个变量是否是一个数组  
-//Array.of()创建一个数组   
+//Array.isArray()检测一个变量是否是一个数组
+//Array.of()创建一个数组
 ```
-
 #### Array.from(arrayLike[,mapFn,thisArg])
-> 使用Array.from(obj,mapFn,thisArg)可将类数组转换为数组   
-> 
-> - 类数组指包含length属性或可迭代的对象   
-> - 第一个参数为要转换的数据  
-> - 第二个参数为类似于map函数的回调方法,thisArg是其要绑定的this对象   
-> - 返回一个新数组，不改变原数组   
+- 使用`Array.from(obj,mapFn,thisArg)`可将类数组转换为数组   
+ + 类数组指包含length属性或可迭代的对象   
+ + 第一个参数为要转换的数据  
+ + 第二个参数为类似于map函数的回调方法,thisArg是其要绑定的this对象   
+ + 返回一个新数组，不改变原数组   
 
 ```javascript
 let str = "你好啊";
@@ -92,7 +66,7 @@ console.log(Array.from(user));//['hello',20]
 </script>
 ```
 
-### Spread/Rest 展开语法 <sup>es6</sup>
+### Spread/Rest (解构)展开语法 <sup>es6</sup>
 
 - 使用展开语法将NodeList转换为数组操作  
 ```html
@@ -237,8 +211,8 @@ function test([a,b]){
     console.log(a,b);
 }
 ```
-### 管理元素
-- 基本使用
+## 数组元素管理函数
+- 使用数组索引来管理元素
 ```javascript
 //使用从0开始的索引来操作数组元素
 let arr = [1,'hello','web.com'];
@@ -247,7 +221,7 @@ console.log(arr);//[1,'hello world','web.com']
 //向数组追加元素
 arr[arr.length] = 'myweb.com';
 ```
-#### 扩展语法  
+### 数组扩展语法  
 ```javascript
 let arr = ['john','alex'];
 let arr2 = ['mark'];
@@ -455,11 +429,11 @@ function includes(array,item){
 ```
 
 #### find()返回查找到的值
-- array.find(function(currentValue,index,arr){ },thisValue)
-- thisValue可选参数，传递函数的this值  
-- find()方法返回通过测试(函数内判断)的数组的第一个元素的值  
-- find()找到第一个通过测试的元素，结束函数调用执行,并返回通过的元素
-- 如果没有找到返回undefined  
+- `array.find(function(currentValue,index,arr){ },thisValue)`
+- `thisValue`可选参数，传递函数的`this`值  
+- `find()`方法返回通过测试(函数内判断)的数组的第一个元素的值  
+- `find()`找到第一个通过测试的元素，结束函数调用执行,并返回通过的元素
+- 如果没有找到返回`undefined`  
 - 空数组，函数不执行
 - 不改变原数组的值  
 ```javascript
@@ -481,7 +455,7 @@ console.log(result);//false
 ```
 
 #### findIndex()
-- array.findIndex(function(currentValue,index,arr){ },thisValue)  
+- `array.findIndex(function(currentValue,index,arr){ },thisValue)`  
 - findIndex与find的区别是返回的是索引值，而不是元素值   
 - 查找不到返回-1
 ```javascript
@@ -518,7 +492,7 @@ let arr = [1,2,3,4];
 console.log(arr.reverse());//[4,3,2,1]
 ```
 #### sort()数组排序
-- sort()每次使用两个值进行比较 Array.sort((a,b)=>(a-b))
+- `sort()`每次使用两个值进行比较 Array.sort((a,b)=>(a-b))
 - 返回负数a排在b前面，返回正数b在a前面,从小到大排序
 - 返回0时，不动   
 ```javascript
@@ -576,7 +550,7 @@ console.log(lessons);
 ```
 
 #### forEach  
-> forEach()使函数作用在每个数组元素上，但是没有返回值  
+> `forEach()`使函数作用在每个数组元素上，但是没有返回值  
 ```javascript
 //截取标签的五个字符
 let lessons = [
@@ -669,9 +643,9 @@ for(const [key,value] of user.entries()){
 }
 ```
 
-### 扩展方法
+### 数组扩展方法
 #### every
-> every()用于递归的检测元素，所有元素操作都要返回true，最后结果才为true  
+> `every()`用于递归的检测元素，所有元素操作都要返回true，最后结果才为true  
 ```javascript
 const user = [{name:'john',age:30},{name:'alex',age:28}];
 let result = user.every(function(user){
@@ -683,7 +657,7 @@ let result = user.every(user=>user.age>18);
 ```
 
 #### some
-> some()函数可以递归的检测数组元素，如果有一个返回true,整个结果就为true  
+> `some()`函数可以递归的检测数组元素，如果有一个返回true,整个结果就为true  
 >
 > - 第一个参数为元素，第二个为索引，第三个参数为原数组  
 ```javascript
@@ -698,8 +672,8 @@ if(state) console.log('你说脏话了');
 ```
 
 #### filter
-> 使用`filter`可以过虑数组中元素   
-- 返回过滤条件通过的数组项 
+> 使用`filter()`可以过虑数组中元素   
+- 返回一个包括过滤条件通过的数组项的新数组 
 - 不改变原数组   
 ```javascript
 //获取在css栏中的课程  
@@ -729,7 +703,7 @@ console.log(except(array,[3,5]));//[1,2,4]
 ```
 
 #### map
-> 使用map(function(value,index,arr){})映射可以在数组的所有元素上应用函数，用于映射出新值  
+> 使用`map(function(value,index,arr){})`映射可以在数组的所有元素上应用函数，用于映射出新值  
 ```javascript
 //获取数组所有标题组合的新数组  
 let lessons = [
@@ -753,10 +727,11 @@ console.log(result);
 ```
 
 #### reduce <sup>es6</sup>
-> 使用reduce()和reduceRight()函数可以迭代数组的所有元素  
-- array.reduce(function(total,currentValue,index,array){},initialValue)  
-- 传入第二个参数initialValue时,初始total = initialValue  
-- 不传入第二个参数initialValue时,初始total = array[0]
+> 使用`reduce()`和`reduceRight()`函数可以迭代数组的所有元素  
+- `array.reduce(function(total,currentValue,index,array){},initialValue)`
+- `initialValue`第二个参数可选
+ + 传入第二个参数`initialValue`时,初始`total = initialValue`  
+ + 不传入第二个参数`initialValue`时,初始`total = array[0]`
 ```javascript
 //统计数组中相同元素的个数 
 function countArrayElem(arr,elem){
@@ -791,7 +766,7 @@ let sumCart = cart.reduce((total,cur)=>total+=cur.price,0);
 console.log(maxPrice.name,sumCart);
 ```
 
-> 应用reduce()实现数组去重  
+> 应用`reduce()`实现数组去重  
 ```javascript
 let arr = [1,2,1,4,5,6,6,10];
 let result = [];
@@ -803,7 +778,7 @@ result = arr.reduce(function(total,cur,index,array){
 },[]);
 console.log(result);
 ```
-> 使用reduce实现字符动画案例  
+> 使用`reduce()`实现字符动画案例  
 ```html
 <style>
     body {
