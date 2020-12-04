@@ -7,5 +7,6 @@
 - `ctrl+shift+p` 进入命令面板，可以输入任何命令
 - `ctrl+shift+o` 转到符号处...,可以快速定位找到`css样式所在处`
 - `ctrl+1,2,3...` 切换不同的窗口
-- `ctrl+tab` 切换不同的文件
+- ctrl + ` 切换到 terminal
+- `ctrl+tab` 切换不同的待编辑文件
 ## 代码编辑
