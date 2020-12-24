@@ -1,7 +1,6 @@
-## Base Of JavaScript 基础知识
+# Base Of JavaScript 基础知识
 
-### JavaScript在HTML页面中的加载运行
-
+## JavaScript在HTML页面中的加载运行
 - 1.HTML页面中内嵌JS脚本 
 ```html
 <!-- 在html文档中可以像style标签一样，使用script标签嵌入js代码   -->
@@ -24,7 +23,7 @@
 ```
 > 在`HTML`文档中，如果`head`标签中有JS代码，则要等到`head`标签中的JS代码加载并解析完成后,浏览器才会开始渲染解析`body`标签中的`HTML`内容，所以JS代码一般放在`body`标签中    
 
-### 数据类型  
+## 数据类型  
 - 六种基本数据类型  
   + number 
   + string 
@@ -58,11 +57,13 @@ console.log(typeof fn);// 'function'
 
 let arr  = []
 console.log(arr);// 'object'
+
 ```
 
-### 变量声明 var,let<sup>es6</sup>,const<sup>es6</sup>
-> 变量提升: JS解析器解析JS代码时,会先把变量的声明提升到变量作用域的最前面(变量的赋值还是在原位置),这就叫变量的提升   
-- 使用`var`声明的变量，变量的声明会提升到最前面，赋值还在原位置  
+## 变量声明 var,let<sup>es6</sup>,const<sup>es6</sup>
+- `变量声明关键字使用规则`：能用`const`就用`const`,不能用`const`就用`let`
+- `变量提升`: JS解析器解析JS代码时,会先把变量的声明提升到变量作用域的最前面(变量的赋值还是在原位置),这就叫变量的提升   
+> 使用`var`声明的变量，变量的声明会提升到最前面，赋值语句还在原位置  
 ```JavaScript
 console.log(test);// undefined
 var test = 'hello';
@@ -75,8 +76,7 @@ test = 'hello';// 变量赋值还在原位置
 console.log(x);//cannot access 'x' before initialization
 let x = 10;
 ```
-
-> TDZ变量暂时性死区:指变量在作用域内已经存在,但必须在`let,const`声明的语句后面才能使用，否则报错    
+> `TDZ变量暂时性死区`:指变量在作用域内已经存在,但必须在`let,const`声明的语句后面才能使用，否则报错    
 - TDZ限制:变量虽然在作用域内可见,但一定要在变量声明语句之后才能使用
 - 使用`let,const`声明的变量,在声明语句前存在TDZ,如果在声明语句之前使用时会发生错误  
 - `var`声明的变量没有TDZ特性    
@@ -89,8 +89,7 @@ function fn(){
 }
 fn();// error
 ```
-
-> 作用域:全局作用域,函数作用域,块作用域   
+> `作用域`:全局作用域,函数作用域,块作用域   
 - 用`{}`声明一个块作用域,`let,const`声明的变量具有块作用域,`var`声明的变量没有块作用域       
 ```JavaScript
 {
@@ -245,7 +244,7 @@ function test()
 test();//1,2,3
 console.log(aa);//not defined
 ```
-### JS基本数据类型和引用数据类型存储值方式是不一样的      
+## JS基本数据类型和引用数据类型存储值方式是不一样的      
 - 基本数据(`number,string,boolean,symbol,null,undefined`),实际值保存在内存中,是栈数据     
 - 复合引用类型数据(`object,array,function,set,map...`),实际值保存在硬盘中，是堆数据，内存中保存的是实际值的指针   
 - 基本数据传值，引用数据传址    
@@ -263,8 +262,7 @@ let bb = aa;
 aa.web = "hello";
 console.log(bb);//hello
 ```
-
-### null和undefined
+## null和undefined
 - `null`用于定义一个空对象，即如果一个变量要用来保存引用类型，则可以用`null`初始化这个变量  
   + 转换数值时为 0 
   + JS先有的`null`后面才出现`undefined`  
@@ -281,9 +279,7 @@ console.log(typeof a)//undefined
 console.log(b);//Uncaught ReferenceError
 console.log(typeof b);//undefined
 ```
-
-
-### 严格模式
+## 严格模式
 - 开启严格模式 `use strict;`
 - 严格模式可以及早发现错误，使代码更规范安全  
 - 主流框架都采用严格模式，严格模式是JS的标准   
@@ -337,7 +333,6 @@ for(const(key,value) of web.entries()){
     console.log(key,value);
 }
 ```
-
 ### 基本类型
 - 六种基本数据类型:`number,string,boolean,undefined,null`,`symbol`<sup>es6</sup> 
 - 一种引用类型数据`object`,`function,array,set,map...`都是`object`  
@@ -347,6 +342,10 @@ for(const(key,value) of web.entries()){
   + 引用类型: `Function,Array,Object` ( `typeof null == 'object'` )    
   + `undefined`(变量未赋值或不存在时)     
 > 备注: typeof 不能区分数组和对象,可以用instanceof区分    
+### 特殊值判断
+- 判断数组 `Array.isArray()`
+- 判断`NaN` `Number.isNaN()`
+- `Object.is(ref1,ref2)`
 ### instanceof
 - 判断对象是否是一个构造函数的实例   
 - 可以判断引用类型，区分`array`和`object`  
