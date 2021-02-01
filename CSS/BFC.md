@@ -1,4 +1,4 @@
-
+# BFC 块级格式化上下文
 > 可以触发BFC的元素有float、position、overflow、display：table-cell/ inline-block/table-caption ；
 - BFC有什么作用呢？比如说实现多栏布局’
 - 块格式化上下文对浮动定位与清除浮动都很重要。

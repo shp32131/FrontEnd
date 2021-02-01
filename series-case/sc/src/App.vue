@@ -8,6 +8,11 @@
 export default {
   name: "app",
   components: {},
+  created() {
+    const mySet = new Set([{a:1},{a:1}])
+    let arr = [...mySet]
+    console.log({arr:arr})
+  },
 };
 </script>
 

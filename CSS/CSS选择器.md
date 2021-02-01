@@ -1,6 +1,6 @@
+## CSS选择器
 选择器	                例子	                例子描述	    CSS
 *	                    *	                    选择所有元素。	2
-
 .class	                    .intro	                选择 class="intro" 的所有元素。	1
 
 #id	                    #firstname	            选择 id="firstname" 的所有元素。	1

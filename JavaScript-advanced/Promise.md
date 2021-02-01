@@ -22,7 +22,7 @@
  
 - 错误处理两种方式     
   + 1.主动抛出错误：throw error  
-  + 2.捕获错误: try ... catch   
+  + 2.捕获错误: try ... catch (只能处理同步代码，异步代码将不起作用)   
 
 ```javascript
     // throw 前面不能有return
