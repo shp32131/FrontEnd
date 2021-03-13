@@ -19,7 +19,7 @@
  + `offset` 栅格左侧的间隔格数,number,默认值0
  + `push` 栅格向右移动格数,number,默认值0
  + `pull` 栅格向左移动格数,number,默认值0
- + `tag` 自定义元素标签
+ + `tag`  自定义元素标签
  + `xs,sm,md,lg,xl` 响应式栅格数或栅格属性对象
 ### container布局容器
 ### color色彩

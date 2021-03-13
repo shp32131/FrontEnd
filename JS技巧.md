@@ -1,9 +1,12 @@
+## ? 和 ?? 的用法
+- `obj?.aa`
+- `let obj = aa ?? bb`
 ## 简单实现深拷贝
 - `let cloneObj = JSON.parse(JSON.stringify(obj))`
-- let arr1 = [...arr],这种方式是属于浅拷贝
+- `let arr1 = [...arr]`,这种方式是属于浅拷贝
 - `数组清洗`
-- array.filter(Boolean)
-## 数字字符串转number
+- `array.filter(Boolean)`
+## 数字字符串转 number
 - 使用`+`
 ## 数字千分位格式化.toLocaleString
 - `number.toLocaleString("en-US",{minimumFractionDigits: 5})` minimumFractionDigits 代表小数点保留多少位，默认是三位
@@ -13,7 +16,7 @@
 ## 进制转换
 - 十进制数据转换成其他进制数据用 `toString()`  
 - `(10).toString(2)` ==> '1010'
-- 其他进制数据转换成十进制数据用 parseInt(num,进制)
+- 其他进制数据转换成十进制数据用 `parseInt`(num,进制)
 - 转换成10进制，`parseInt(value,8)` 将value以8进制大小转换成10进制数
 ## 对象打印
 - 对象要打印出的,对象的外层再包一个对象'{}'
@@ -43,4 +46,3 @@ function info({name,age,job}) {
 
 ## 循环嵌套 `break + 标签` 自由退出具体的嵌套循环
 ## 必传参数
-## 

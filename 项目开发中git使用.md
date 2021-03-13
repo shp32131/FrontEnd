@@ -8,10 +8,10 @@
   + `git status`
   + `git push`
 - 忽略当前文件的更改,`git checkout [file]`
-- git log
-- git branch 
-- git branch -a
-- git config user.name
-- git config user.password
-- git config --global user.name '[用户名]'
-- git config --global user.name '[密码]'
+- `git log`
+- `git branch` 
+- `git branch -a`
+- `git config user.name`
+- `git config user.password`
+- `git config --global user.name '[用户名]'`
+- `git config --global user.name '[密码]'`
