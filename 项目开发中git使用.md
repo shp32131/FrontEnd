@@ -16,5 +16,3 @@
 - `git config --global user.name '[用户名]'`
 - `git config --global user.password'[密码]'`
 - `git config --system --unset credential.helper`
-- access-token 931880f9eff23cab7c1c26a03f7bdac4befbb1a4
-- 37809c8b061c2b89c3ee9a55f9ca8a335846a8e6

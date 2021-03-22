@@ -112,8 +112,3 @@ function idCardValid(code) {
     }
   }
 }
-
-
-
-
-

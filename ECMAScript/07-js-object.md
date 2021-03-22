@@ -1,26 +1,20 @@
-## Object
-## 对象
+## Object 对象
 ### 基础知识 
-> 对象是包括属性与方法的复杂引用数据类型，js中大部分类型都是对象  
-> 
-> - String,Number,Math,Date,RegExp...
-> - 对象的属性名只能是字符串，如果数值或其他类型，最终都会调用 toString 转为字符串  
-> - 对象中属性名相同时，相同的属性名只保留一个,后面的属性值会覆盖前面的     
-
+- 对象是包括属性与方法的复杂引用数据类型，`js`中大部分类型都是对象  
+- `String, Number, Math, Date, RegExp, ...`
+- 对象的属性名只能是字符串，如果是数值或其他类型，最终都会调用`toString()`转为字符串  
+- 对象中属性名相同时，相同的属性名只保留一个，后面的属性值会覆盖前面的     
 ```javascript
 //同名的属性后面的会覆盖前面的  
-let obj = {1:"john","1":"alex"};
+let obj = { 1:"john", "1":"alex" };
 console.log(obj);//{"1":"alex"}
 ```
-
 #### OOP 
-> 面向对象编程，包括几四个核心概念 :  
-> 
-> - 封装，对象是属性和方法的集合 
-> - 继承，通过代码复用减少冗余  
-> - 多态，不同形态的对象产生不同的结果
-> - 抽象，复杂逻辑功能隐藏在对象内部，开放给外部调用的方法 
-
+- 面向对象编程，包括几四个核心概念 :  
+- 1.封装，对象是属性和方法的集合 
+- 2.继承，通过代码复用减少冗余  
+- 3.多态，不同形态的对象产生不同的结果
+- 4.抽象，复杂逻辑功能隐藏在对象内部，开放给外部调用的方法 
 ```javascript
 //面向对象编程 
 let user = {
@@ -36,13 +30,11 @@ let user = {
 }
 console.log(user.average());//john:79.5分
 ```
-
 #### 基本声明 
-> 使用字面量形式声明对象是最简单的方式,创建一个对象的几种方法 :   
-> - let obj = new Object()   
-> - 字面量形式 let obj = { name:"john" }   
-> - Object.create(proto=null,[,propertiesObject]),可以创建一个没有原型的对象     
-
+- 使用字面量形式声明对象是最简单的方式,创建一个对象的几种方法 :   
+- 1.`let obj = new Object()`
+- 2.字面量形式 `let obj = { name:"john" }`
+- 3.`Object.create(proto=null,[,propertiesObject])`,可以创建一个没有原型的对象     
 ```javascript 
 let obj = {
     name: 'mark',
@@ -62,28 +54,26 @@ let user = {
 console.log(obj.get());
 ```
 
-> 用字面量形式声明对象时，在系统内部也是使用构造函数 new Object()创建的   
-
+- 用字面量形式声明对象时，在系统内部也是使用构造函数 `new Object()`创建的   
 ```javascript
 let user = {};
 let people = new Object();
 ```
 
 #### 操作属性 
-> 使用.点语法获取对象属性   
+- 使用`.`点语法获取对象属性   
 ```javascript 
 let user = { name:'john'};
 console.log(user.john);
 ```
-> 使用[]获取对象属性，用于属性名表达式或变量定义的场景   
+- 使用`[]`获取对象属性，用于属性名表达式或变量定义的场景   
 ```javascript 
 console.log(user['name']);
 let a = 'name';
 console.log(user[a]);
 ```
-> 如果属性名不是合法变量名就必须使用[]形式获取(包括Symbol值) 
->
-> - 对象的属性可以动态的添加或删除 
+- 如果属性名不是合法变量名就必须使用`[]`形式获取(包括`Symbol`值) 
+- 对象的属性可以动态的添加或删除 
 ```javascript
 let sy1 = Symbol('name');
 let obj = {
@@ -99,7 +89,7 @@ delete obj.a;//删除对象a属性
 ```
 
 #### 对象方法 
-> 定义在对象中的函数称之为方法  
+- 定义在对象中的函数称之为方法  
 ```javascript 
 let obj = {
     say(){
@@ -114,9 +104,9 @@ obj.eat();//eat apple
 ```
 
 #### 引用特性 
-> 对象,函数,数组都是引用类型，复制只会复制引用地址  
-> - 对象作为函数参数使用时不会产生完全复制，内外共用一个对象   
-> - 对象的比较是对内存地址的比较，所以使用'=='和'==='效果是一样的  
+- 对象,函数,数组都是引用类型，复制只会复制引用地址  
+- 对象作为函数参数使用时不会产生完全复制，内外共用一个对象   
+- 对象的比较是对内存地址的比较，所以使用`==`和`===`效果是一样的  
 ```javascript 
 let student = {name:'john'};
 let user = student;
@@ -139,9 +129,9 @@ console.log(obj1 == obj3);//false
 ```
 
 #### this 
-> this指当前对象的引用  
-> - 不同对象的this只指向当前对象  
-> - 始终建议在对象内部使用this而不要使用对象名  
+- `this`指当前对象的引用  
+- 不同对象的`this`只指向当前对象  
+- 始终建议在对象内部使用`this`而不要使用对象名  
 ```javascript 
 //不使用this容易引发TypeError：cannot read property...
 let john = {
@@ -158,10 +148,10 @@ alex.say();//TypeError:cannot read property age
 ```
 
 #### 展开语法 
-> 使用...可以展开对象的结构，可以实现对象的合并  
+- 使用`...`可以展开对象的结构，可以实现对象的合并  
 ```javascript 
-let john = {age:20,gender:'boy'};
-let user = {...john,height:170};
+let john = { age:20, gender:'boy' };
+let user = {...john, height:170 };
 console.log(user);//{age:20,gender:'boy',height:170}
 //函数参数的合并 
 function upload(params){
@@ -175,10 +165,10 @@ function upload(params){
 ```
 
 ### 对象转换 
-> 对象直接参与计算时，解析器根据计算的场景在String,number,default之间转换  
-> - 当声明需要字符串类型时，调用顺序为toString() > valueOf() 
-> - 当场景需要数值类型时，顺序valueOf() > toString()  
-> - 不确定时使用default  
+- 对象直接参与计算时，解析器根据计算的场景在`String, number, default`之间转换  
+- 当声明需要字符串类型时，调用顺序为`toString() > valueOf()`
+- 当场景需要数值类型时，顺序`valueOf() > toString()`
+- 不确定时使用`default`  
 #### 基础知识  
 ```javascript 
 let n = new Number(1);
@@ -188,7 +178,7 @@ console.log(n + '10');//string 110
 console.log(n == '1');//true
 ```
 #### Symbol.toPrimitive <sup>es6</sup> 
-> 内部自定义Symbol.toPrimitive方法用来处理所有的转换场景  
+- 内部自定义`Symbol.toPrimitive`方法用来处理所有的转换场景  
 ```javascript 
 let obj = {
     num: 1,
@@ -199,7 +189,7 @@ let obj = {
 console.log(obj + 2);//3
 ```
 #### valueOf(),toString() 
-> 可以自定义valueOf与toString方法用来对象转换，转换并不限制返回类型  
+- 可以自定义`valueOf()`与`toString()`方法用来对象转换，转换并不限制返回类型  
 ```javascript 
 let obj = {
     name: 'john',
@@ -216,9 +206,8 @@ console.log(`${obj}`);//john
 ```
 
 ### 解构赋值 <sup>es6</sup>
-> 解构是一种更简洁的赋值特性，可以理解为分解一个数据结构   
->
-> - 建议使用var,let,const进行声明  
+- 解构是一种更简洁的赋值特性，可以理解为分解一个数据结构   
+- 建议使用`var,let,const`进行声明  
 #### 基本使用
 ```javascript 
 //解构用法 
@@ -232,7 +221,7 @@ let {name,url} = info;//=> {name:name,url:url} = info
 console.log(name,url);//john,web.com
 ```
 
-> 函数返回值直接解构到变量   
+- 函数返回值直接解构到变量   
 ```javascript 
 function fn(){
     return {
@@ -250,22 +239,22 @@ function demo({name,age}){
 demo({name:'john',age:30});//john,30
 ```
 #### 严格模式  
-> 非严格模式可以不使用声明指令，严格模式下必须使用声明，建议使用let   
+- 非严格模式可以不使用声明指令，严格模式下必须使用声明，建议使用`let`   
 ```javascript 
-({name,url} = {name:'john',url:'web.com'});
+({ name, url } = { name:'john',url:'web.com' });
 console.log(name,url);//john,web.com
 //严格模式必须使用let等赋值声明 
 "use strict";
-let {name,url} = {name:'john',url:'web.com'};
+let {name,url} = { name:'john', url:'web.com' };
 console.log(name,url);
 ```
 #### 简洁定义 
-> 当属性名与赋值的变量名相同中时可以使用简洁定义 
+- 当属性名与赋值的变量名相同中时可以使用简洁定义 
 ```javascript 
 //let {name:name,url:url} = {name:'john',url:'web.com'}
 let {name,url} = {name:'john','web.com'};
 ```
-> 只赋值部分变量  
+- 只赋值部分变量  
 ```javascript 
 let [,url] = ['john','web.com'];
 console.log(url);//web.com 
@@ -273,7 +262,7 @@ console.log(url);//web.com
 let {name} = {name:'john',url:'web.com'};
 console.log(name);//john
 ```
-> 可以直接使用变量赋值给对象属性 
+- 可以直接使用变量赋值给对象属性 
 ```javascript 
 let name = 'john',url = 'web.com';
 let obj = {name:name,url:url};
@@ -283,7 +272,7 @@ let obj2 = {name,url};
 console.log(obj2);//{name:'john',url:'web.com'}
 ```
 #### 嵌套解构 
-> 可以操作多层复杂数据结构   
+- 可以操作多层复杂数据结构   
 ```javascript 
 const obj = {
     name: 'john',
@@ -296,7 +285,7 @@ const {name,url:{title},url:{content}} = obj;
 console.log(name,title,content);//john ,url web.com
 ```
 #### 默认值 
-> 为变量设置默认值  
+- 为变量设置默认值  
 ```javascript 
 let [name,site = 'web'] = ['john'];
 console.log(name,site);//john,web
@@ -305,7 +294,7 @@ let {name,url,gender = 'boy'} = {name:'john',url:'web.com'};
 console.log(name,url,gender);//john,web.com,boy
 ```
 
-> 使用默认值对参数进行预设  
+- 使用默认值对参数进行预设  
 
 ```javascript
 function createElement(options){
@@ -343,17 +332,15 @@ obj.age = 18;
 console.log(obj);
 ```
 #### 删除属性 
-> 使用delete可以删除属性
+- 使用`delete`可以删除属性
 ```javascript 
-let obj = {name:'alex',age:18};
-delete obj.age;
-console.log(obj);
+let obj = { name:'alex',age:18 }
+delete obj.age
+console.log(obj)
 ```
 #### 检测属性 
-> obj.hasOwnProperty()检测对象自身是否包含指定的属性，不检测原型链上的继承的属性   
->
-> - 使用 in 可以在原型链上检测属性  
-
+- `obj.hasOwnProperty()`检测对象自身是否包含指定的属性，不检测原型链上的继承的属性   
+- 使用 `in` 可以在原型链上检测属性
 ```javascript 
 let obj = {name:'john'};
 console.log(obj.hasOwnProperty('name'));//true
@@ -371,7 +358,7 @@ console.log(obj.hasOwnProperty('web'));//false
 console.log('web' in obj);//true
 ```
 #### assign 
-> 使用Object.assign()静态方法从一个或多个对象复制属性  
+- 使用`Object.assign()`静态方法从一个或多个对象复制属性  
 ```javascript 
 "use strict";
 let obj = {a:1,b:2};
@@ -379,7 +366,7 @@ obj = Object.assign(obj,{c:3},{d:4});
 console.log(obj);//{a:1,b:2,c:3,d:4}
 ```
 #### 计算属性 
-> 对象属性可以通过表达式计算定义，在动态设置属性和执行属性方法时很好用  
+- 对象属性可以通过表达式计算定义，在动态设置属性和执行属性方法时很好用  
 ```javascript 
 let id = 0;
 const user = {
@@ -403,17 +390,16 @@ console.log(lessonObj);//{'css-0':{title:'响应式布局',category:'css'}...}
 console.log(lessonObj['css-0']);//{title:'响应式布局',category:'css'}
 ```
 #### 传值操作 
-> 对象是引用类型，赋值是传址操作  
+- 对象是引用类型，赋值是传址操作  
 ```javascript 
-let user = {name:'john'};
-let boy = {student:user};
+let user = { name: 'john' };
+let boy = { student: user };
 boy.student.name = 'alex';
 console.log(user.name);//alex
 ```
 ### 遍历对象 
-> 使用系统API获取对象的属性与属性值   
->
-> - Object.keys(),Object.values(),Object.entries()  
+- 使用系统API获取对象的属性与属性值   
+- `Object.keys(),Object.values(),Object.entries()`
 ```javascript 
 const user = {
     name:'mark',
@@ -423,8 +409,8 @@ console.log(Object.keys(user));//['name','age']
 console.log(Object.values(user));//['mark','25']
 console.log(Object.entries(user));//[['name','mark'],['age','25']]
 ```
-#### for\/in
-> 遍历对象属性 ,操作的是属性名
+#### for...in
+- 遍历对象属性,操作的是属性名
 ```javascript 
 const user = {
     name:'john',
@@ -434,10 +420,9 @@ for(const key in user){
     console.log(key);//name,age
 }
 ```
-#### for/of <sup>es6</sup>
-> for/of不能直接操作对象,可以操作迭代数组对象   
->
-> - 要调用Object.keys(),Object.values(),Object.entries()得到对象的迭代数组对象   
+#### for...of <sup>es6</sup>
+- `for...of`不能直接操作对象,可以操作迭代数组对象   
+- 要调用`Object.keys(),Object.values(),Object.entries()`得到对象的迭代数组对象   
 ```javascript 
 const user = {
     name:'john',
@@ -470,7 +455,7 @@ for(const item of lessons){
 document.body.appendChild(ul);
 ```
 ### 对象拷贝 
-> 对象赋值时复制的是内存地址，所以一个对象的改变会直接影响另外一个对象  
+- 对象赋值时复制的是内存地址，所以一个对象的改变会直接影响另外一个对象  
 ```javascript 
 let user = {name:'john'};
 let student = user;
@@ -478,9 +463,8 @@ student.name = 'alex';
 console.log(user.name);//alex
 ```
 #### 浅拷贝 
-> 使用for\/in执行对象的浅拷贝   
->
-> - 浅拷贝不会将深层的数据复制  
+- 使用`for...in`执行对象的浅拷贝   
+- 浅拷贝不会将深层的数据复制  
 ```javascript 
 let user = {name:'john',age:20};
 let student = {};
@@ -491,9 +475,8 @@ student.name = 'alex';
 console.log(user);//{name:'john',age:20}
 console.log(student);//{name:'alex',age:20}
 ```
-> Object.assign()函数可实现简单的浅拷贝，它是将两个对象的属性叠加   
->
-> - 后面的对象属性会覆盖前面对象的同名属性  
+- `Object.assign()`函数可实现简单的浅拷贝，它是将两个对象的属性叠加   
+- 后面的对象属性会覆盖前面对象的同名属性  
 ```javascript 
 let user = {name:'john'};
 let student = {};
@@ -502,7 +485,7 @@ Object.assign(student,user);
 student.name = 'alex';
 console.log(user,student);//{name:'john'},{name:'alex'}
 ```
-> 使用展开语法也可以实现浅拷贝  
+- 使用展开语法也可以实现浅拷贝  
 ```javascript 
 let user = {name:'john'};
 let stu = {...user};
@@ -510,7 +493,7 @@ stu.name = 'alex';
 console.log(user,stu);//{name:'john'},{name:'alex'};
 ```
 #### 深拷贝
-> 深拷贝是完全的复制一个对象，两个对象是完全独立的对象  
+- 深拷贝是完全的复制一个对象，两个对象是完全独立的对象  
 ```javascript 
 function deepCopy(obj){
     //如果obj不是数组也不是对象，将会返回一个{}
@@ -530,11 +513,11 @@ user.name = 'alex';
 console.log(user);
 ```
 ### 构建函数 
-> 对象可以通过内置或自定义的构造函数创建  
+- 对象可以通过内置或自定义的构造函数创建  
 #### 工厂函数 
-> 在函数中返回对象的函数称为工厂函数  
-> - 减少重复创建相同类型对象的代码  
-> - 修改工厂函数的方法影响所有同类对象  
+- 在函数中返回对象的函数称为工厂函数  
+- 减少重复创建相同类型对象的代码  
+- 修改工厂函数的方法影响所有同类对象  
 ```javascript 
 //工厂函数可以简化代码  
 function student(name){
@@ -551,11 +534,11 @@ stu1.show();//john
 stu2.show();//alex
 ```
 #### 构造函数 
-> 与工厂函数相似构造函数也可以创建对象，它的this上下文为新对象实例  
-> - 构造函数名每个单词首字母大写(Pascal命名规范) 
-> - this指当前创建的对象 
-> - 不需要返回this，由系统自动完成 
-> - 需要使用new关键词生成对象  
+- 与工厂函数相似构造函数也可以创建对象，它的`this`上下文为新对象实例  
+- 构造函数名每个单词首字母大写(`Pascal`命名规范) 
+- `this`指当前创建的对象 
+- 不需要返回`this`，由系统自动完成 
+- 需要使用`new`关键词生成对象  
 ```javascript 
 function Student(name){
     this.name = name;
@@ -567,7 +550,7 @@ function Student(name){
 let s1 = new Student('john');
 s1.show();
 ```
-> 如果构造函数返回对象，那么new出来的实例将是此对象  
+- 如果构造函数返回对象，那么`new`出来的实例将是此对象  
 ```javascript
 function ArrayObject(...values){
     const arr = new Array();
@@ -581,7 +564,7 @@ console.log(arr);//[1,2,3,string:function]
 console.log(arr.string);//1-2-3
 ```
 #### 严格模式
-> 在严格模式下，this的值为undefined,这是为了防止无意修改window对象  
+- 在严格模式下，`this`的值为`undefined`,这是为了防止无意修改`window`对象  
 ```javascript 
 "use strict";
 function User(){
@@ -596,9 +579,8 @@ let fn = u.show;
 fn();//undefined
 ```
 #### 内置构造 
-> js中大部分数据类型都是通过构造函数创建的   
->
-> - 字面量创建的对象，内部也调用了Object()构造函数   
+- `js`中大部分数据类型都是通过构造函数创建的   
+- 字面量创建的对象，内部也调用了`Object()`构造函数   
 ```javascript 
 let num = new Number(11);
 console.log(num.valueOf());//11
@@ -627,7 +609,7 @@ student.age = 18;
 console.log(student);
 ```
 #### 对象函数 
-> js中函数也是对象  
+- `js`中函数也是对象
 ```javascript 
 function fn(str){}
 console.log(fn.toString());//function fn(){}
@@ -649,9 +631,9 @@ let user = new User('alex');
 console.log(user.show());//alex
 ```
 ### 抽象特性  
-> 将复杂功能隐藏在内部，对外开放简单的接口方法  
+- 将复杂功能隐藏在内部，对外开放简单的接口方法  
 #### 问题分析 
-> 将对象属性简单封装到构造函数内部，外部可以访问修改对象的属性    
+- 将对象属性简单封装到构造函数内部，外部可以访问修改对象的属性    
 ```javascript 
 function User(name,age){
     this.name = name;
@@ -665,7 +647,7 @@ console.log(u.name,u.age);//这些属性外部还是可以访问的
 console.log(u.info);
 ```
 #### 抽象封装  
-> 通常是不能让外部访问到属性和方法的，这样才能保护对象内部的逻辑和数据的安全 
+- 通常是不能让外部访问到属性和方法的，这样才能保护对象内部的逻辑和数据的安全 
 ```javascript 
 //通过闭包特性对对象进行封装，使得外部不能访问对象内部的属性和方法  
 function User(name,age){
@@ -682,10 +664,10 @@ let u = new User('alex',16);
 console.log(u.result());//alex是未成年人
 ```
 ### 属性特征 
-> javascript 可以设置对象属性的特性    
+- `javascript` 可以设置对象属性的特性    
 #### 查看特征 
-> 使用Object.getOwnPropertyDescriptor(obj,property)查看对象属性的描述  
-> 使用Object.getOwnPropertyDescriptors(obj)查看对象所有属性的描述 
+- 使用`Object.getOwnPropertyDescriptor(obj,property)`查看对象属性的描述  
+- 使用`Object.getOwnPropertyDescriptors(obj)`查看对象所有属性的描述 
 ```javascript 
 "use strict";
 let user = {
@@ -703,7 +685,7 @@ console.log(JSON.stringify(desc,null,4));
 let descs =Object.getOwnPropertyDescriptors(user);
 console.log(JSON.stringify(descs,null,4));
 ```
-> 对象属性包括下面四种特性 
+- 对象属性包括下面四种特性 
 
 |特性|说明|默认值|
 |:-:|:-:|:-:|
@@ -713,7 +695,7 @@ console.log(JSON.stringify(descs,null,4));
 |configurable|对象属性能否delete,能否修改访问器属性，能否修改属性特性|true|
 
 #### 设置特征
-> 使用`Object.defineProperty(obj,property,descriptor)`方法单个设置属性特性有三个参数    
+- 使用`Object.defineProperty(obj,property,descriptor)`方法单个设置属性特性有三个参数    
 ```javascript 
 "use strict";
 let user = {
@@ -746,7 +728,7 @@ Object.defineProperty(user,'name',{
 });//TypeError:cannot redefine property:name
 
 ```
-> 使用`Object.defineProperty(obj,property,descriptor)`注意事项      
+- 使用`Object.defineProperty(obj,property,descriptor)`注意事项      
 ```JavaScript
 var o = {}; // 创建一个新对象
 
@@ -784,7 +766,7 @@ Object.defineProperty(o, "conflict", {
 });
 // 抛出错误 TypeError: value appears only in data descriptors, get appears only in accessor descriptors
 ```
-> 使用Object.defineProperties()方法设置多个属性特性有两个参数      
+- 使用`Object.defineProperties()`方法设置多个属性特性有两个参数      
 ```javascript
 "use strict";
 let user = {
@@ -797,9 +779,8 @@ Object.defineProperties(user,{
 });
 ```
 #### 禁止添加  
-> Object.preventExtensions(obj) 禁止向对象添加属性   
->
-> - Object.isExtensible(obj) 判断能否向对象添加属性  
+- `Object.preventExtensions(obj)`禁止向对象添加属性   
+- `Object.isExtensible(obj)` 判断能否向对象添加属性  
 ```javascript 
 "use strict";
 let user = {};
@@ -810,9 +791,9 @@ let bool = Object.isExtensible(user);
 console.log(bool);//false
 ```
 #### 封闭对象 
-> Object.seal(obj)封闭一个对象  
-- 阻止添加新属性,并将现有所有属性标记为 configurable: false  
-- Object.isSealed(obj)判断对象是否封闭  
+- `Object.seal(obj)`封闭一个对象  
+- 阻止添加新属性,并将现有所有属性标记为 `configurable: false`
+- `Object.isSealed(obj)`判断对象是否封闭  
 ```javascript 
 "use strict";
 const user = {
@@ -827,9 +808,9 @@ console.log(Object.isSealed(user));//true
 delete user.name;//Error
 ```
 #### 冻结对象 
-> Object.freeze()冻结对象不允许添加，删除，修改属性  
-- 对象冻结后writable,configurable都标记为 false
-- Object.isFrozen(obj)判断对象是否冻结  
+- `Object.freeze()`冻结对象不允许添加，删除，修改属性  
+- 对象冻结后`writable,configurable`都标记为 `false`
+- `Object.isFrozen(obj)`判断对象是否冻结  
 ```javascript 
 "use strict";
 const user = {
@@ -842,17 +823,15 @@ user.name = 'alex';//Error
 Object.isFroze(user);//true
 ```
 ### 属性访问器 
-> 对象中可以使用专门的函数来管理属性，这是js提供的存取器特性   
->
-> - getter()用于获得属性值，setter()用来设置属性值  
-> - 用于避免错误的赋值
-> - 需要动态监测值的变化 
-> - 属性只能在属性访问器和普通属性任选其一，不能同时存在 
+- 对象中可以使用专门的函数来管理属性，这是`js`提供的存取器特性   
+- `getter()`用于获得属性值，`setter()`用来设置属性值  
+- 用于避免错误的赋值
+- 需要动态监测值的变化 
+- 属性只能在属性访问器和普通属性任选其一，不能同时存在 
 
-#### getter\/setter
-> 使用属性访问器后，正常的赋值将无效  
-> 
-> - 属性访问器的函数名可以与属性名不同    
+#### getter setter
+- 使用属性访问器后，正常的赋值将无效  
+-- 属性访问器的函数名可以与属性名不同    
 ```javascript 
 //对用户的年龄数据使用属性访问器监控控制  
 "use strict";
@@ -881,7 +860,7 @@ user.age = 30;
 console.log(user.age);//年龄是:30
 ```
 
-> 只提供getter的只读属性   
+- 只提供`getter`的只读属性   
 ```javascript
 let lessons = {
     lists: [
@@ -896,7 +875,7 @@ console.log(lessons.totalPrice());//322
 lessons.totalPrice = 100;//无效，没有set totalPrice
 console.log(lessons.totalPrice());//322
 ```
-> 批量设置属性 
+- 批量设置属性 
 ```javascript
 const Web = {
     data:{
@@ -913,7 +892,7 @@ const Web = {
 web.site = 'web,this,myweb.com';
 console.log(web.site);
 ```
-> 设置token储存示例  
+- 设置`token`储存示例  
 ```javascript
 let Request = {
     get token(){
@@ -930,7 +909,7 @@ let Request = {
 //Request.token = 'love';
 console.log(Request.token);
 ```
-> 定义内部私有属性  
+- 定义内部私有属性  
 
 ```javascript
 "use strict";
@@ -949,7 +928,7 @@ user.name = 'john';
 console.log(user.name);
 ```
 #### 访问器描述符 
-> 使用Object.defineProperties()可以模拟定义对象私有属性，使用对象特性  
+- 使用`Object.defineProperties()`可以模拟定义对象私有属性，使用对象特性  
 ```javascript 
 function User(name,age){
     let data = {name,age};
@@ -979,7 +958,7 @@ console.log(u.name);
 u.name = 'alex';
 console.log(u.name);
 ```
-> 用class定义  
+- 用`class`定义  
 ```javascript
 "use strict";
 const DATA = Symbol();
@@ -1008,15 +987,14 @@ let u = new User('john',18);
 console.log(u.name);
 ```
 ### 代理 proxy <sup>es6</sup>
-
-> 代理(拦截器)是对整个对象的访问控制  
-> - 两个参数，new Proxy(target,handler);
-> - setter,getter是对单个对象属性的控制  
-> - 代理读写时代码更简洁 
-> - 对象的多个属性控制统一交给代理完成 
-> - 严格模式下set必须返回boolean值 
+- 代理(拦截器)是对整个对象的访问控制  
+- 两个参数，`new Proxy(target,handler)`
+- `setter,getter`是对单个对象属性的控制  
+- 代理读写时代码更简洁 
+- 对象的多个属性控制统一交给代理完成 
+- 严格模式下`set`必须返回`boolean`值 
 #### 代理对象   
-> 代理对象操作使用get,set方法
+- 代理对象操作使用`get,set`方法
 ```javascript 
 "use strict";
 const user = {name:'john'};
@@ -1034,10 +1012,9 @@ proxy.age = 10;
 console.log(user);
 ```
 #### 代理函数  
-> 如果代理以函数方式执行，会执行代理中定义的apply方法  
->
-> - 代理函数使用handler对象的apply(func,obj,args)方法
-> - 参数说明：函数，上下文对象，参数 
+- 如果代理以函数方式执行，会执行代理中定义的`apply`方法  
+- 代理函数使用`handler`对象的`apply(func,obj,args)`方法
+- 参数说明：函数，上下文对象，参数 
 ```javascript 
 //使用apply计算函数执行时间 
 function factorial(num){
@@ -1075,7 +1052,7 @@ let proxy = new Proxy(lessons,handler);
 console.log(proxy[0]);//媒体查询... 
 ```
 #### 双向绑定 
-> 用代理实现vue框架的数据双向绑定特性  
+- 用代理实现`vue`框架的数据双向绑定特性  
 ```html 
 <html>
     <head>
@@ -1119,15 +1096,14 @@ console.log(proxy[0]);//媒体查询...
 ```
 
 ### 反射 Reflect <sup>es6</sup>
-> es6中将Object的一些明显语言内部的方法移植到了Reflect对象上   
-> 
-> - Object对象的指令操作变成Reflect对象的方法操作     
-> - Reflect对象对某些方法的返回结果进行了修改，使其更合理     
+- `es6`中将`Object`的一些明显语言内部的方法移植到了`Reflect`对象上   
+- `Object`对象的指令操作变成`Reflect`对象的方法操作     
+- `Reflect`对象对某些方法的返回结果进行了修改，使其更合理     
 
 #### 静态方法 
 
-> Reflect.get(target,name,receiver) , 查找并返回target对象的name属性    
-> - 当target对象中有name属性的getter方法时，getter方法的this会绑定到 receiver对象   
+- `Reflect.get(target,name,receiver)`, 查找并返回`target`对象的`name`属性    
+- 当`target`对象中有`name`属性的`getter`方法时，`getter`方法的`this`会绑定到`receiver`对象
 
 ```javascript
 let User = {
@@ -1146,9 +1122,9 @@ let res = Reflect.get(User,"getName",{
 console.log(res);//alex
 
 ```
-> Reflect.set(target,name,value,receiver)  设置对象target中name属性的值为value  
-> - value为空时，会清除name属性   
-> - 当target对象中存在name属性的setter方法时，会将setter方法中的this绑定到 receiver 对象上 ，设置的是receiver对象的属性值   
+- `Reflect.set(target,name,value,receiver)`设置对象`target`中`name`属性的值为`value`  
+- `value`为空时，会清除`name`属性   
+- 当`target`对象中存在`name`属性的`setter`方法时，会将`setter`方法中的`this`绑定到 `receiver` 对象上，设置的是`receiver`对象的属性值   
 ```javascript
 let User = {
     name: "john",
@@ -1171,36 +1147,36 @@ if(Reflect.set(User,"name","alex",receiver)){
 }
 
 ```
-> Reflect.has(obj,name) 是语句 name in obj 的函数化  
+- `Reflect.has(obj,name)`是语句`name in obj` 的函数化  
 ```javascript
 let u = {name: 'john'};
 if(Reflect.has(u,"john")){
     console.log("yes");
 }
 ```
-> Reflect.deleteProperty(obj,property) 删除对象的一个属性，删除一个空属性也会返回true  
+- `Reflect.deleteProperty(obj,property)`删除对象的一个属性，删除一个空属性也会返回`true`  
 ```javascript
 let u = {name: "john",age: 20};
 Reflect.deleteProperty(u,"age");
 console.log(u.age);//undefined
 ```
-> Reflect.constructor(obj,args) 等同于 new obj(args)  
+- `Reflect.constructor(obj,args)` 等同于 `new obj(args)`
 ```javascript
 function fn(){}
 let f = Reflect.constructor(fn);
 ```
-> Reflect.getPrototypeOf(obj) 获取对象 obj 的 \_\_proto\_\_ 原型 当obj不是对象时 会报错  
+- `Reflect.getPrototypeOf(obj)`获取对象`obj`的`__proto__` 原型 当`obj`不是对象时 会报错  
 ```javascript
 function Fn(){}
 let f = new Fn();
 console.log(Fn.prototype == Reflect.getPrototypeOf(f));//true
 ```
-> Reflect.setPrototypeOf(obj,prototype) 设置对象 obj 的原型为 prototype   
+- `Reflect.setPrototypeOf(obj,prototype)`设置对象`obj`的原型为`prototype`   
 ```javascript
 let obj = {};
 Reflect.setPrototypeOf(obj,Array.prototype);
 ```
-> Reflect.apply(func,thisArg,args)   
+- `Reflect.apply(func,thisArg,args)`
 ```javascript
 function fn(){
     console.log(this.name);
@@ -1208,13 +1184,13 @@ function fn(){
 let u = {name: 'john',[]};
 Reflect.apply(fn,u);//john
 ```
-> Reflect.defineProperty(target,property,attributes) 和 Reflect.getOwnPropertyDescriptor(target,propertyKey)   
+- `Reflect.defineProperty(target,property,attributes)`和`Reflect.getOwnPropertyDescriptor(target,propertyKey)`
 ```javascript
 let u = {};
 Reflect.defineProperty(u,'name',{value: 'john'});//默认 {writable: false,enumerable: false,configurable:false}
 console.log(Reflect.getOwnPropertyDescriptor(u,'name'));//{value: 'john',writable: false,enumerable: false,configurable:false}
 ```
-> Reflect.isExtensible(target) 和 Reflect.preventExtensions(target)   
+- `Reflect.isExtensible(target)`和`Reflect.preventExtensions(target)`
 ```javascript
 let u = {};
 Reflect.preventExtensions(u);
@@ -1222,7 +1198,7 @@ u.name = "john";
 console.log(u.name);//undefined
 console.log(Reflect.isExtensible(u));//false
 ```
-> Reflect.ownKeys(target)  返回target对象的所有属性名，不管属性是否可枚举，包括 Symbols属性名   
+- `Reflect.ownKeys(target)`返回`target`对象的所有属性名，不管属性是否可枚举，包括 `Symbols`属性名   
 ```javascript
 let sym = Symbol(1);
 let u  = {
@@ -1239,7 +1215,7 @@ console.log(Reflect.ownKeys(u));//["name","age","sym","gender"]
 ```
 
 ### Proxy 与 Reflect 组合使用  
-> Reflect 对象的方法与 Proxy 对象的方法是一一对应的，可以很好的组合使用   
+- `Reflect` 对象的方法与 `Proxy` 对象的方法是一一对应的，可以很好的组合使用   
 ```javascript
 let user = {
     name: "john",
@@ -1258,7 +1234,7 @@ user.name = "alex";
 user.age = 30;
 console.log(user);//{name:"alex",age:30}
 ```
-> 实现观察者模式   
+- 实现观察者模式   
 ```javascript
 //定义Set集合 
 const queuedObservers = new Set();
@@ -1282,13 +1258,12 @@ const observable = function(obj){
 ```
 
 ### JSON 
-> json是一种轻量级的数据交换格式，易于阅读与编写  
->
-> - json JavaScript Object Notation   
-> - json标准中要求使用双引号包裹属性名称，减少传输发生的错误 
-> - json属于文本,文本是各种语言的合法格式   
-> - json用双引号，不用单引号  
-> - json和javascript对象差不多，但有区别 
+- `json`是一种轻量级的数据交换格式，易于阅读与编写  
+- `json: JavaScript Object Notation` 
+- `json`标准中要求使用双引号包裹属性名称，减少传输发生的错误 
+- `json`属于文本,文本是各种语言的合法格式   
+- `json`用双引号，不用单引号  
+- `json`和`javascrip`t对象差不多，但有区别 
 ```javascript 
 let user = {
     name: "john",
@@ -1321,13 +1296,17 @@ let lessons = [
 ];
 ```
 #### 序列化 
-> JSON.string(value[,replacer[,space]])生成对应json文本    
-- value必须参数，要转换的对象或数组 
-- replacer可选参数，如果replacer为函数，则JSON.stringify 将调用该函数，并传入每个成员的键和值。使用返回值而不是原始值。如果此函数返回 undefined，则排除成员。根对象的键是一个空字符串：""；如果 replacer 是一个数组，则仅转换该数组中具有键值的成员。成员的转换顺序与键在数组中的顺序一样  
-- space可选参数，文本添加缩进、空格和换行符，如果 space 是一个数字，则返回值文本在每个级别缩进指定数目的空格，如果 space 大于 10，则文本缩进 10 个空格。space 也可以使用非数字，如：\\t
-#### 反序列化
+- `JSON.stringify(value[,replacer[,space]])`生成对应`json`文本    
+- `value`必须参数，要转换的对象或数组 
+- `replacer`可选参数 
+- 如果`replacer`为函数，则`JSON.stringify`将调用该函数，并传入每个成员的键和值，使用返回值而不是原始值 
+- 如果此函数返回`undefined`，则排除成员。根对象的键是一个空字符串：""；
+- 如果 `replacer` 是一个数组，则仅转换该数组中具有键值的成员。成员的转换顺序与键在数组中的顺序一样  
+- `space`可选参数，文本添加缩进、空格和换行符 
+- 如果 `space` 是一个数字，则返回值文本在每个级别缩进指定数目的空格，
+- 如果 `space` 大于 `10`，则文本缩进 `10` 个空格。`space` 也可以使用非数字，如`\t`
 
-> JSON.parse(text[,reviver]) 
->  
-> - text必须参数，一个有效的JSON字符串 
-> - reviver可选参数，一个转换结果的函数，为对象每个成员调用些函数  
+#### 反序列化
+- `JSON.parse(text[,reviver])`
+- `text`必须参数，一个有效的`JSON`字符串 
+- `reviver`可选参数，一个转换结果的函数，为对象每个成员调用些函数  
