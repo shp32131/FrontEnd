@@ -3,14 +3,19 @@
 ## 数组声明 
 - `Array`对象实例创建数组：`let arr = new Array(1,'hello','world')`
  + 声明一个长度确定的数组：`let  arr = new Array(5)`
+
 - (推荐)使用字面量方式声明一个数组：`let  array = ['hello','world']`
+
 - 多维数组定义：`const array = [[1,2,3],[4,5,6]]`
- + 数组是引用类型可以使用`const`声明并修改它的值  
-- 使用原型的`length`属性可以获取数组的长度    
-- 使用`Array.of()` 与 `new Array()`不同是传一个参数时不会创建空元素数组  
+ + 数组是引用类型可以使用`const`声明并修改它的值
+
+- 使用原型的`length`属性可以获取数组的长度
+
+- 使用`Array.of()` 与 `new Array()`不同是传一个参数时不会创建空元素数组
  + `const hd = Array.of(1, 2, 3) console.log(hd); //[1, 2, 3] `
-- 数组类型检测，`Array.isArray()`检测变量是否为数组类型  
- + `Array.isArray([1,2]);//true`
+
+- 数组类型检测，`Array.isArray()`检测变量是否为数组类型
+ + `Array.isArray([1,2]);// true`
 
 ## 数组类型转换
 - 可以将数组转换为字符串也可以将其他类型转换为数组  
@@ -21,56 +26,49 @@ let str = String([1,2,3]);// 也可以使用String()转换为字符串 1,2,3
 let str2 = [1,2,3].join('-');// 也可以使用join()方法连接成字符串 1-2-3
 ```
 ### Array.isArray(),Array.of()
-```javascript
-//Array.isArray()检测一个变量是否是一个数组
-//Array.of()创建一个数组
-```
-#### Array.from(arrayLike[,mapFn,thisArg])
-- 使用`Array.from(obj,mapFn,thisArg)`可将类数组转换为数组   
- + 类数组指包含length属性或可迭代的对象   
- + 第一个参数为要转换的数据  
- + 第二个参数为类似于map函数的回调方法,thisArg是其要绑定的this对象   
+- 创建一个数组，`Array.of()`
+- 可靠数组类型判断，`Array.isArray()`
+### Array.from(arrayLike[,mapFn,thisArg])
+- 使用`Array.from(obj,mapFn,thisArg)`可将类数组转换为数组
+ + 类数组指包含`length`属性或可迭代的对象
+ + 第一个参数为要转换的数据
+ + 第二个参数为类似于数组`map`方法的回调方法,`thisArg`是其要绑定的`this`对象
  + 返回一个新数组，不改变原数据
 ```javascript
 let str = "你好啊";
-console.log(Array.from(str));//['你','好','啊']
-//为对象设置length属性后也可以转换为数组,但要属性(下标)为数值或数值字符串  
+console.log(Array.from(str));// ['你','好','啊']
+// 为对象设置length属性后也可以转换为数组,但要属性(下标)为数值或数值字符串  
 let user = {
     0:'hello',
     '1':20,
     length:2
 };
-console.log(Array.from(user));//['hello',20]
-//DOM元素转换为数组后使用数组函数，第二个参数类似于map 函数的方法，可对数组元素执行函数处理
+console.log(Array.from(user));// ['hello',20]
+// DOM元素转换为数组后使用数组函数，第二个参数类似于map 函数的方法，可对数组元素执行函数处理
 <body>
-    <button message="后盾人">button</button>
+    <button message="前端">button</button>
     <button message="hello">button</button>
 </body>
-
 <script>
-
     let btns = document.querySelectorAll('button');
     console.log(btns); //包含length属性
     Array.from(btns, (item) => {
         item.style.background = 'red';
     });
-
 </script>
 ```
-### Spread/Rest (解构)展开语法 <sup>es6</sup>
-- 使用展开语法将`NodeList`转换为数组操作  
+### Spread/Rest (解构)展开语法<sup>es6</sup>
+- 使用展开语法将`NodeList`(节点对象)转换为数组操作  
 ```html
 <style>
     .hide {
       display: none;
     }
 </style>
-
 <body>
   <div>hello</div>
   <div>world</div>
 </body>
-
 <script>
   let divs = document.querySelectorAll("div");
   [...divs].map(function(div) {
@@ -84,17 +82,16 @@ console.log(Array.from(user));//['hello',20]
 ```javascript
 let a = [1,2,3];
 let b = ['a','hello',...a];
-console.log(b);//['a','hello',1,2,3]
+console.log(b);// ['a','hello',1,2,3]
 ```
 
-- 使用展开语法可以替代`arguments`来接收任意数量的参数  
+- 使用展开语法可以替代`arguments`，来接收任意数量的参数  
 ```javascript
-function test(...args)
-{
-    console.log(args);
+function test (...args) {
+  console.log(args);
 }
-//也可以用于接收部分参数  
-function test2(num,...args){
+// 也可以用于接收部分参数
+function test2 (num,...args){
     console.log(num,args);
 }
 ```
@@ -103,13 +100,13 @@ function test2(num,...args){
 ```html
 <!-- 可以将DOM节点转为数组，下面例子不可以使用 filter 因为是节点列表 -->
 <body>
-    <button message="后盾人">button</button>
+    <button message="前端">button</button>
     <button message="hello">button</button>
 </body>
 
 <script>
     let btns = document.querySelectorAll('button');
-    //btns是一个集合，不是一个数组，可以用forEach,不能用map,filter...
+    // btns是一个NodeList类型，不是一个数组，可以用forEach,不能用map,filter...
     btns.filter((item) => {
         console.log(item); //TypeError: btns.filter is not a function
     })
@@ -117,7 +114,7 @@ function test2(num,...args){
 ```
 - `Spread/Rest`语法，将集合`set`转换成数组   
 ```html
-<!-- 使用展开语法后就可以使用数据方法 -->
+<!-- 使用展开语法后就可以使用数组方法 -->
 <body>
   <div>hello</div>
   <div>world</div>
@@ -134,9 +131,9 @@ function test2(num,...args){
 ```
 - 使用`call`借用数组原型方法 
 ```html
-<!-- 学习后面章节后也可以使用原型处理 -->
+<!-- 后也可以使用原型处理 -->
 <body>
-    <button message="后盾人">button</button>
+    <button message="前端">button</button>
     <button message="hello">button</button>
 </body>
 
@@ -147,55 +144,61 @@ function test2(num,...args){
     });
 </script>
 ```
-### 解构赋值 <sup>es6</sup>
-- 解构赋值就是`Spread/Rest`特性，放，收特性  
-- 解构是一种更简洁的赋值特性，省去中间变量，可以理解为分解一个数据的结构  
-- 建议使用`var/let/const`声明  
-- 基本使用  
+### 解构赋值<sup>es6</sup>
+- 解构赋值就是`Spread/Rest`特性收放特性
+- 解构是一种更简洁的赋值特性，省去中间变量，可以理解为分解一个数据的结构
+- 使用`var/let/const`进行声明
+- 解构赋值数组
+- 字符串解构，`const [...a] = 'hello words'`
+- 剩余解构指用一个变量来接收剩余参数
 ```javascript
-//数组使用
-let [name, url] = ['后盾人', 'myweb.com'];
+// 数组使用
+let [name, url] = ['平安', 'myweb.com'];
 console.log(name);
 
 // 解构赋值数组
 function hd() {
-    return ['world', 'hello'];
+  return ['world', 'hello'];
 }
 let [a, b] = hd();
-console.log(a); //world
+console.log(a); // world
 
 // 剩余解构指用一个变量来接收剩余参数
-let [a, ...b] = ['后盾人', 'world', 'hello'];
+let [a, ...b] = ['前端', 'world', 'hello'];
 console.log(b);
 
-// 如果变量已经初始化过，就要使用() 定义赋值表达式，严格模式会报错所以不建议使用。
-let web = "后盾人";
+// 如果变量已经初始化过，就要使用()定义赋值表达式，严格模式会报错所以不建议使用。
+let web = "前端";
 [web, url] = ["myweb.com", "wwww.myweb.com"];
 console.log(web);
 
 // 字符串解构
 "use strict";
 const [...a] = "myweb.com";
-console.log(a); //Array(13)
+console.log(a); // Array(13)
 ```
 
 - 非严格模式可以不使用声明指令，严格模式下必须使用声明，建议使用`let`等声明  
 ```javascript
 "use strict";
 [web,url] = ['web.com','myweb.com'];
-console.log(web);//error
+console.log(web);// error
 ```
 - 简洁定义
+- 只赋值部分变量
 ```javascript
-//只赋值部分变量
+// 只赋值部分变量
 let [,url] = ['hello','myweb.com'];
 console.log(url);//myweb.com
-//使用展开语法获取多个值 
-let [name,..arr] = ['john','web','www.myweb.com'];
+
+// 使用展开语法获取多个值 
+let [name, ..arr] = ['john','web','www.myweb.com'];
 console.log(name,arr);
-//默认值 
+
+// 默认值 
 let [name,site='myweb.com'] = ['john'];
-//函数参数 
+
+// 函数参数 
 function test([a,b]){
     console.log(a,b);
 }
@@ -203,11 +206,12 @@ function test([a,b]){
 ## 数组元素管理函数
 - 使用数组索引来管理元素
 ```javascript
-//使用从0开始的索引来操作数组元素
+// 使用从0开始的索引来操作数组元素
 let arr = [1,'hello','web.com'];
 arr[1] = 'hello world';
 console.log(arr);//[1,'hello world','web.com']
-//向数组追加元素
+
+// 向数组追加元素
 arr[arr.length] = 'myweb.com';
 ```
 ### 数组扩展语法  
@@ -218,7 +222,7 @@ arr2.push(...arr);
 console.log(arr2);//['mark','john','alex']
 ```
 
-#### array.push()往数组后面添加元素
+### array.push()往数组后面添加元素
 - 将元素压入数组，直接改变数组，返回值为新数组的元素个数  
 ```javascript
 let arr = ['john','alex'];
@@ -235,7 +239,7 @@ function newArray(begin,end){
 }
 ```
 
-#### array.unshift()往数组前面添加元素
+### array.unshift()往数组前面添加元素
 - 从数组前面添加元素，直接改变数组，返回新数组的元素的个数  
 ```javascript
 let arr = ['john','alex'];
@@ -243,14 +247,14 @@ console.log(arr.unshift('mark'));//3
 console.log(arr);//['john','alex','mark']
 ```
 
-#### array.pop()从数组后面弹出一个元素
+### array.pop()从数组后面弹出一个元素
 - 从数组末尾弹出一个元素，直接改变数组，返回被弹出的元素  
 ```javascript
 let arr = ['john','alex'];
 console.log(arr.pop());//alex 
 ```
 
-#### array.shift()从数组前面弹出一个元素
+### array.shift()从数组前面弹出一个元素
 - 从数组前面取出一个元素，直接改变数组，返回被取出的元素   
 - 改变原数组   
 ```javascript
@@ -259,7 +263,7 @@ console.log(arr.shift());//john
 console.log(arr);//alex
 ```
 
-#### array.fill()往数组里填充元素
+### array.fill()往数组里填充元素
 - 填充数组元素 
 ```javascript
 console.log(Array(2).fill('john'));//['john','john']
@@ -269,7 +273,7 @@ arr.fill('lily',1,2);
 console.log(arr)//['john','lily','mark']
 ```
 
-#### array.slice()截取数组(不改变原数组)
+### array.slice()截取数组(不改变原数组)
 - 使用`slice([begin[,end]])`方法从数组中截取部分元素组合成新数组   
 - 不传一参默认从`0`开始,不传二参时默认截取到数组的最后元素 
 ```javascript
@@ -279,7 +283,7 @@ console.log(nums.slice(1,3));//[1,2]
 console.log(nums.slice());//[0,1,2,3,4]
 ```
 
-#### array.splice()往数组中添加，删除，替换元素(改变原数组)
+### array.splice()往数组中添加，删除，替换元素(改变原数组)
 - `splice(start[,deleteCount,[,replace...]])`往数组中添加，删除，替换元素，改变原数组，以数组形式返回被删除的元素   
 - 删除数组元素时第一个参数为从哪开始删   
 - 第二个参数为删除的个数,当删除个数为0时，在开始位置添加三参内容      
@@ -315,7 +319,7 @@ const array = [1, 2, 3, 4];
 console.table(move(array, 0, 3));
 ```
 
-#### 清空数组
+### 清空数组
 - 将数组值修改为`[]`可以清空数组，如果有多个引用时数组在内存中存在被其他变量引用 
 ```javascript
 let user = [{name:'john'},{name:'alex'}];
@@ -335,20 +339,20 @@ while(user.pop){ }
 ```
 
 ### 合并拆分
-#### join()连接成字符串
+### join()连接成字符串
 ```javascript
 let user = ['john','alex','mark'];
 console.log(user.join('-'));//'john-alex-mark'
 ```
 
-#### split()将字符串分割成数组
+### split()将字符串分割成数组
 - 类似`join()`反函数
 ```javascript
 let str = 'john-alex-mark';
 console.log(str.split('-'));//['john','alex','mark']
 ```
 
-#### concat()合并连接多个数组
+### concat()合并连接多个数组
 - `concat()`用于连接两个或多个数组
 - 元素是值类型时执行复制操作
 - 元素是引用类型时还是指向同一对象
@@ -357,11 +361,11 @@ let arr = ['john','alex'];
 let user = ['lily'];
 let student = ['hello'];
 console.log(arr.concat(user,student));//['john','alex','lily','hello']
-//也可以使用展开语法进行连接
+// 也可以使用展开语法进行连接
 console.log([...arr,...usr,...student]);
 ```
 
-#### copyWithin()数组内部复制操作  
+### copyWithin()数组内部复制操作  
 - 从数组中复制一部分到数组中的另外位置  
 - `array.copyWithin(target,start,end)`
 - `target` 复制到指定目标索引位置  
@@ -375,7 +379,8 @@ console.log(arr.copyWithin(2,0,2));//[1,2,1,2,5]
 ### 查找元素
 - 数组包含多种查找的函数，需要把这些函数掌握清楚
 - 根据不同的场景选择合适的查找函数
-#### indexOf()
+
+### indexOf()
 - 从前向后查找元素出现的位置
 ```javascript
 let arr = [0,1,2,3,4,5];
@@ -388,7 +393,7 @@ let arr = [0,1,2,3,4,5,3];
 console.log(arr.indexOf(3,3));//3
 console.log(arr.indexOf(3,4));//6
 ```
-#### lastIndexOf()
+### lastIndexOf()
 - 从后向前查找元素出现的位置
 - 第二参数指定开始查找的位置
 ```javascript
@@ -398,7 +403,7 @@ console.log(arr.lastIndexOf(3,2));//-1
 console.log(arr.lastIndexOf(3,4));//3
 ```
 
-#### includes()返回布尔值
+### includes()返回布尔值
 - 使用`includes`查找字符串返回值是布尔值，方便判断   
 ```javascript
 let arr = [3,7,9,5];
@@ -415,7 +420,7 @@ function includes(array,item){
 }
 ```
 
-#### find()返回查找到的值
+### find()返回查找到的值
 - `array.find(function(currentValue,index,arr){ },thisValue)`
 - `thisValue`可选参数，传递函数的`this`值  
 - `find()`方法返回通过测试(函数内判断)的数组的第一个元素的值  
@@ -441,7 +446,7 @@ const result = user.find(function(name){
 console.log(result);//false
 ```
 
-#### findIndex()
+### findIndex()
 - `array.findIndex(function(currentValue,index,arr){ },thisValue)`  
 - `findIndex`与`find`的区别是返回的是索引值，而不是元素值   
 - 查找不到返回`-1`
@@ -451,7 +456,7 @@ let pos = arr.findIndex(function(value){return value === 6});
 console.log(pos);//3
 ```
 
-#### find原理
+### find原理
 ```javascript
 //自定义函数
 function find(array,callback){
@@ -473,23 +478,25 @@ function Array.prototype.findValue = function(callback){
 ```
 
 ### 数组排序
-#### reverse()反转数组顺序
+### reverse()反转数组顺序
 ```javascript
 let arr = [1,2,3,4];
 console.log(arr.reverse());//[4,3,2,1]
 ```
-#### sort()数组排序
+### sort()数组排序
 - `sort()`每次使用两个值进行比较 `Array.sort((a,b)=>(a-b))`
 - 返回负数`a`排在`b`前面，返回正数`b`在`a`前面,从小到大排序
 - 返回`0`时，不动   
 ```javascript
 let arr = [1,5,2,0,9,7];
-console.log(arr.sort());//默认从小到大排序
-//从大到小排序 
+console.log(arr.sort());// 默认从小到大排序
+
+// 从大到小排序 
 console.log(arr.sort(function(v1,v2){
     return v2-v1;
 }));
-//按课程点击次数由高到低排序
+
+// 按课程点击次数由高到低排序
 let lessons = [
 {tittle:'媒体查询响应式布局',click:78},
 {tittle:'flex弹性布局',click:69},
@@ -499,7 +506,7 @@ let sortLessons = lessons.sort((v1,v2)=>v2.click-v1.click);
 console.log(sortLessons);
 ```
 
-#### 排序原理
+### 排序原理
 ```javascript
 let arr = [1, 5, 3, 9, 7];
 function sort(array, callback) {
@@ -521,7 +528,7 @@ console.table(arr);
 ```
 
 ### 循环遍历
-#### for
+### for
 - 根据数组长度，结合`for`循环来遍历数组  
 ```javascript
 let lessons = [
@@ -531,15 +538,15 @@ let lessons = [
 ];
 
 for (let i = 0; i < lessons.length; i++) {
-  lessons[i] = `后盾人: ${lessons[i].title}`;
+  lessons[i] = `前端: ${lessons[i].title}`;
 }
 console.log(lessons);
 ```
 
-#### forEach  
+### forEach, 没有返回值  
 - `forEach()`使函数作用在每个数组元素上，但是没有返回值  
 ```javascript
-//截取标签的五个字符
+// 截取标签的五个字符
 let lessons = [
 	{title: '媒体查询响应式布局',category: 'css'},
   {title: 'FLEX 弹性盒模型',category: 'css'},
@@ -552,7 +559,7 @@ lessons.forEach((item, index, array) => {
 console.log(lessons);
 ```
 
-#### for...in
+### for...in
 - 遍历时的`key`值为数组的索引  
 ```javascript
 let lessons = [
@@ -565,7 +572,7 @@ for(const key in lessons){
 }
 ```
 
-#### for/of <sup>es6</sup>
+### for...of <sup>es6</sup>
 - 与`for...in`不同的是`for...of`每次循环取的是其中的值而不是索引  
 ```javascript
 let lessons = [
@@ -585,11 +592,11 @@ const iterator = user.entries();
 console.log(iterator.next());//value:{0:0,1:'john'};
 console.log(iterator.next());//value:{0:1,1:'alex'};
 console.log(iterator.next());//value:{0:2,1:'mark'};
-//这样就可以使用解构特性与for/of遍历并获取索引与值了
+// 这样就可以使用解构特性与for/of遍历并获取索引与值了
 for(const [key,value] of user.entries()){
     console.log(key,value);
 }
-//取数组中的最大值
+// 取数组中的最大值
 let array = [22,943,1350,133,5555];
 function arrayMax(array){
     let max=0;
@@ -603,7 +610,7 @@ console.log(arrayMax(array));
 
 ### 迭代器方法
 - 数组中可以使用多种迭代器方法
-#### keys
+### keys
 - 通过迭代对象获取索引  
 ```javascript
 const user = ['john','alex'];
@@ -612,7 +619,7 @@ console.log(keys.next());//{value:0,done:false}
 console.log(keys.next());//{value:1,done:false}
 console.log(keys.next());//{value:undefined,done:true}
 ```
-#### values
+### values
 - 通过迭代对象获取值  
 ```javascript
 const user = ['john','alex'];
@@ -621,7 +628,7 @@ console.log(values.next());//{value:0,done:false}
 console.log(values.next());//{value:1,done:false}
 console.log(values.next());//{value:undefined,done:true}
 ```
-#### entries
+### entries
 - 返回数组所有键值对  
 ```javascript
 const user = ['john','alex'];
@@ -631,7 +638,7 @@ for(const [key,value] of user.entries()){
 ```
 
 ### 数组扩展方法
-#### every
+### every
 - `every()`用于递归的检测元素，所有元素操作都要返回`true`，最后结果才为`true`  
 ```javascript
 const user = [{name:'john',age:30},{name:'alex',age:28}];
@@ -639,11 +646,11 @@ let result = user.every(function(user){
     return user.age>18;
 });
 console.log(result);//true
-//简写
+// 简写
 let result = user.every(user=>user.age>18);
 ```
 
-#### some
+### some
 - `some()`函数可以递归的检测数组元素，如果有一个返回`true`,整个结果就为`true`  
 - 第一个参数为元素，第二个为索引，第三个参数为原数组  
 ```javascript
@@ -657,12 +664,12 @@ console.log(state);
 if(state) console.log('你说脏话了');
 ```
 
-#### filter
+### filter
 - 使用`filter()`可以过虑数组中元素   
 - 返回一个包括过滤条件通过的数组项的新数组 
 - 不改变原数组   
 ```javascript
-//获取在css栏中的课程  
+// 获取在css栏中的课程  
 let lessons = [
     {tittle:'媒体查询响应式布局',category:'css'},
     {tittle:'flex弹性布局',category:'css'},
@@ -674,7 +681,7 @@ let csslessons = lessons.filter(function(item,index,array){
     }
 });
 console.log(csslessons);
-//过虑掉数组一些元素  
+// 过虑掉数组一些元素  
 function except(array,excepts){
     const newArray = [];
     for(const elem of array){
@@ -688,18 +695,18 @@ const array = [1,2,3,4,5];
 console.log(except(array,[3,5]));//[1,2,4]
 ```
 
-#### map
+### map
 - 使用`map(function(value,index,arr){})`映射可以在数组的所有元素上应用函数，用于映射出新值  
 ```javascript
-//获取数组所有标题组合的新数组  
+// 获取数组所有标题组合的新数组  
 let lessons = [
     {tittle:'媒体查询响应式布局',category:'css'},
     {tittle:'flex弹性布局',category:'css'},
     {tittle:'mysql多表查询',category:'mysql'}
 ];
 let result = lessons.map(item => item.tittle);
-console.log(result);//['媒体查询响应式布局','flex弹性布局','mysql多表查询']
-//为所有课程的标题加上一个'免费课程'前缀
+console.log(result);// ['媒体查询响应式布局','flex弹性布局','mysql多表查询']
+// 为所有课程的标题加上一个'免费课程'前缀
 let lessons = [
     {tittle:'媒体查询响应式布局',category:'css'},
     {tittle:'flex弹性布局',category:'css'},
@@ -712,14 +719,14 @@ let result = lessons.map(function(item,index,array){
 console.log(result);
 ```
 
-#### reduce <sup>es6</sup>
+### reduce <sup>es6</sup>
 - 使用`reduce()`和`reduceRight()`函数可以迭代数组的所有元素  
 - `array.reduce(function(total,currentValue,index,array){},initialValue)`
 - `initialValue`第二个参数可选
  + 传入第二个参数`initialValue`时,初始`total = initialValue`  
  + 不传入第二个参数`initialValue`时,初始`total = array[0]`
 ```javascript
-//统计数组中相同元素的个数 
+// 统计数组中相同元素的个数 
 function countArrayElem(arr,elem){
     let result = arr.reduce(function(total,cur){
         if(cur == elem ) total++;
@@ -730,15 +737,15 @@ function countArrayElem(arr,elem){
 let arr = [1,2,1,4,5,6];
 let result = countArrayElem(arr,1);
 console.log(result);
-//累加
+// 累加
 let arr = [1,2,3];
 let sum = arr.reduce((total,cur)=>total+cur);
 console.log(sum);//6
-//取数组中的最大的值  
+// 取数组中的最大的值  
 let arr = [1,22,33,11,55,26,99,90];
 let max = arr.reduce((total,cur)=>(total = total>cur?total:cur),arr[0]);
 console.log(max);
-//取购物车中 价格最高的商品  
+// 取购物车中 价格最高的商品  
 let cart = [
     {name:'iphone',price:12000},
     {name:'thinkpad',price:9000},
@@ -747,7 +754,7 @@ let cart = [
 let maxPrice = cart.reduce(function(total,cur){
     return total.price > cur.price ? total:cur;
 });
-//购物车总价  
+// 购物车总价  
 let sumCart = cart.reduce((total,cur)=>total+=cur.price,0);
 console.log(maxPrice.name,sumCart);
 ```
@@ -843,7 +850,7 @@ console.log(Infinity);// Infinity
 ```javascript
 console.log([1,[2,3]].flat());//[1,2,3]
 
-//指定转换的嵌套层数 
+// 指定转换的嵌套层数 
 console.log([1,[2,[3,4]]].flat(1));//[1,2,[3,4]]
 console.log([1,[2,[3,4]]].flat(2));//[1,2,3,4]
 ```
@@ -864,7 +871,7 @@ let buffer = new ArrayBuffer(10);
 let buffer1 = buffer.slice(1, 3);
 console.log(buffer1.byteLength); // 2
 ```
-#### 视图  
+### 视图  
 - 视图是用来操作内存的接口
 - 支持`8`种数值型数据类型
 ```javascript
@@ -882,7 +889,7 @@ dataView1.setInt8(5,1); // RangeError
 #### 定型数组   
 - 数组缓冲区的特定类型的视图  
 ```javascript
-//创建
+// 创建
 let buffer = new ArrayBuffer(10);
 view = new Int8Array(buffer);
 console.log(view.byteLength);//10

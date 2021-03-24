@@ -1,14 +1,12 @@
 ## 原型与继承 Prototype and extend  
 - 重要概念:
-  + javascript是基于原型编程语言 
-  + ES6引入的class关键字，只是语法糖，本质实现还是原型与原型链接
-  + 几乎所有JavaScript对象都是位于原型链最顶端的`Object`的实例  
-  + 每个JavaScript对象都有它的原型:
-    - 对象的原型是它的私有属性`__proto__`(非官方标准表示，但浏览器都实现了这个属性) 
-    - 在ECMAScript标准中用符号`[[Prototype]]`(等同于`__proto__`)指向对象的原型 
-    - `[[Prototype]]` 可以通过
-      + `Object.getPrototypeOf()` 
-      + `Object.setPrototypeOf()`来访问 
+- `javascript`是基于原型编程语言 
+- `ES6`引入的`class`关键字，只是语法糖，本质实现还是原型与原型链接
+- 几乎所有`JavaScript`对象都是位于原型链最顶端的`Object`的实例  
+- 每个`JavaScript`对象都有它的原型:
+- 1.对象的原型是它的私有属性`__proto__`(非官方标准表示，但浏览器都实现了这个属性) 
+- 2.在`ECMAScript`标准中用符号`[[Prototype]]`(等同于`__proto__`)指向对象的原型 
+- `[[Prototype]]` 可以通过`Object.getPrototypeOf()`, `Object.setPrototypeOf()`来访问 
 ```javascript
 function Fn(name,age){
     this.name = name,
@@ -189,7 +187,7 @@ console.log(a instanceof C);//true
 console.log(b instanceof C);//true
 console.log(c instanceof C);//true
 ```
-- 使用 isPrototypeOf()检测一个对象是否是另一个对象的原型链中  
+- 使用`isPrototypeOf()`检测一个对象是否是另一个对象的原型链中  
 ```javascript
 let a = {};
 let b = {};
@@ -235,7 +233,7 @@ for(const k in u){
 ```
 #### 借用原型  
 - 一个对象`obj`使用 `fn.call(obj,argument)` 或 `fn.apply(obj,[arguments])` 可以借用其他原型的`fn`方法
-- 一个对象的方法fn可以指定其他对象当作它的 `this`对象 
+- 一个对象的方法`fn`可以指定其他对象当作它的 `this`对象 
 ```javascript 
 //借用对象的原型方法  
 let obj = {
@@ -435,7 +433,7 @@ User.prototype = {
 - 使用优化:  
   + 使用构造函数会产生函数复制造成内存占用,及相同函数不能共享问题 
   + 如果使用原型的话，就不会产生函数复制，多个对象共享相同功能的函数方法 
-  + `Object.assign(target,sources)`,合并多个source对象后返回得到target对象  
+  + `Object.assign(target,sources)`,合并多个`source`对象后返回得到`target`对象  
 ``` javascript 
 function User(name, age) {
   this.name = name;

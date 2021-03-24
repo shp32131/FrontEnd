@@ -8,12 +8,12 @@
     alert('hello javascript');
 </script>
 ```
-- 2.外部JS文件引入HTML页面中
+- 2.外部`JS`文件引入`HTML`页面中
 ```html
 <!-- 通过设置script标签的src属性引入js -->
 <script src="test.js"></script>
 ```
-> 使用`<script></script>`标签的`src`属性引入外部JS文件时,标签中的JS代码不会执行  
+- 使用`<script></script>`标签的`src`属性引入外部`JS`文件时,标签中的`JS`代码不会执行  
 ```html
 <!-- 以下console.log('hello javascript')不会执行 -->
 <script src='test.js'>
@@ -21,21 +21,21 @@
     console.log('hello javascript');
 </script>
 ```
-> 在`HTML`文档中，如果`head`标签中有JS代码，则要等到`head`标签中的JS代码加载并解析完成后,浏览器才会开始渲染解析`body`标签中的`HTML`内容，所以JS代码一般放在`body`标签中    
+- 在`HTML`文档中，如果`head`标签中有JS代码，则要等到`head`标签中的JS代码加载并解析完成后,浏览器才会开始渲染解析`body`标签中的`HTML`内容，所以JS代码一般放在`body`标签中    
 
 ## 数据类型  
 - 六种基本数据类型  
-  + number 
-  + string 
-  + boolean
-  + undefined 
-  + null 
-  + symbol <sup>es6</sup> 
+  + `number`, `js`没整形数据 
+  + `string` 
+  + `boolean`
+  + `undefined` 
+  + `null` 
+  + `symbol` <sup>es6</sup> 
 - 一种引用类型数据`Object`   
-  + object
-  + array
-  + set
-  + map 
+  + `object`
+  + `array`
+  + `set`
+  + `map` 
 > `JavaScript`是弱类型脚本语言，变量的类型由其所引用的值类型决定   
 ```JavaScript
 // String字面量声明方式
@@ -62,8 +62,8 @@ console.log(arr);// 'object'
 
 ## 变量声明 var,let<sup>es6</sup>,const<sup>es6</sup>
 - `变量声明关键字使用规则`：能用`const`就用`const`,不能用`const`就用`let`
-- `变量提升`: JS解析器解析JS代码时,会先把变量的声明提升到变量作用域的最前面(变量的赋值还是在原位置),这就叫变量的提升   
-> 使用`var`声明的变量，变量的声明会提升到最前面，赋值语句还在原位置  
+- `变量提升`: `JS`解析器解析`JS`代码时,会先把变量的声明提升到变量作用域的最前面(变量的赋值还是在原位置),这就叫变量的提升   
+- 使用`var`声明的变量，变量的声明会提升到最前面，赋值语句还在原位置  
 ```JavaScript
 console.log(test);// undefined
 var test = 'hello';
@@ -76,8 +76,8 @@ test = 'hello';// 变量赋值还在原位置
 console.log(x);//cannot access 'x' before initialization
 let x = 10;
 ```
-> `TDZ变量暂时性死区`:指变量在作用域内已经存在,但必须在`let,const`声明的语句后面才能使用，否则报错    
-- TDZ限制:变量虽然在作用域内可见,但一定要在变量声明语句之后才能使用
+- `TDZ变量暂时性死区`:指变量在作用域内已经存在,但必须在`let,const`声明的语句后面才能使用，否则报错    
+- `TDZ`限制:变量虽然在作用域内可见,但一定要在变量声明语句之后才能使用
 - 使用`let,const`声明的变量,在声明语句前存在TDZ,如果在声明语句之前使用时会发生错误  
 - `var`声明的变量没有TDZ特性    
 - 变量声明建议使用`let,const`，而少使用`var`,变量要先声明后使用   
@@ -89,7 +89,7 @@ function fn(){
 }
 fn();// error
 ```
-> `作用域`:全局作用域,函数作用域,块作用域   
+- `作用域`:全局作用域,函数作用域,块作用域   
 - 用`{}`声明一个块作用域,`let,const`声明的变量具有块作用域,`var`声明的变量没有块作用域       
 ```JavaScript
 {
@@ -100,12 +100,12 @@ fn();// error
 console.log(a);// 1
 console.log(b);// Uncaught ReferenceError: b is not defined
 ```
-> 同作用域内变量重复声明: `var`重复声明不会报错;`let,const`会报错，不能重复声明 
+- 同作用域内变量重复声明: `var`重复声明不会报错;`let,const`会报错，不能重复声明 
 ```JavaScript
 var a = 1;
 var a = 2;
 ```
-> 使用`Object.freeze()`冻结变量后，变量不可以修改了，如果是严格模式("use strict";)，则会报错    
+- 使用`Object.freeze()`冻结变量后，变量不可以修改了，如果是严格模式("use strict";)，则会报错    
 ```javascript
 const HTTP = {
     url: 'www.baidu.com',
@@ -114,7 +114,7 @@ const HTTP = {
 Object.freeze(HTTP);
 HTTP.port = '8000';//cannot assign to readonly property
 ```
-> 立即执行函数:主要为了隔离作用域，避免变量污染
+- 立即执行函数:主要为了隔离作用域，避免变量污染
 - 使函数立即执行有两个条件 :
   + 函数体必须是函数表达式,函数体上有运算符(`(),!,+,-,=`将匿名函数或函数声明转换为函数表达式)    
   + 函数体后面要有小括号`()`   
@@ -129,7 +129,7 @@ HTTP.port = '8000';//cannot assign to readonly property
 =function(arg){}(arg) 
 ```
 
-> 使用`var`声明变量
+- 使用`var`声明变量
 - 1.`var`声明的变量存在于最近的函数或全局作用域中  
 ```HTML
 <script>
@@ -186,7 +186,7 @@ show();
 
 ```
 
-> 使用`let`<sup>es6</sup>声明变量      
+- 使用`let`<sup>es6</sup>声明变量      
 ```javascript
 let i = 20;
 for(let i =0;i < 3;i++)
@@ -203,7 +203,7 @@ console.log(v);//100
 console.log(a);//ReferenceError:not defined
 ```
 
-> 使用 `const`<sup>es6</sup>声明变量    
+- 使用 `const`<sup>es6</sup>声明变量    
 - JS使用`const`声明只读变量，即常量     
   + `const`声明常量的本质是变量所指向的内存空间存储的数据(栈数据)不允许改变   
   + `const`声明的基本数据类型是一个常量，但引用类型的实际值(堆数据)不受影响可以改变   
@@ -219,7 +219,7 @@ HTTP.port = '7000';
 console.log(HTTP);//7000
 ```
 
-> `var`与`let,const`的区别与共同点    
+- `var`与`let,const`的区别与共同点    
 - `var`与`let,const`声明变量的区别:
   + `let,const`没有变量提升特性,`let,const`有TDZ暂时死区  
   + `let,const`有块作用域
@@ -264,8 +264,8 @@ console.log(bb);//hello
 ```
 ## null和undefined
 - `null`用于定义一个空对象，即如果一个变量要用来保存引用类型，则可以用`null`初始化这个变量  
-  + 转换数值时为 0 
-  + JS先有的`null`后面才出现`undefined`  
+  + 转换数值时为 `0` 
+  + `JS`先有的`null`后面才出现`undefined`  
 
 - `undefined`:对声明但未赋值的变量使用`typeof`运算符时，返回类型为`undefined`,表示值未定义   
   + 对未声明的变量使用会报错(`ReferenceError:not defined`)  
@@ -341,7 +341,7 @@ for(const(key,value) of web.entries()){
   + 基本类型: `number,string,boolean,symbol` ( `typeof NaN == 'number'` )     
   + 引用类型: `Function,Array,Object` ( `typeof null == 'object'` )    
   + `undefined`(变量未赋值或不存在时)     
-> 备注: typeof 不能区分数组和对象,可以用instanceof区分    
+- 备注: `typeof` 不能区分数组和对象,可以用`instanceof/Array.isArray()`区分    
 ### 特殊值判断
 - 判断数组 `Array.isArray()`
 - 判断`NaN` `Number.isNaN()`
@@ -358,7 +358,7 @@ console.log(a instanceof Array);//true
 console.log(b instanceof Array);//false
 ```
 ### 值类型与对象
-> 使用字面量与对象方法创建字符串时，返回的是不同类型  
+- 使用字面量与对象方法创建字符串时，返回的是不同类型  
 ```javascript
 let a = "good";
 let b = new String("good");
