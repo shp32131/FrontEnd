@@ -17,15 +17,15 @@
 ![http请求](./imgs/ABNF02.png)
 ![http请求](./imgs/ABNF03.png)
 - HTTP/1 协议为什么会如此设计?  
-  + 网络分层原理,REST架构 
-  + 问题:HTTP1不支持服务器推送消息的webSocket协议
+  + 网络分层原理,`REST`架构 
+  + 问题:`HTTP1`不支持服务器推送消息的`webSocket`协议
 - 协议的通用规则 
   + 协议格式 
-  + URI 
+  + `URI` 
   + 方法与响应码概览 
 - 连接与消息的路由 
 - 内容协商与传输 
-- cookie的设计与问题 
+- `cookie`的设计与问题 
 - 缓存的控制  
 ## HTTP/1.1 Websocket
 - 建立会话

@@ -120,7 +120,7 @@ console.log(hd.match(/houdun(ren)\.(com)/));
 ```
 + 邮箱匹配 `reg = /^[\w-]+@([\w-]+\.)+(org|com|cc|cn)$/` 
 + 引用分组 
-  - \number 在匹配时引用原子组，$number 指在替换时使用匹配的组数据 
+  - `\number` 在匹配时引用原子组，`$number` 指在替换时使用匹配的组数据 
 ```JavaScript
 // 将h 标签替换为p 标签
 

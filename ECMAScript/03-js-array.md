@@ -180,16 +180,16 @@ console.log(a); // Array(13)
 
 - 非严格模式可以不使用声明指令，严格模式下必须使用声明，建议使用`let`等声明  
 ```javascript
-"use strict";
-[web,url] = ['web.com','myweb.com'];
-console.log(web);// error
+"use strict"
+[web,url] = ['web.com','myweb.com']
+console.log(web)// error
 ```
 - 简洁定义
 - 只赋值部分变量
 ```javascript
 // 只赋值部分变量
 let [,url] = ['hello','myweb.com'];
-console.log(url);//myweb.com
+console.log(url);// myweb.com
 
 // 使用展开语法获取多个值 
 let [name, ..arr] = ['john','web','www.myweb.com'];
@@ -209,7 +209,7 @@ function test([a,b]){
 // 使用从0开始的索引来操作数组元素
 let arr = [1,'hello','web.com'];
 arr[1] = 'hello world';
-console.log(arr);//[1,'hello world','web.com']
+console.log(arr);// [1,'hello world','web.com']
 
 // 向数组追加元素
 arr[arr.length] = 'myweb.com';
@@ -228,8 +228,8 @@ console.log(arr2);//['mark','john','alex']
 let arr = ['john','alex'];
 let arr2 = ['mark'];
 arr2.push(arr[0]);
-console.log(arr2);//['mark','john']
-//根据范围创建新数组 
+console.log(arr2);// ['mark','john']
+// 根据范围创建新数组 
 function newArray(begin,end){
     let arr = [];
     for(let i=0;i <= end;i++){
@@ -244,7 +244,7 @@ function newArray(begin,end){
 ```javascript
 let arr = ['john','alex'];
 console.log(arr.unshift('mark'));//3
-console.log(arr);//['john','alex','mark']
+console.log(arr);// ['john','alex','mark']
 ```
 
 ### array.pop()从数组后面弹出一个元素
@@ -266,45 +266,46 @@ console.log(arr);//alex
 ### array.fill()往数组里填充元素
 - 填充数组元素 
 ```javascript
-console.log(Array(2).fill('john'));//['john','john']
-//往数组指定位置填充元素，从起始位置到终止位置，不包括终止位置
+console.log(Array(2).fill('john'));// ['john','john']
+// 往数组指定位置填充元素，从起始位置到终止位置，不包括终止位置
 let arr = ['john','alex','mark'];
 arr.fill('lily',1,2);
-console.log(arr)//['john','lily','mark']
+console.log(arr)// ['john','lily','mark']
 ```
 
 ### array.slice()截取数组(不改变原数组)
 - 使用`slice([begin[,end]])`方法从数组中截取部分元素组合成新数组   
 - 不传一参默认从`0`开始,不传二参时默认截取到数组的最后元素 
+- 包括起始位置，不包括终止位置
 ```javascript
-let nums = [0,1,2,3,4];
-console.log(nums.slice(1,3));//[1,2]
-//不设置参数时默认截取原数组所有元素
-console.log(nums.slice());//[0,1,2,3,4]
+let nums = [0, 1, 2, 3, 4];
+console.log(nums.slice(1,3));// [1,2]
+// 不设置参数时默认截取原数组所有元素
+console.log(nums.slice());// [0,1,2,3,4]
 ```
 
 ### array.splice()往数组中添加，删除，替换元素(改变原数组)
-- `splice(start[,deleteCount,[,replace...]])`往数组中添加，删除，替换元素，改变原数组，以数组形式返回被删除的元素   
-- 删除数组元素时第一个参数为从哪开始删   
-- 第二个参数为删除的个数,当删除个数为0时，在开始位置添加三参内容      
-- 指定第三个参数来设置在删除位置要添加的元素   
+- `splice(start[, deleteCount, [, replace...]])`往数组中添加，删除，替换元素，改变原数组，以数组形式返回被删除的元素   
+- 删除数组元素时第一个参数为从哪开始删
+- 第二个参数为删除的个数,当删除个数为`0`时，在开始位置添加三参内容
+- 第三个参数来设置在删除位置要添加的元素
 ```javascript
-//删除指定个数元素
+// 删除指定个数元素
 let arr = [0,1,2,3,4,5];
-console.log(arr.splice(1,2));//[1,2]
-console.log(arr);//[0,3,4,5]
+console.log(arr.splice(1,2));// [1,2]
+console.log(arr);// [0,3,4,5]
 
-//在删除的位置添加新元素  
+// 在删除的位置添加新元素
 let arr2 = [0,1,2,3,4,5];
-console.log(arr2.splice(1,3,'john','alex'));//[1,2,3]
-console.log(arr2);//[0,'john','alex',4,5]
+console.log(arr2.splice(1,3,'john','alex'));// [1,2,3]
+console.log(arr2);// [0,'john','alex',4,5]
 
-//向末尾添加元素
+// 向末尾添加元素
 let arr3 = [0,1,2];
 console.log(arr3.splice(arr3.length,0,'john','alex'));
-console.log(arr3);//[0,1,2,'john','alex']
+console.log(arr3);// [0,1,2,'john','alex']
 
-//数组元素位置调整函数
+// 数组元素位置调整函数
 function move(array, before, to) {
   if (before < 0 || to >= array.length) {
     console.error("指定位置错误");
@@ -322,19 +323,22 @@ console.table(move(array, 0, 3));
 ### 清空数组
 - 将数组值修改为`[]`可以清空数组，如果有多个引用时数组在内存中存在被其他变量引用 
 ```javascript
-let user = [{name:'john'},{name:'alex'}];
+let user = [{ name:'john' }, { name:'alex' }];
 let student = user;
 user = [];
 console.log(user,student);
-//将数组length赋值为0也可以清空数组
+
+// 将数组length赋值为0也可以清空数组
 let user = [{name:'john'},{name:'alex'}];
 user.length = 0;
 console.log(user);
-//使用splice方法删除所有元素
+
+// 使用splice方法删除所有元素
 let user = [{name:'john'},{name:'alex'}];
-user.splice(0,user.length);
-//使用pop(),shift()删除所有元素
-let user = [{name:'john'},{name:'alex'}];
+user.splice(0) === user.splice(0,user.length);
+
+// 使用pop(), shift()删除所有元素
+let user = [{ name:'john' }, { name:'alex' }];
 while(user.pop){ }
 ```
 
@@ -342,7 +346,7 @@ while(user.pop){ }
 ### join()连接成字符串
 ```javascript
 let user = ['john','alex','mark'];
-console.log(user.join('-'));//'john-alex-mark'
+console.log(user.join('-'));// 'john-alex-mark'
 ```
 
 ### split()将字符串分割成数组
@@ -360,12 +364,13 @@ console.log(str.split('-'));//['john','alex','mark']
 let arr = ['john','alex'];
 let user = ['lily'];
 let student = ['hello'];
-console.log(arr.concat(user,student));//['john','alex','lily','hello']
-// 也可以使用展开语法进行连接
-console.log([...arr,...usr,...student]);
+console.log(arr.concat(user,student));// ['john','alex','lily','hello']
+
+// 现在可以使用展开语法进行连接
+console.log([...arr, ...usr, ...student]);
 ```
 
-### copyWithin()数组内部复制操作  
+### copyWithin()数组内部复制操作(改变原数组)
 - 从数组中复制一部分到数组中的另外位置  
 - `array.copyWithin(target,start,end)`
 - `target` 复制到指定目标索引位置  
@@ -373,7 +378,7 @@ console.log([...arr,...usr,...student]);
 - `end` 元素复制的终止位置，默认为`array.length`,负数表示倒数
 ```javascript
 const arr = [1,2,3,4,5];
-console.log(arr.copyWithin(2,0,2));//[1,2,1,2,5]
+console.log(arr.copyWithin(2,0,2));// [1,2,1,2,5]
 ```
 
 ### 查找元素
@@ -382,13 +387,17 @@ console.log(arr.copyWithin(2,0,2));//[1,2,1,2,5]
 
 ### indexOf()
 - 从前向后查找元素出现的位置
+- 第二参数指定开始查找的位置
+- 返回元素的位置，没有找到则返回`-1`
 ```javascript
 let arr = [0,1,2,3,4,5];
 console.log(arr.indexOf(2));// 2
-//indexOf()执行的是类似于 === 的严格类型约束
+
+// indexOf()执行的是类似于 === 的严格类型约束
 let arr = [0,1,2,'3',4,5];
 console.log(arr.indexOf(3));//-1
-//indexOf()第二个参数用于指定开始查找的位置
+
+// indexOf()第二个参数用于指定开始查找的位置
 let arr = [0,1,2,3,4,5,3];
 console.log(arr.indexOf(3,3));//3
 console.log(arr.indexOf(3,4));//6
@@ -396,6 +405,7 @@ console.log(arr.indexOf(3,4));//6
 ### lastIndexOf()
 - 从后向前查找元素出现的位置
 - 第二参数指定开始查找的位置
+- 返回元素的位置，没有找到则返回`-1`
 ```javascript
 let arr = [0,1,2,3,4,5];
 console.log(arr.lastIndexOf(3));//3
@@ -407,10 +417,10 @@ console.log(arr.lastIndexOf(3,4));//3
 - 使用`includes`查找字符串返回值是布尔值，方便判断   
 ```javascript
 let arr = [3,7,9,5];
-console.log(arr.includes(5));//true
-console.log(arr.includes(1));//false
+console.log(arr.includes(5));// true
+console.log(arr.includes(1));// false
 ```
-- 自己实现一个includes()方法  
+- 自己实现一个`includes()`方法  
 ```javascript
 function includes(array,item){
     for(const value of array){
@@ -434,16 +444,18 @@ let result = user.find(function(item){
     return item == 'alex';
 });
 console.log(result);
-//使用includes()等不能查找引用类型，因为它们的内存地址不是相等的,不能满足 ===  
+
+// 使用includes()等不能查找引用类型，因为它们的内存地址不是相等的,不能满足 ===  
 const user = [{name:'john'},{name:'alex'}];
 const result = user.includes({name:'john'});
 console.log(result);//false
-//find()可以方便的查找引用类型
+
+// find()可以方便的查找引用类型
 const user = [{name:'john'},{name:'alex'}];
 const result = user.find(function(name){
     return name.name ==  'john';
 })
-console.log(result);//false
+console.log(result);// false
 ```
 
 ### findIndex()
@@ -458,7 +470,7 @@ console.log(pos);//3
 
 ### find原理
 ```javascript
-//自定义函数
+// 自定义函数
 function find(array,callback){
     for(const value of array){
         if(callback(value)===true) return value;
@@ -468,7 +480,8 @@ function find(array,callback){
 let arr = [1,2,3,4,5];
 let result = find(arr,function(value){return value==3;});
 console.log(result);
-//原型方法实现
+
+// 原型方法实现
 function Array.prototype.findValue = function(callback){
     for(const value of this){
       if(callback(value)==true) return value;
@@ -498,10 +511,10 @@ console.log(arr.sort(function(v1,v2){
 
 // 按课程点击次数由高到低排序
 let lessons = [
-{tittle:'媒体查询响应式布局',click:78},
-{tittle:'flex弹性布局',click:69},
-{tittle:'mysql多表查询操作',click:99}
-];
+  { tittle:'媒体查询响应式布局',click:78 },
+  { tittle:'flex弹性布局',click:69 },
+  { tittle:'mysql多表查询操作',click:99 }
+]
 let sortLessons = lessons.sort((v1,v2)=>v2.click-v1.click);
 console.log(sortLessons);
 ```
@@ -532,9 +545,9 @@ console.table(arr);
 - 根据数组长度，结合`for`循环来遍历数组  
 ```javascript
 let lessons = [
-	{title: '媒体查询响应式布局',category: 'css'},
-  {title: 'FLEX 弹性盒模型',category: 'css'},
-	{title: 'MYSQL多表查询随意操作',category: 'mysql'}
+	{ title: '媒体查询响应式布局',category: 'css' },
+  { title: 'FLEX 弹性盒模型',category: 'css' },
+	{ title: 'MYSQL多表查询随意操作',category: 'mysql' }
 ];
 
 for (let i = 0; i < lessons.length; i++) {
@@ -545,6 +558,7 @@ console.log(lessons);
 
 ### forEach, 没有返回值  
 - `forEach()`使函数作用在每个数组元素上，但是没有返回值  
+- 没有返回值
 ```javascript
 // 截取标签的五个字符
 let lessons = [
@@ -667,7 +681,7 @@ if(state) console.log('你说脏话了');
 ### filter
 - 使用`filter()`可以过虑数组中元素   
 - 返回一个包括过滤条件通过的数组项的新数组 
-- 不改变原数组   
+- 不改变原数组
 ```javascript
 // 获取在css栏中的课程  
 let lessons = [
@@ -706,6 +720,7 @@ let lessons = [
 ];
 let result = lessons.map(item => item.tittle);
 console.log(result);// ['媒体查询响应式布局','flex弹性布局','mysql多表查询']
+
 // 为所有课程的标题加上一个'免费课程'前缀
 let lessons = [
     {tittle:'媒体查询响应式布局',category:'css'},
@@ -725,6 +740,7 @@ console.log(result);
 - `initialValue`第二个参数可选
  + 传入第二个参数`initialValue`时,初始`total = initialValue`  
  + 不传入第二个参数`initialValue`时,初始`total = array[0]`
+
 ```javascript
 // 统计数组中相同元素的个数 
 function countArrayElem(arr,elem){
@@ -737,14 +753,17 @@ function countArrayElem(arr,elem){
 let arr = [1,2,1,4,5,6];
 let result = countArrayElem(arr,1);
 console.log(result);
+
 // 累加
 let arr = [1,2,3];
 let sum = arr.reduce((total,cur)=>total+cur);
 console.log(sum);//6
+
 // 取数组中的最大的值  
 let arr = [1,22,33,11,55,26,99,90];
-let max = arr.reduce((total,cur)=>(total = total>cur?total:cur),arr[0]);
+let max = arr.reduce((total,cur) => (total = total > cur ? total : cur), arr[0]);
 console.log(max);
+
 // 取购物车中 价格最高的商品  
 let cart = [
     {name:'iphone',price:12000},
@@ -752,10 +771,11 @@ let cart = [
     {name:'xiaomi',price:3999}
 ];
 let maxPrice = cart.reduce(function(total,cur){
-    return total.price > cur.price ? total:cur;
+    return total.price > cur.price ? total : cur;
 });
+
 // 购物车总价  
-let sumCart = cart.reduce((total,cur)=>total+=cur.price,0);
+let sumCart = cart.reduce((total,cur) => total += cur.price,0);
 console.log(maxPrice.name,sumCart);
 ```
 
@@ -765,7 +785,7 @@ let arr = [1,2,1,4,5,6,6,10];
 let result = [];
 result = arr.reduce(function(total,cur,index,array){
     if(!total.includes(cur)){
-        total.push(cur);
+      total.push(cur);
     }
     return total;
 },[]);
@@ -841,32 +861,36 @@ console.log(result);
 ```
 
 ### 数组扁平化  
-- 嵌套数组转换成一维数组就叫数组扁平化  
-- `Infinity`是一个全局属性，表示正无穷大的数值      
+- 嵌套数组转换成一维数组就叫数组扁平化
+- `Infinity`是一个全局属性，表示正无穷大的数值
 ```javascript
 console.log(Infinity);// Infinity
 ```
-- `flat(depth)`  默认深度为 `1`, 自动清除空元素 `depth = Infinity`时表示无穷大的数值    
+
+- `array.flat(depth)`默认深度为`1`, 自动清除空元素 `depth = Infinity`时表示无穷大的数值    
 ```javascript
-console.log([1,[2,3]].flat());//[1,2,3]
+console.log([1,[2,3]].flat());// [1,2,3]
 
 // 指定转换的嵌套层数 
-console.log([1,[2,[3,4]]].flat(1));//[1,2,[3,4]]
-console.log([1,[2,[3,4]]].flat(2));//[1,2,3,4]
+console.log([1,[2,[3,4]]].flat(1));// [1,2,[3,4]]
+console.log([1,[2,[3,4]]].flat(2));// [1,2,3,4]
 ```
--  `flatMap(callback(currentValue,index,array,thisArg))`
+
+-  `array.flatMap(callback(currentValue,index,array,thisArg))`
 - 先用回调函数处理每个元素，再对数组执行`flat`函数
 ```javascript
 console.log([1,2,3].flatMap(n => [n*2]));//[2,4,6]
 ```
-### 数组缓冲区 <sup>es6</sup>  
+
+### 数组缓冲区<sup>es6</sup>  
 - 数组缓冲区是内存中的一段地址  
 - 定型数组的基础  
 - 实际字节数在创建时确定，之后只可改元素值，不可改数组长度  
 ```javascript
 let buffer = new ArrayBuffer(10);
 console.log(buffer.byteLength); // 10
-//分割已有数组缓冲区
+
+// 分割已有数组缓冲区
 let buffer = new ArrayBuffer(10);
 let buffer1 = buffer.slice(1, 3);
 console.log(buffer1.byteLength); // 2
@@ -886,7 +910,7 @@ let buffer1 = new ArrayBuffer(10);
     dataView1 = new DataView(buffer1, 0, 3);
 dataView1.setInt8(5,1); // RangeError
 ```
-#### 定型数组   
+### 定型数组   
 - 数组缓冲区的特定类型的视图  
 ```javascript
 // 创建

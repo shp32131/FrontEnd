@@ -2,7 +2,7 @@
 
 ## 什么是事件？
 - 事件就是一件事情或者一个行为(对于元素来说，元素的很多事情是天生自带的)，操作这个元素，就触发相应的事件  
-- 事件是DOM元素天生自带的行为属性，操作元素，就会触发相应元素的行为
+- 事件是`DOM`元素天生自带的行为属性，操作元素，就会触发相应元素的行为
 
 ## 元素天生自带的事件
 - 鼠标事件  
@@ -137,7 +137,7 @@ box.onclick = me => {
   <a href="javascript:void;" id="link"> </a>
 
   <script>
-    //通过JavaScript阻止 a 标签默认行为
+    // 通过JavaScript阻止 a 标签默认行为
     link.onclick = me => {
       me = me || window.event;
       // 1.直接return false 也可以阻止默认行为
@@ -150,17 +150,17 @@ box.onclick = me => {
 
 ## 事件传播机制
 - 事件的传播机制的几个阶段:
-  - Event.prototype 事件传播机制
-    + 0: NONE
-    + 1: CAPTURING_PHASE
-    + 2: AT_TARGET
-    + 3: BUBBLING_PHASE
+  - `Event.prototype` 事件传播机制
+    + `0`: `NONE`
+    + `1`: `CAPTURING_PHASE`
+    + `2`: `AT_TARGET`
+    + `3`: `BUBBLING_PHASE`
 
-  - 1.捕获阶段: 由HTML结构最外层(html)开始向内层查找具体的事件源元素,构建出事件冒泡传播的路径  
+  - 1.捕获阶段: 由`HTML`结构最外层(`html`)开始向内层查找具体的事件源元素,构建出事件冒泡传播的路径  
     + 不同浏览器最外层元素定义是不一样的
-    + chrome: window->document->html->body->...
-    + IE8以上: window->html->body->...
-    + IE低版本: html->body->...
+    + `chrome: window->document->html->body->...`
+    + `IE8`以上: `window->html->body->...`
+    + `IE`低版本: `html->body->...`
 
   - 2.事件源: 把事件源相关操作行为触发，执行事件绑定的方法
 
