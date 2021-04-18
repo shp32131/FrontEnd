@@ -756,7 +756,7 @@ console.log(result);
 
 // 累加
 let arr = [1,2,3];
-let sum = arr.reduce((total,cur)=>total+cur);
+let sum = arr.reduce((total,cur) => total+cur);
 console.log(sum);//6
 
 // 取数组中的最大的值  

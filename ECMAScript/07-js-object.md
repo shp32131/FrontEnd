@@ -254,6 +254,7 @@ console.log(name,url);
 //let {name:name,url:url} = {name:'john',url:'web.com'}
 let {name,url} = {name:'john','web.com'};
 ```
+
 - 只赋值部分变量  
 ```javascript 
 let [,url] = ['john','web.com'];
@@ -262,16 +263,18 @@ console.log(url);//web.com
 let {name} = {name:'john',url:'web.com'};
 console.log(name);//john
 ```
+
 - 可以直接使用变量赋值给对象属性 
 ```javascript 
 let name = 'john',url = 'web.com';
 let obj = {name:name,url:url};
 console.log(obj);//{name:'john',url:'web.com'}
+
 //如果对象属性和值变量同名可以简写 
 let obj2 = {name,url};
 console.log(obj2);//{name:'john',url:'web.com'}
 ```
-#### 嵌套解构 
+### 嵌套解构 
 - 可以操作多层复杂数据结构   
 ```javascript 
 const obj = {
@@ -284,7 +287,8 @@ const obj = {
 const {name,url:{title},url:{content}} = obj;
 console.log(name,title,content);//john ,url web.com
 ```
-#### 默认值 
+
+### 默认值 
 - 为变量设置默认值  
 ```javascript 
 let [name,site = 'web'] = ['john'];
@@ -306,19 +310,20 @@ function createElement(options){
 }
 createElement({height:'150px',background:'red'});
 ```
-#### 函数参数
+
+### 函数参数
 ```javascript 
-//数组参数的使用 
+// 数组参数的使用 
 function test([a,b]){
     console.log(a,b);
 }
 test(['js','mysql']);
-//对象参数使用 
+// 对象参数使用 
 function fn({name,url,gender='boy'}){
     console.log(name,url,gender);
 }
 fn({name:'john',url:'web.com'});
-//对象解构传参 
+// 对象解构传参 
 function user(name,{gender,age}){
     console.log(name,gender,age);
 }
@@ -345,13 +350,13 @@ console.log(obj)
 let obj = {name:'john'};
 console.log(obj.hasOwnProperty('name'));//true
 
-//在数组上检测属性 
+// 在数组上检测属性 
 let arr = ['john'];
 console.log(arr.hasOwnProperty('length'));//true
 console.log(arr.hasOwnProperty('concat'));//false
 console.log('concat' in arr);//true
 
-//在对象上检测属性 
+// 在对象上检测属性 
 let url = {web:'web.com'};
 Object.setPrototypeOf(obj,url);//将url设置成obj原型属性
 console.log(obj.hasOwnProperty('web'));//false
