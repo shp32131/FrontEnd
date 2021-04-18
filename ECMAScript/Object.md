@@ -1,5 +1,5 @@
 ## Object
-- Object构造函数为给定值创建一个对象包装器，如果给定值是null或undefined，将会创建并返回一个空对象  
+- `Object`构造函数为给定值创建一个对象包装器，如果给定值是null或undefined，将会创建并返回一个空对象  
 - 当以非构造函数形式(new Object())形式调用时，Object相当于new Object()     
 ### Object属性   
 - Object.length    
