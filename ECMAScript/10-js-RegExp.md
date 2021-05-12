@@ -232,9 +232,15 @@ console.log(str.split(/[-/]/));
 
 ## 断言匹配
 - 可以将断言理解为正则中的条件 
-- `(?=exp)` 断言写在括号中，但断言不是原子组，不会在匹配结果中保存 
+- `(?=exp)` 断言写在括号中，断言不是原子组，不会在匹配结果中保存 
 
-### (?=exp) 零宽先行断言 
+### 边界类断言
+- `^` 匹配开头
+- `$` 匹配结尾
+- `\b` 匹配单词的边界
+- `\B` 匹配非单词的边界
+
+### reg(?=exp) 向前断言，也叫零宽先行断言 
 - `(?=exp)`匹配后面为`exp`的内容 
 ```HTML
 <script>
@@ -254,7 +260,32 @@ console.log(str.split(/[-/]/));
 
 ```
 
-### (?<=exp) 零宽后行断言 
+### reg(?!exp) 向前否定断言，也叫零宽负向先行断言
+- 后面不能出现`exp`指定的内容 
+```html
+<<script>
+// 字母后面不能为两位数字 
+let hd = "houdunren12";
+let reg = /[a-z]+(?!\d{2})$/i;
+console.table(reg.exec(hd));
+</script>>
+
+<body>
+  <main>
+    <input type="text" name="username" />
+  </main>
+</body>
+<script>
+  // 用户名中不能出现 向军
+  const input = document.querySelector(`[name="username"]`);
+  input.addEventListener("keyup", function() {
+    const reg = /^(?!.*向军.*)[a-z]{5,6}$/i;
+    console.log(this.value.match(reg));
+  });
+</script>
+```
+
+### (?<=exp)reg 向后断言，也叫零宽后行断言 
 - `(?<=exp)` 匹配前面为`exp`的内容 
 ```js
 // 匹配前后都是数字的内容
@@ -281,33 +312,9 @@ users = users.replace(reg, str => {
   return "*".repeat(4)
 });
 console.log(users); // 向军电话: 1234567****后盾人电话: 9874567****
-
 ```
-### (?!exp) 零宽负向先行断言 
-- 后面不能出现`exp`指定的内容 
-```html
-<<script>
-// 字母后面不能为两位数字 
-let hd = "houdunren12";
-let reg = /[a-z]+(?!\d{2})$/i;
-console.table(reg.exec(hd));
-</script>>
 
-<body>
-  <main>
-    <input type="text" name="username" />
-  </main>
-</body>
-<script>
-  // 用户名中不能出现 向军
-  const input = document.querySelector(`[name="username"]`);
-  input.addEventListener("keyup", function() {
-    const reg = /^(?!.*向军.*)[a-z]{5,6}$/i;
-    console.log(this.value.match(reg));
-  });
-</script>
-```
-### (?<!exp) 零宽负向后行断言 
+### (?<!exp)reg 向后否定断言，零宽负向后行断言 
 - 前面不能出现`exp`指定的内容 
 ```html
 <script>

@@ -1,12 +1,12 @@
-## class <sup>es6</sup>
-### 认识JavaScript类 
+# class<sup>es6</sup>
+## 认识JavaScript类 
 - 在ES6中`class (类)`作为对象的模板被引入,通过 `class` 关键字定义类  
-- JavaScript是基于原型的语言,`class`是一个语法糖,让对象原型的写法更加清晰、更像面向对象编程的语法  
+- `JavaScript`是基于原型的语言,`class`是一个语法糖,让对象原型的写法更加清晰、更像面向对象编程的语法  
 - `class` 的本质是 `function`,底层实现依然是原型继承 
-- 类的声明定义
-  + 类定义不会被提升，必须在访问前对类进行定义，否则会报错 
-  + 类中方法不需要 `function` 关键字 
-  + 类方法间不能加分号,也不需要加逗号  
+- 类的声明定义:
+- 1.类定义不会被提升，必须在访问前对类进行定义，否则会报错 
+- 2.类中方法不需要 `function` 关键字 
+- 3.类方法间不能加分号,也不需要加逗号  
 ```JavaScript
 // 1.类声明 推荐这种方式声明一个类 
 class Example {
@@ -66,10 +66,10 @@ class Student extend User {
     }
 }
 ```
-- 类的原理分析
-  + `JavaScript`中类的本质就是函数 
-  + `constructor`用于定义函数代码 
-  + `constructor`外面的方法是在添加函数原型`prototype`上的方法  
+- 类的原理分析:
+- 1.`JavaScript`中类的本质就是函数 
+- 2.`constructor`用于定义函数代码 
+- 3.`constructor`外面的方法是在添加函数原型`prototype`上的方法  
 ```JavaScript
 // 类的本质就是函数 
 class User{
@@ -96,8 +96,8 @@ User.prototype.show = function(){
 }
 ```
 - 类的属性定义
-  + 在`class`中定义的属性都是为每个`new`出的实例独立创建 
-  + `class`中定义的方法有`constructor`内和外的区别 
+- 在`class`中定义的属性都是为每个`new`出的实例独立创建 
+- `class`中定义的方法有`constructor`内和外的区别 
 ```JavaScript
 class User {
   site = "后盾人";
