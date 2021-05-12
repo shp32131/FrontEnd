@@ -1,7 +1,14 @@
 ## '?'和'??'以及'||'的用法
-- `obj?.aa`
-- `let obj = aa ?? bb`
-- `let obj = aa || bb`
+- `let obj = a && b`, 如果`!!a`为`false`,则`obj == a`,否则`obj == b`
+- `let obj = a || b`, 如果`!!a`为`false`,则`obj == b`,否则`obj == a`
+
+## 判断为普通对象
+```js
+function isPlainObject(param) {
+  return Object.prototype.toString.call(param) === '[object Object]';
+}
+```
+
 ## 简单实现深拷贝
 - `let cloneObj = JSON.parse(JSON.stringify(obj))`
 - `let arr1 = [...arr]`,这种方式是属于浅拷贝
@@ -17,6 +24,7 @@
 
 ## 数组清洗
 `array.filter(Boolean)`
+
 
 ## 进制转换
 - 十进制数据转换成其他进制数据用 `toString()`  

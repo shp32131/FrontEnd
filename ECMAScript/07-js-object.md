@@ -20,8 +20,8 @@ console.log(obj);//{"1":"alex"}
 let user = {
     name: 'john',
     grade: [
-        {lesson: 'javascript',score:89},
-        {lesson: 'mysql',score:70}
+        { lesson: 'javascript',score:89 },
+        { lesson: 'mysql',score:70 }
     ],
     average(){
         const total = this.grade.reduce((result,cur)=>(result+=cur.score),0);

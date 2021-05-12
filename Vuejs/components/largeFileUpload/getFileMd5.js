@@ -2,7 +2,7 @@
  * 计算文件的md5
  * @param { file } file 文件流 
  */
-getFileMd5 (file) {
+function getFileMd5 (file) {
   const _this = this
   const fileSize = file.size
   const slices = Math.ceil(file.size / _this.blockSize)
@@ -27,7 +27,7 @@ getFileMd5 (file) {
  * @param { Number } index 文件片段fileSlice的序号
  * @param { Function } func 回调方法
  */
-getFileSliceMd5(fileSlice, index, func) {
+function getFileSliceMd5(fileSlice, index, func) {
   const file = fileSlice
   const chunkSize = 1024 * 1024 * 4
   const chunks = Math.ceil(file.size / chunkSize)

@@ -8,7 +8,6 @@ function getImgColor(img) {
    * @ this.canvas canvas元素
    * @ this.cvs context对象
    * @ this.accuracy Number 解析图片颜色的精确度 1 - 7 数字选择 
-   *
    * 
    */
 
