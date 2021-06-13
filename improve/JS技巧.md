@@ -1,3 +1,16 @@
+## 复杂数据类型引用问题
+```javascript
+function fun1 () {
+  // 每次返回一个新对象数据
+  return { a: 1, b: 2 }
+}
+
+function fun2 () {
+ const obj = { a: 1, b: 2 } 
+ // 返回是ojb的内存地址
+ return obj
+}
+```
 ## '?'和'??'以及'||'的用法
 - `let obj = a && b`, 如果`!!a`为`false`,则`obj == a`,否则`obj == b`
 - `let obj = a || b`, 如果`!!a`为`false`,则`obj == b`,否则`obj == a`

@@ -1,21 +1,22 @@
 ## Array 数组类型  
-***数组是`Array`对象的实例，可以像对象一样调用方法***
+- 数组是`Array`对象的实例，可以像对象一样调用方法
 ## 数组声明 
 - `Array`对象实例创建数组：`let arr = new Array(1,'hello','world')`
- + 声明一个长度确定的数组：`let  arr = new Array(5)`
+- 声明一个长度确定的数组：`let  arr = new Array(5)`
 
 - (推荐)使用字面量方式声明一个数组：`let  array = ['hello','world']`
 
 - 多维数组定义：`const array = [[1,2,3],[4,5,6]]`
- + 数组是引用类型可以使用`const`声明并修改它的值
 
-- 使用原型的`length`属性可以获取数组的长度
+- 数组是引用类型可以使用`const`声明并修改它的值
+
+- 使用原型的`length`属性可以获取数组的长度，也可以修改数组的长度
 
 - 使用`Array.of()` 与 `new Array()`不同是传一个参数时不会创建空元素数组
- + `const hd = Array.of(1, 2, 3) console.log(hd); //[1, 2, 3] `
+- `const arr = Array.of(1, 2, 3) console.log(arr); // [1, 2, 3] `
 
-- 数组类型检测，`Array.isArray()`检测变量是否为数组类型
- + `Array.isArray([1,2]);// true`
+- 数组类型检测：`Array.isArray()` 
+- 检测变量是否为数组类型: `Array.isArray([1,2]);// true`
 
 ## 数组类型转换
 - 可以将数组转换为字符串也可以将其他类型转换为数组  
@@ -26,8 +27,8 @@ let str = String([1,2,3]);// 也可以使用String()转换为字符串 1,2,3
 let str2 = [1,2,3].join('-');// 也可以使用join()方法连接成字符串 1-2-3
 ```
 ### Array.isArray(),Array.of()
-- 创建一个数组，`Array.of()`
 - 可靠数组类型判断，`Array.isArray()`
+- 创建一个数组，`Array.of()`
 ### Array.from(arrayLike[,mapFn,thisArg])
 - 使用`Array.from(obj,mapFn,thisArg)`可将类数组转换为数组
  + 类数组指包含`length`属性或可迭代的对象
@@ -45,17 +46,11 @@ let user = {
 };
 console.log(Array.from(user));// ['hello',20]
 // DOM元素转换为数组后使用数组函数，第二个参数类似于map 函数的方法，可对数组元素执行函数处理
-<body>
-    <button message="前端">button</button>
-    <button message="hello">button</button>
-</body>
-<script>
-    let btns = document.querySelectorAll('button');
-    console.log(btns); //包含length属性
-    Array.from(btns, (item) => {
-        item.style.background = 'red';
-    });
-</script>
+let btns = document.querySelectorAll('button');
+console.log(btns); //包含length属性
+Array.from(btns, (item) => {
+    item.style.background = 'red';
+});
 ```
 ### Spread/Rest (解构)展开语法<sup>es6</sup>
 - 使用展开语法将`NodeList`(节点对象)转换为数组操作  
@@ -203,7 +198,7 @@ function test([a,b]){
     console.log(a,b);
 }
 ```
-## 数组元素管理函数
+## 数组元素管理方法
 - 使用数组索引来管理元素
 ```javascript
 // 使用从0开始的索引来操作数组元素
@@ -222,8 +217,11 @@ arr2.push(...arr);
 console.log(arr2);//['mark','john','alex']
 ```
 
-### array.push()往数组后面添加元素
-- 将元素压入数组，直接改变数组，返回值为新数组的元素个数  
+### array.push() 往数组后面添加元素
+- 将元素从数组后面压入数组
+- 直接改变原数组
+- @param：可以是单个元数，也可以是多个元素
+- @return: 新数组的元素个数  
 ```javascript
 let arr = ['john','alex'];
 let arr2 = ['mark'];
@@ -239,32 +237,39 @@ function newArray(begin,end){
 }
 ```
 
-### array.unshift()往数组前面添加元素
-- 从数组前面添加元素，直接改变数组，返回新数组的元素的个数  
+### array.unshift() 往数组前面添加元素
+- 从数组前面添加元素
+- 直接改变数组
+- @param：可以是单个元数，也可以是多个元素
+- @return: 返回新数组的元素的个数  
 ```javascript
 let arr = ['john','alex'];
 console.log(arr.unshift('mark'));//3
 console.log(arr);// ['john','alex','mark']
 ```
 
-### array.pop()从数组后面弹出一个元素
-- 从数组末尾弹出一个元素，直接改变数组，返回被弹出的元素  
+### array.pop() 从数组后面弹出一个元素
+- 从数组末尾弹出一个元素
+- 直接改变数组
+- @return: 返回被弹出的元素  
 ```javascript
 let arr = ['john','alex'];
 console.log(arr.pop());//alex 
 ```
 
-### array.shift()从数组前面弹出一个元素
-- 从数组前面取出一个元素，直接改变数组，返回被取出的元素   
-- 改变原数组   
+### array.shift() 从数组前面弹出一个元素
+- 从数组前面取出一个元素
+- 直接改变数组
+- @return: 返回被取出的元素   
 ```javascript
 let arr = ['john','alex'];
 console.log(arr.shift());//john
 console.log(arr);//alex
 ```
 
-### array.fill()往数组里填充元素
+### array.fill() 往数组里填充元素
 - 填充数组元素 
+- 直接改变数组
 ```javascript
 console.log(Array(2).fill('john'));// ['john','john']
 // 往数组指定位置填充元素，从起始位置到终止位置，不包括终止位置
@@ -273,7 +278,7 @@ arr.fill('lily',1,2);
 console.log(arr)// ['john','lily','mark']
 ```
 
-### array.slice()截取数组(不改变原数组)
+### array.slice() 截取数组 (不改变原数组)
 - 使用`slice([begin[,end]])`方法从数组中截取部分元素组合成新数组   
 - 不传一参默认从`0`开始,不传二参时默认截取到数组的最后元素 
 - 包括起始位置，不包括终止位置
@@ -284,7 +289,7 @@ console.log(nums.slice(1,3));// [1,2]
 console.log(nums.slice());// [0,1,2,3,4]
 ```
 
-### array.splice()往数组中添加，删除，替换元素(改变原数组)
+### array.splice() 往数组中添加，删除，替换元素(改变原数组)
 - `splice(start[, deleteCount, [, replace...]])`往数组中添加，删除，替换元素，改变原数组，以数组形式返回被删除的元素   
 - 删除数组元素时第一个参数为从哪开始删
 - 第二个参数为删除的个数,当删除个数为`0`时，在开始位置添加三参内容
@@ -540,22 +545,7 @@ arr = sort(arr, function(a, b) {
 console.table(arr);
 ```
 
-### 循环遍历
-### for
-- 根据数组长度，结合`for`循环来遍历数组  
-```javascript
-let lessons = [
-	{ title: '媒体查询响应式布局',category: 'css' },
-  { title: 'FLEX 弹性盒模型',category: 'css' },
-	{ title: 'MYSQL多表查询随意操作',category: 'mysql' }
-];
-
-for (let i = 0; i < lessons.length; i++) {
-  lessons[i] = `前端: ${lessons[i].title}`;
-}
-console.log(lessons);
-```
-
+## 循环遍历
 ### forEach, 没有返回值  
 - `forEach()`使函数作用在每个数组元素上，但是没有返回值  
 - 没有返回值
@@ -572,7 +562,23 @@ lessons.forEach((item, index, array) => {
 });
 console.log(lessons);
 ```
+### for
+- 根据数组长度，结合`for`循环来遍历数组  
+```javascript
+let lessons = [
+	{ title: '媒体查询响应式布局',category: 'css' },
+  { title: 'FLEX 弹性盒模型',category: 'css' },
+	{ title: 'MYSQL多表查询随意操作',category: 'mysql' }
+];
 
+for (let i = 0; i < lessons.length; i++) {
+  lessons[i] = `前端: ${lessons[i].title}`;
+}
+console.log(lessons);
+```
+
+## 迭代器方法
+- 数组中可以使用多种迭代器方法
 ### for...in
 - 遍历时的`key`值为数组的索引  
 ```javascript
@@ -598,32 +604,6 @@ for(const item of lessons){
     console.log(`标题:${item.title}`);
 }
 ```
-
-- 使用数组的迭代对象遍历获取索引与值
-```javascript
-const user = ['john','alex','mark'];
-const iterator = user.entries();
-console.log(iterator.next());//value:{0:0,1:'john'};
-console.log(iterator.next());//value:{0:1,1:'alex'};
-console.log(iterator.next());//value:{0:2,1:'mark'};
-// 这样就可以使用解构特性与for/of遍历并获取索引与值了
-for(const [key,value] of user.entries()){
-    console.log(key,value);
-}
-// 取数组中的最大值
-let array = [22,943,1350,133,5555];
-function arrayMax(array){
-    let max=0;
-    for(item of array){
-        max = max > item ? max:item;
-    }
-    return max;
-}
-console.log(arrayMax(array));
-```
-
-### 迭代器方法
-- 数组中可以使用多种迭代器方法
 ### keys
 - 通过迭代对象获取索引  
 ```javascript
@@ -649,6 +629,28 @@ const user = ['john','alex'];
 for(const [key,value] of user.entries()){
     console.log(key,value);
 }
+```
+- 使用数组的迭代对象遍历获取索引与值
+```javascript
+const user = ['john','alex','mark'];
+const iterator = user.entries();
+console.log(iterator.next());//value:{0:0,1:'john'};
+console.log(iterator.next());//value:{0:1,1:'alex'};
+console.log(iterator.next());//value:{0:2,1:'mark'};
+// 这样就可以使用解构特性与for/of遍历并获取索引与值了
+for(const [key,value] of user.entries()){
+    console.log(key,value);
+}
+// 取数组中的最大值
+let array = [22,943,1350,133,5555];
+function arrayMax(array){
+    let max=0;
+    for(item of array){
+        max = max > item ? max:item;
+    }
+    return max;
+}
+console.log(arrayMax(array));
 ```
 
 ### 数组扩展方法

@@ -1,6 +1,8 @@
 - 1. 行内样式
 ```HTML
+
 <p style="color:red;font-size:20px;">hello CSS </p>
+
 ```
 - 2. 内部样式
 ```HTML

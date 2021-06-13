@@ -4,6 +4,7 @@
 - `window`,`navigator`,`screen`,`history`,`location`,`sessionStorage`,`localStorage`  
 
 ## window对象
+
 - `window`对象指浏览器中打开的窗口  
 > window对象属性 27个  
 - document,navigator,screen,history,location对象的只读引用  
@@ -27,19 +28,22 @@
 
 ## Screen对象
 > screen属性 
-- availHeight,availWidth,height,pixelDepth,width  
+>
+> - availHeight,availWidth,height,pixelDepth,width  
 
 ## History对象  
 > history属性  
 - `length`
 > history方法
-- `back`,`forward`,`go`  
+>
+> - `back`,`forward`,`go`  
 
 ## Location对象  
 > location属性  
 - `hash`,`host`,`hostname`,`href`,`pathname`,`port`,`protocol`,`search`
 > location方法 
-- `assign`,`reload`,`replace`  
+>
+> - `assign`,`reload`,`replace`  
 
 ## 存储对象
 - `sessionStorage`会话存储和`localStorage`本地存储两个对象实现对网页数据进行添加，删除，修改，查询操作   
