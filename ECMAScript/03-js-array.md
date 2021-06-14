@@ -1,5 +1,6 @@
-## Array 数组类型  
+## Array 数组数据类型  
 - 数组是`Array`对象的实例，可以像对象一样调用方法
+
 ## 数组声明 
 - `Array`对象实例创建数组：`let arr = new Array(1,'hello','world')`
 - 声明一个长度确定的数组：`let  arr = new Array(5)`
@@ -16,19 +17,21 @@
 - `const arr = Array.of(1, 2, 3) console.log(arr); // [1, 2, 3] `
 
 - 数组类型检测：`Array.isArray()` 
-- 检测变量是否为数组类型: `Array.isArray([1,2]);// true`
+- 检测变量是否为数组类型: `Array.isArray([1,2]); // true`
 
 ## 数组类型转换
-- 可以将数组转换为字符串也可以将其他类型转换为数组  
+- 可以将数组转换为字符串也可以将其他类型(类数组)转换为数组  
 - 大部分数据类型都可以使用`.toString()`函数转换为字符串 
-```javascript
+```js
 console.log([1,2,3].toString());// 1,2,3
 let str = String([1,2,3]);// 也可以使用String()转换为字符串 1,2,3
 let str2 = [1,2,3].join('-');// 也可以使用join()方法连接成字符串 1-2-3
 ```
+
 ### Array.isArray(),Array.of()
 - 可靠数组类型判断，`Array.isArray()`
 - 创建一个数组，`Array.of()`
+
 ### Array.from(arrayLike[,mapFn,thisArg])
 - 使用`Array.from(obj,mapFn,thisArg)`可将类数组转换为数组
  + 类数组指包含`length`属性或可迭代的对象
@@ -39,12 +42,8 @@ let str2 = [1,2,3].join('-');// 也可以使用join()方法连接成字符串 1-
 let str = "你好啊";
 console.log(Array.from(str));// ['你','好','啊']
 // 为对象设置length属性后也可以转换为数组,但要属性(下标)为数值或数值字符串  
-let user = {
-    0:'hello',
-    '1':20,
-    length:2
-};
-console.log(Array.from(user));// ['hello',20]
+let user = { 0:'hello', '1':20, length:2 };
+console.log(Array.from(user)); // ['hello',20]
 // DOM元素转换为数组后使用数组函数，第二个参数类似于map 函数的方法，可对数组元素执行函数处理
 let btns = document.querySelectorAll('button');
 console.log(btns); //包含length属性
@@ -52,26 +51,16 @@ Array.from(btns, (item) => {
     item.style.background = 'red';
 });
 ```
+
 ### Spread/Rest (解构)展开语法<sup>es6</sup>
 - 使用展开语法将`NodeList`(节点对象)转换为数组操作  
-```html
-<style>
-    .hide {
-      display: none;
-    }
-</style>
-<body>
-  <div>hello</div>
-  <div>world</div>
-</body>
-<script>
-  let divs = document.querySelectorAll("div");
-  [...divs].map(function(div) {
-    div.addEventListener("click", function() {
-      this.classList.toggle("hide");
-    });
+```js
+let divs = document.querySelectorAll("div");
+[...divs].map(function(div) {
+  div.addEventListener("click", function() {
+    this.classList.toggle("hide");
   });
-</script>
+});
 ```
 - 数组合并，使用展开语法合并数组相比`concat`方法要更简单，使用`...`可将数组展开为多个值  
 ```javascript
@@ -80,7 +69,7 @@ let b = ['a','hello',...a];
 console.log(b);// ['a','hello',1,2,3]
 ```
 
-- 使用展开语法可以替代`arguments`，来接收任意数量的参数  
+#### 使用展开语法可以替代`arguments`，来接收任意数量的参数  
 ```javascript
 function test (...args) {
   console.log(args);
@@ -91,54 +80,31 @@ function test2 (num,...args){
 }
 ```
 
-- 节点转换
-```html
-<!-- 可以将DOM节点转为数组，下面例子不可以使用 filter 因为是节点列表 -->
-<body>
-    <button message="前端">button</button>
-    <button message="hello">button</button>
-</body>
+### 节点转换
+#### `Spread/Rest`语法，将集合NodeList转换成数组   
+```js
+// 可以将DOM节点转为数组，下面例子不可以使用 filter 因为是节点列表 -->
+let btns = document.querySelectorAll('button');
+// btns是一个NodeList类型，不是一个数组，可以用forEach,不能用map,filter...
+btns.filter((item) => {
+    console.log(item); // TypeError: btns.filter is not a function
+})
 
-<script>
-    let btns = document.querySelectorAll('button');
-    // btns是一个NodeList类型，不是一个数组，可以用forEach,不能用map,filter...
-    btns.filter((item) => {
-        console.log(item); //TypeError: btns.filter is not a function
-    })
-</script>
-```
-- `Spread/Rest`语法，将集合`set`转换成数组   
-```html
-<!-- 使用展开语法后就可以使用数组方法 -->
-<body>
-  <div>hello</div>
-  <div>world</div>
-</body>
+// 使用`call`借用数组原型方法 
+let btns = document.querySelectorAll('button');
+Array.prototype.map.call(btns, (item) => {
+    item.style.background = 'red';
+});
 
-<script>
-  let divs = document.querySelectorAll("div");
-  [...divs].map(function(div) {
-    div.addEventListener("click", function() {
-      this.classList.toggle("hide");
-    });
+// 使用展开语法后就可以使用数组方法 -->
+let divs = document.querySelectorAll("div");
+[...divs].map(function(div) {
+  div.addEventListener("click", function() {
+    this.classList.toggle("hide");
   });
-</script>
+});
 ```
-- 使用`call`借用数组原型方法 
-```html
-<!-- 后也可以使用原型处理 -->
-<body>
-    <button message="前端">button</button>
-    <button message="hello">button</button>
-</body>
 
-<script>
-    let btns = document.querySelectorAll('button');
-    Array.prototype.map.call(btns, (item) => {
-        item.style.background = 'red';
-    });
-</script>
-```
 ### 解构赋值<sup>es6</sup>
 - 解构赋值就是`Spread/Rest`特性收放特性
 - 解构是一种更简洁的赋值特性，省去中间变量，可以理解为分解一个数据的结构
@@ -198,7 +164,8 @@ function test([a,b]){
     console.log(a,b);
 }
 ```
-## 数组元素管理方法
+
+## 数组元素的管理方法
 - 使用数组索引来管理元素
 ```javascript
 // 使用从0开始的索引来操作数组元素
@@ -290,7 +257,8 @@ console.log(nums.slice());// [0,1,2,3,4]
 ```
 
 ### array.splice() 往数组中添加，删除，替换元素(改变原数组)
-- `splice(start[, deleteCount, [, replace...]])`往数组中添加，删除，替换元素，改变原数组，以数组形式返回被删除的元素   
+- `splice(start[, deleteCount, [, replace...]])`
+- 往数组中添加，删除，替换元素，改变原数组，以数组形式返回被删除的元素   
 - 删除数组元素时第一个参数为从哪开始删
 - 第二个参数为删除的个数,当删除个数为`0`时，在开始位置添加三参内容
 - 第三个参数来设置在删除位置要添加的元素
@@ -546,6 +514,8 @@ console.table(arr);
 ```
 
 ## 循环遍历
+- `for...in`,`for...of`
+- 数组中可以使用多种迭代器方法,`Array.keys(),Array.values(),Array.entries()`
 ### forEach, 没有返回值  
 - `forEach()`使函数作用在每个数组元素上，但是没有返回值  
 - 没有返回值
@@ -576,9 +546,6 @@ for (let i = 0; i < lessons.length; i++) {
 }
 console.log(lessons);
 ```
-
-## 迭代器方法
-- 数组中可以使用多种迭代器方法
 ### for...in
 - 遍历时的`key`值为数组的索引  
 ```javascript
@@ -604,7 +571,7 @@ for(const item of lessons){
     console.log(`标题:${item.title}`);
 }
 ```
-### keys
+### 迭代器方法 keys()
 - 通过迭代对象获取索引  
 ```javascript
 const user = ['john','alex'];
@@ -613,7 +580,7 @@ console.log(keys.next());//{value:0,done:false}
 console.log(keys.next());//{value:1,done:false}
 console.log(keys.next());//{value:undefined,done:true}
 ```
-### values
+### 迭代器方法 values()
 - 通过迭代对象获取值  
 ```javascript
 const user = ['john','alex'];
@@ -622,7 +589,7 @@ console.log(values.next());//{value:0,done:false}
 console.log(values.next());//{value:1,done:false}
 console.log(values.next());//{value:undefined,done:true}
 ```
-### entries
+### 迭代器方法 entries()
 - 返回数组所有键值对  
 ```javascript
 const user = ['john','alex'];
@@ -897,6 +864,7 @@ let buffer = new ArrayBuffer(10);
 let buffer1 = buffer.slice(1, 3);
 console.log(buffer1.byteLength); // 2
 ```
+
 ### 视图  
 - 视图是用来操作内存的接口
 - 支持`8`种数值型数据类型
