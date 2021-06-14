@@ -29,7 +29,7 @@ let str = String([1,2,3]); // 也可以使用String()转换为字符串 1,2,3
 let str2 = [1,2,3].join('-'); // 也可以使用join()方法连接成字符串 1-2-3
 ```
 
-### Array.isArray(),Array.of()
+### Array.isArray()/Array.of()
 - 可靠数组类型判断，`Array.isArray()`
 - 创建一个数组，`Array.of()`
 
@@ -65,6 +65,7 @@ let divs = document.querySelectorAll("div");
   });
 });
 ```
+
 - 数组合并，使用展开语法合并数组相比`concat`方法要更简单，使用`...`可将数组展开为多个值  
 ```js
 let a = [1,2,3];
@@ -144,13 +145,14 @@ console.log(a); // Array(13)
 ```
 
 - 非严格模式可以不使用声明指令，严格模式下必须使用声明，建议使用`let`等声明  
+
 ```js
 "use strict"
 [web,url] = ['web.com','myweb.com']
 console.log(web)// error
 ```
-- 简洁定义
-- 只赋值部分变量
+- 简洁定义,只赋值部分变量
+
 ```js
 // 只赋值部分变量
 let [,url] = ['hello','myweb.com'];
@@ -171,6 +173,7 @@ function test([a,b]){
 
 ## 数组元素的管理方法
 - 使用数组索引来管理元素
+
 ```js
 // 使用从0开始的索引来操作数组元素
 let arr = [1,'hello','web.com'];
@@ -606,15 +609,15 @@ for(const [key,value] of user.entries()){
 ```js
 const user = ['john','alex','mark'];
 const iterator = user.entries();
-console.log(iterator.next());//value:{0:0,1:'john'};
-console.log(iterator.next());//value:{0:1,1:'alex'};
-console.log(iterator.next());//value:{0:2,1:'mark'};
+console.log(iterator.next()); //value:{0:0,1:'john'};
+console.log(iterator.next()); //value:{0:1,1:'alex'};
+console.log(iterator.next()); //value:{0:2,1:'mark'};
 // 这样就可以使用解构特性与for/of遍历并获取索引与值了
 for(const [key,value] of user.entries()){
     console.log(key,value);
 }
 // 取数组中的最大值
-let array = [22,943,1350,133,5555];
+let array = [22, 943, 1350, 133, 5555];
 function arrayMax(array){
     let max=0;
     for(item of array){
@@ -629,7 +632,7 @@ console.log(arrayMax(array));
 ### every
 - `every()`用于递归的检测元素，所有元素操作都要返回`true`，最后结果才为`true`  
 ```js
-const user = [{name:'john',age:30},{name:'alex',age:28}];
+const user = [{ name:'john', age:30 },{ name:'alex', age:28 }];
 let result = user.every(function(user){
     return user.age>18;
 });
@@ -841,7 +844,8 @@ console.log(result);
 ### 数组扁平化  
 - 嵌套数组转换成一维数组就叫数组扁平化
 - `Infinity`是一个全局属性，表示正无穷大的数值
-```javascript
+
+```js
 console.log(Infinity);// Infinity
 ```
 
@@ -856,15 +860,17 @@ console.log([1,[2,[3,4]]].flat(2));// [1,2,3,4]
 
 -  `array.flatMap(callback(currentValue,index,array,thisArg))`
 - 先用回调函数处理每个元素，再对数组执行`flat`函数
-```javascript
-console.log([1,2,3].flatMap(n => [n*2]));//[2,4,6]
+
+```js
+console.log([1,2,3].flatMap(n => [n*2])); //[2,4,6]
 ```
 
 ## 数组缓冲区<sup>es6</sup>  
 - 数组缓冲区是内存中的一段地址  
 - 定型数组的基础  
 - 实际字节数在创建时确定，之后只可改元素值，不可改数组长度  
-```javascript
+
+```js
 let buffer = new ArrayBuffer(10);
 console.log(buffer.byteLength); // 10
 
@@ -877,7 +883,8 @@ console.log(buffer1.byteLength); // 2
 ## 视图  
 - 视图是用来操作内存的接口
 - 支持`8`种数值型数据类型
-```javascript
+
+```js
 // 默认 DataView 可操作数组缓冲区全部内容
 let buffer = new ArrayBuffer(10);
     dataView = new DataView(buffer); 
@@ -891,14 +898,14 @@ dataView1.setInt8(5,1); // RangeError
 ```
 ## 定型数组   
 - 数组缓冲区的特定类型的视图  
-```javascript
-// 创建
-let buffer = new ArrayBuffer(10);
+```js
+let buffer = new ArrayBuffer(10); // 创建
 view = new Int8Array(buffer);
-console.log(view.byteLength);//10
+console.log(view.byteLength); //10
 ```
 - 通过构造函数   
-```javascript
+
+```js
 let view = new Int32Array(10);
 console.log(view.byteLength); // 40
 console.log(view.length);     // 10
@@ -910,32 +917,31 @@ console.log(view1.byteLength); // 0
 console.log(view1.length);     // 0
  
 // 可接受参数包括定型数组、可迭代对象、数组、类数组对象
-let arr = Array.from({
-  0: '1',
-  1: '2',
-  2: 3,
-  length: 3
-});
+let arr = Array.from({ 0: '1', 1: '2', 2: 3, length: 3 });
 let view2 = new Int16Array([1, 2]),
-    view3 = new Int32Array(view2),
-    view4 = new Int16Array(new Set([1, 2, 3])),
-    view5 = new Int16Array([1, 2, 3]),
-    view6 = new Int16Array(arr);
+view3 = new Int32Array(view2),
+view4 = new Int16Array(new Set([1, 2, 3])),
+view5 = new Int16Array([1, 2, 3]),
+view6 = new Int16Array(arr);
 console.log(view2 .buffer === view3.buffer); // false
 console.log(view4.byteLength); // 6
 console.log(view5.byteLength); // 6
 console.log(view6.byteLength); // 6
 ```
+
 - `length`属性不可写，可使用`entries,keys,values`迭代器遍历   
-```javascript
+
+```js
 let view = new Int16Array([1,2]);
 for(let [k,v] of view.entries()){
   console.log(k,v);
 }
 ```
+
 - 定型数组不是普通数组，不继承自`Array`   
 - `set(),subarray()`  
-```javascript
+
+```js
 // set 方法
 // 参数1：一个定型数组或普通数组
 // 参数2：可选，偏移量，开始插入数据的位置，默认为0
@@ -948,9 +954,9 @@ console.log(view); // [1, 2, 3, 4]
 // 参数1：可选，开始位置
 // 参数2：可选，结束位置(不包含结束位置)
 let view= new Int16Array([1, 2, 3, 4]), 
-    subview1 = view.subarray(), 
-    subview2 = view.subarray(1), 
-    subview3 = view.subarray(1, 3);
+subview1 = view.subarray(), 
+subview2 = view.subarray(1), 
+subview3 = view.subarray(1, 3);
 console.log(subview1); // [1, 2, 3, 4]
 console.log(subview2); // [2, 3, 4]
 console.log(subview3); // [2, 3]
